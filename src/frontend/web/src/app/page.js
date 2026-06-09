@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./page.module.css";
 
 // Sample Services Data
@@ -9,6 +9,31 @@ const servicesList = [
   { id: 2, name: "Relationship Counseling", image: "/images/service-relationship.jpg" },
   { id: 3, name: "Sexual Health & Wellness", image: "/images/service-sexual.jpg" },
   { id: 4, name: "Personal Growth & Mindfulness", image: "/images/service-growth.jpg" }
+];
+
+// Hero Slides Data
+const heroSlides = [
+  {
+    id: 1,
+    badge: "Helping Hands",
+    title: <>Stretch Your Hands To <span className="text-teal">Reduce Daily Pain</span></>,
+    desc: "Daily tasks like typing, texting, or lifting can place constant stress on your hands, leading to stiffness, soreness, and fatigue.",
+    image: "/images/hero-bg.jpg"
+  },
+  {
+    id: 2,
+    badge: "Senior Care",
+    title: <>Simple Hand Workouts <span className="text-teal">To Boost</span></>,
+    desc: "Unlock the power in your hands with easy yet effective exercises designed to improve grip strength and finger flexibility.",
+    image: "/images/therapist-1.jpg"
+  },
+  {
+    id: 3,
+    badge: "Mental Wellness",
+    title: <>Empathetic Support To <span className="text-teal">Find Balance</span></>,
+    desc: "Mental health is about daily habits and trusted guidance. We work with you to find your balance, process emotions, and flourish.",
+    image: "/images/therapist-2.jpg"
+  }
 ];
 
 // Sample Videos Data
@@ -109,6 +134,15 @@ export default function Home() {
   const [selectedVideo, setSelectedVideo] = useState(videoResources[0]);
   const [activeStep, setActiveStep] = useState(1);
   const [activeTestimonial, setActiveTestimonial] = useState(0);
+  const [activeSlide, setActiveSlide] = useState(0);
+
+  // Autoplay hero slider
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveSlide((prev) => (prev + 1) % heroSlides.length);
+    }, 6000);
+    return () => clearInterval(timer);
+  }, []);
 
   // Booking Form state
   const [formData, setFormData] = useState({
@@ -243,16 +277,20 @@ export default function Home() {
         </nav>
       </div>
 
-      {/* Hero Section */}
-      <section id="home" className={styles.hero}>
+      {/* Hero Section with Slider */}
+      <section
+        id="home"
+        className={styles.hero}
+        style={{ "--hero-bg": `url(${heroSlides[activeSlide].image})` }}
+      >
         <div className="container">
-          <div className={styles.heroContent}>
-            <div className={styles.sectionBadge}>Helping Hands</div>
+          <div className={styles.heroContent} key={activeSlide} style={{ animation: "fadeIn 0.6s ease-in-out" }}>
+            <div className={styles.sectionBadge}>{heroSlides[activeSlide].badge}</div>
             <h1 className={styles.heroTitle}>
-              Healing Begins, <span>Growth Continues</span>, & Wellness Flourishes
+              {heroSlides[activeSlide].title}
             </h1>
             <p className={styles.heroDesc}>
-              Welcome to Mind Mantra. We are a comprehensive mental health & psychological wellness center dedicated to guiding you toward long-term peace, recovery, and flourishing.
+              {heroSlides[activeSlide].desc}
             </p>
             <div className={styles.heroContactList}>
               <a href="mailto:info@mindmantra.com" className={`${styles.heroContactPill} ${styles.teal}`}>
@@ -274,6 +312,17 @@ export default function Home() {
               </a>
             </div>
           </div>
+        </div>
+
+        {/* Three Vertical Dots on the Right */}
+        <div className={styles.heroDots}>
+          {heroSlides.map((_, idx) => (
+            <span
+              key={idx}
+              className={`${styles.heroDot} ${activeSlide === idx ? styles.heroDotActive : ""}`}
+              onClick={() => setActiveSlide(idx)}
+            ></span>
+          ))}
         </div>
       </section>
 
