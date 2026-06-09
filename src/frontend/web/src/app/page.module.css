@@ -2151,14 +2151,27 @@
 }
 
 @media (max-width: 768px) {
+  .topBar {
+    padding: 8px 0;
+    font-size: 11px;
+  }
+
+  .topInfo {
+    gap: 10px;
+  }
+
+  .socials {
+    display: none; /* Hide socials to keep top bar a single compact row */
+  }
+
   .navWrapper {
     top: 52px;
-    padding: 0 16px;
+    padding: 0 12px;
   }
 
   .navbar {
-    height: 70px;
-    padding: 0 20px;
+    height: 68px;
+    padding: 0 18px;
   }
   
   .logoImage {
@@ -2186,9 +2199,9 @@
     background-color: var(--color-primary-dark);
     z-index: 90;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
-    padding-top: 80px;
+    padding-top: 160px;
     animation: slideInDown 0.3s ease-out;
   }
 
@@ -2205,7 +2218,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 40px;
+    gap: 32px;
+    width: 100%;
   }
 
   .mobileNavMenu {
