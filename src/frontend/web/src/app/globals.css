@@ -1,11 +1,11 @@
 :root {
-  --color-primary-dark: #1c3f3a;
-  --color-secondary-light: #e2ece9;
-  --color-accent-teal: #2ca5a7;
-  --color-accent-teal-dark: #1d7274;
+  --color-primary-dark: #1F3F43;
+  --color-secondary-light: #faf0f2;
+  --color-accent-teal: #b54c62;
+  --color-accent-teal-dark: #953b4e;
   --color-white: #ffffff;
-  --color-text-dark: #1a2c29;
-  --color-text-muted: #506662;
+  --color-text-dark: #1e2f31;
+  --color-text-muted: #627577;
   --color-card-bg: #ffffff;
   
   --font-serif: var(--font-playfair), Georgia, serif;

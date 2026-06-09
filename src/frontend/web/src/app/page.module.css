@@ -139,7 +139,7 @@
 }
 
 .btnAppointment:hover {
-  background-color: var(--color-accent-teal-dark);
+  background-color: var(--color-primary-dark);
   transform: translateY(-2px);
 }
 
@@ -161,8 +161,9 @@
 
 /* 2. Hero Section Styles */
 .hero {
-  min-height: 95vh;
-  background: linear-gradient(to right, rgba(28, 63, 58, 0.95) 0%, rgba(28, 63, 58, 0.8) 45%, rgba(28, 63, 58, 0.25) 75%, rgba(28, 63, 58, 0.05) 100%), var(--hero-bg) center/cover no-repeat;
+  height: 100vh;
+  min-height: 750px;
+  background: linear-gradient(to right, rgba(31, 63, 67, 0.95) 0%, rgba(31, 63, 67, 0.8) 45%, rgba(31, 63, 67, 0.25) 75%, rgba(31, 63, 67, 0.05) 100%), var(--hero-bg) center/cover no-repeat;
   padding-top: 180px;
   padding-bottom: 160px;
   display: flex;
@@ -262,7 +263,7 @@
 }
 
 .heroContactPill.teal:hover {
-  background-color: var(--color-accent-teal-dark);
+  background-color: var(--color-primary-dark);
   transform: translateY(-2px);
 }
 
@@ -298,6 +299,11 @@
   z-index: 10;
 }
 
+.aboutHeader {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
 .aboutGrid {
   display: grid;
   grid-template-columns: 1.1fr 1fr;
@@ -305,48 +311,27 @@
   align-items: center;
 }
 
-.collageContainer {
+.aboutImageWrapper {
   position: relative;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  align-items: center;
-}
-
-.largeCard {
-  grid-row: span 2;
   border-radius: var(--border-radius-lg);
-  overflow: hidden;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+  overflow: visible;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
 }
 
-.largeCard img {
+.aboutSingleImage {
   width: 100%;
-  height: 480px;
+  height: 520px;
   object-fit: cover;
-  display: block;
-}
-
-.smallCard {
-  border-radius: var(--border-radius-md);
-  overflow: hidden;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.06);
-}
-
-.smallCard img {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
+  border-radius: var(--border-radius-lg);
   display: block;
 }
 
 .badgeCircle {
   position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 120px;
-  height: 120px;
+  right: -20px;
+  bottom: 40px;
+  width: 130px;
+  height: 130px;
   background-color: var(--color-primary-dark);
   border-radius: 50%;
   color: var(--color-white);
@@ -356,7 +341,7 @@
   justify-content: center;
   text-align: center;
   border: 8px solid var(--color-secondary-light);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
   z-index: 10;
 }
 
@@ -377,7 +362,8 @@
 .aboutTitle {
   font-size: 42px;
   line-height: 1.2;
-  margin-bottom: 20px;
+  margin: 10px auto 0 auto;
+  max-width: 700px;
 }
 
 .aboutTitle span {
@@ -387,6 +373,7 @@
 .aboutDesc {
   font-size: 16px;
   margin-bottom: 24px;
+  text-align: justify;
 }
 
 .quoteBlock {
@@ -451,7 +438,10 @@
 
 /* 4. Services Section Styles */
 .services {
-  background-color: var(--color-primary-dark);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/images/hero-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   padding: 120px 0;
   color: var(--color-white);
 }
@@ -472,316 +462,495 @@
   color: var(--color-accent-teal);
 }
 
+/* Services grid styling */
 .servicesGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin-top: 50px;
 }
 
+/* Service Card wrapper with thin borders */
 .serviceCard {
-  position: relative;
-  background-color: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--border-radius-lg);
-  padding: 24px;
-  min-height: 380px;
+  padding: 40px 30px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  overflow: hidden;
-  transition: var(--transition-smooth);
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 380px;
+  position: relative;
   z-index: 1;
 }
 
-.serviceCard::before {
-  content: '';
-  position: absolute;
+.serviceCard:hover {
+  transform: translateY(-8px);
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: var(--color-accent-teal);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+}
+
+/* Centered Icon Container */
+.serviceIconContainer {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--color-accent-teal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  margin-bottom: 24px;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.serviceCard:hover .serviceIconContainer {
+  background-color: var(--color-accent-teal);
+  color: var(--color-white);
+  transform: scale(1.1);
+  box-shadow: 0 8px 20px rgba(181, 76, 98, 0.35);
+}
+
+/* Service Card Title */
+.serviceCardTitle {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--color-white);
+  margin-bottom: 16px;
+  font-family: var(--font-serif);
+}
+
+/* Service Card Description */
+.serviceCardDesc {
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.75);
+  margin-bottom: 28px;
+  flex-grow: 1;
+  text-align: center;
+}
+
+/* Learn More Link */
+.serviceCardLearnMore {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-accent-teal);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  transition: all 0.3s ease;
+}
+
+.serviceCardLearnMore svg {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.3s ease;
+}
+
+.serviceCard:hover .serviceCardLearnMore {
+  color: var(--color-white);
+}
+
+.serviceCard:hover .serviceCardLearnMore svg {
+  transform: translateX(4px);
+}
+
+/* Modal Overlay Styles */
+.modalOverlay {
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-size: cover;
-  background-position: center;
-  opacity: 0.25;
-  transition: var(--transition-smooth);
-  z-index: -1;
+  background-color: rgba(15, 32, 29, 0.8);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease-out forwards;
 }
 
-.serviceCard:hover::before {
-  opacity: 0.5;
-  transform: scale(1.05);
+/* Modal Content Container */
+.modalContent {
+  background-color: var(--color-secondary-light);
+  border-radius: 32px;
+  width: 90%;
+  max-width: 880px;
+  padding: 40px;
+  position: relative;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  animation: modalScaleUp 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
 }
 
-.serviceCard:hover {
-  transform: translateY(-10px);
-  border-color: var(--color-accent-teal);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+@keyframes modalScaleUp {
+  0% {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }
 
-/* Concave cut-out top-right for the arrow icon button */
-.cardArrowBtn {
+/* Modal Close Button */
+.modalCloseBtn {
   position: absolute;
-  top: 0;
-  right: 0;
-  width: 60px;
-  height: 60px;
+  top: 24px;
+  right: 24px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
   background-color: var(--color-primary-dark);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 5;
-}
-
-/* The curved visual inset corners surrounding the button */
-.cardArrowBtn::before, .cardArrowBtn::after {
-  content: '';
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  background-color: transparent;
-}
-
-.cardArrowBtn::before {
-  bottom: -20px;
-  right: 0;
-  border-top-right-radius: 20px;
-  box-shadow: 10px -10px 0 10px var(--color-primary-dark);
-}
-
-.cardArrowBtn::after {
-  left: -20px;
-  top: 0;
-  border-top-right-radius: 20px;
-  box-shadow: 10px -10px 0 10px var(--color-primary-dark);
-}
-
-.innerCircle {
-  width: 44px;
-  height: 44px;
-  background-color: var(--color-white);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--color-primary-dark);
-  transition: var(--transition-smooth);
-}
-
-.serviceCard:hover .innerCircle {
-  background-color: var(--color-accent-teal);
   color: var(--color-white);
-  transform: rotate(-45deg);
-}
-
-.serviceCardTitle {
-  font-size: 22px;
-  color: var(--color-white);
-  margin-top: auto;
-}
-
-.servicesPagination {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 48px;
-}
-
-.dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.2);
+  border: none;
   cursor: pointer;
-  transition: var(--transition-smooth);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  z-index: 10;
 }
 
-.dot.active {
+.modalCloseBtn:hover {
   background-color: var(--color-accent-teal);
-  width: 24px;
-  border-radius: 5px;
+  transform: rotate(90deg);
 }
+
+/* Modal Grid */
+.modalGrid {
+  display: grid;
+  grid-template-columns: 1.12fr 1.3fr;
+  gap: 36px;
+  align-items: stretch;
+}
+
+/* Modal Image */
+.modalImageWrapper {
+  width: 100%;
+  height: 420px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.modalImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Modal Info Text Section */
+.modalInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+  color: var(--color-primary-dark);
+}
+
+.modalIconCircle {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background-color: var(--color-primary-dark);
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 12px;
+  margin-bottom: -4px;
+}
+
+.modalTitle {
+  font-size: 26px;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.modalDesc {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: rgba(31, 63, 67, 0.85);
+  margin: 0;
+}
+
+/* Bullet Checklist */
+.modalChecklist {
+  list-style: none;
+  padding: 0;
+  margin: 5px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.modalChecklistItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13.5px;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+.modalCheckIconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-accent-teal);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.modalCheckIcon {
+  width: 16px;
+  height: 16px;
+}
+
+/* Modal Button */
+.modalBtn {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  border-radius: 30px;
+  background-color: var(--color-accent-teal);
+  color: var(--color-white);
+  border: none;
+  font-family: inherit;
+  font-size: 14.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(44, 165, 167, 0.2);
+  margin-top: 8px;
+}
+
+.modalBtn:hover {
+  background-color: var(--color-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(31, 63, 67, 0.25);
+}
+
+.modalBtnInnerCircle {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: var(--color-primary-dark);
+  color: var(--color-accent-teal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.modalBtn:hover .modalBtnInnerCircle {
+  background-color: var(--color-accent-teal);
+  color: var(--color-white);
+  transform: translateX(3px);
+}
+
+
 
 /* 5. Video Resources Section Styles */
 .videos {
   background-color: var(--color-secondary-light);
   padding: 120px 0;
+  overflow: hidden;
 }
 
-.videosHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  margin-bottom: 60px;
-  flex-wrap: wrap;
-  gap: 20px;
+.videosHeaderLeft {
+  margin-bottom: 50px;
 }
 
 .videosTitle {
   font-size: 42px;
   max-width: 600px;
+  margin-top: 10px;
 }
 
 .videosTitle span {
   color: var(--color-accent-teal);
 }
 
-.videosGrid {
-  display: grid;
-  grid-template-columns: 1.4fr 1fr;
-  gap: 40px;
-}
-
-.playerCard {
-  background-color: var(--color-white);
-  border-radius: var(--border-radius-lg);
+/* Video Slider Track & Container */
+.videoSliderContainer {
+  width: 100%;
   overflow: hidden;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.05);
-  padding: 24px;
+  position: relative;
+  border-radius: 24px;
 }
 
-.videoWrapper {
+.videoSliderTrack {
+  display: flex;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.videoSliderCard {
+  flex-shrink: 0;
+  padding: 0 12px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+/* Individual Video Player Wrapper */
+.videoPlayerWrapper {
   position: relative;
   width: 100%;
-  padding-top: 56.25%; /* 16:9 Aspect Ratio */
-  background-color: #000;
-  border-radius: var(--border-radius-md);
+  aspect-ratio: 16 / 9;
+  border-radius: 20px;
   overflow: hidden;
+  background-color: #000;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.videoIframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Thumbnail Container when not playing */
+.videoThumbnailContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
 }
 
 .videoThumbnail {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.6s ease;
 }
 
-.videoOverlay {
+.videoThumbnailContainer:hover .videoThumbnail {
+  transform: scale(1.05);
+}
+
+/* Play Button Overlay */
+.videoPlayOverlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(15, 32, 29, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: background 0.3s ease;
 }
 
-.playBtnCircle {
-  width: 80px;
-  height: 80px;
-  background-color: var(--color-accent-teal);
+.videoThumbnailContainer:hover .videoPlayOverlay {
+  background: rgba(15, 32, 29, 0.45);
+}
+
+.playButtonCircle {
+  width: 60px;
+  height: 60px;
+  background-color: var(--color-white);
+  color: var(--color-accent-teal);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.videoThumbnailContainer:hover .playButtonCircle {
+  background-color: var(--color-accent-teal);
   color: var(--color-white);
-  box-shadow: 0 10px 25px rgba(44, 165, 167, 0.4);
-  transition: var(--transition-smooth);
-  cursor: pointer;
-}
-
-.playBtnCircle:hover {
   transform: scale(1.1);
-  background-color: var(--color-accent-teal-dark);
 }
 
-.playBtnCircle svg {
-  width: 32px;
-  height: 32px;
-  fill: currentColor;
-  margin-left: 4px;
-}
-
-.videoInfoBlock {
-  margin-top: 24px;
-}
-
-.videoCategory {
-  font-size: 13px;
-  text-transform: uppercase;
-  color: var(--color-accent-teal);
-  font-weight: 600;
-  letter-spacing: 1px;
-  margin-bottom: 8px;
-}
-
-.activeVideoTitle {
-  font-size: 24px;
-  margin-bottom: 12px;
-}
-
-.videoList {
+/* Video info section */
+.videoCardInfo {
+  padding: 20px 8px 10px 8px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 10px;
+  flex-grow: 1;
 }
 
-.videoItem {
-  display: flex;
-  gap: 16px;
-  background-color: var(--color-white);
-  padding: 16px;
-  border-radius: var(--border-radius-md);
-  cursor: pointer;
-  border: 1px solid transparent;
-  transition: var(--transition-smooth);
+.videoCategoryBadge {
+  align-self: flex-start;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-accent-teal);
+  letter-spacing: 1.5px;
 }
 
-.videoItem:hover, .videoItem.active {
-  border-color: var(--color-accent-teal);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
-}
-
-.itemThumb {
-  position: relative;
-  width: 100px;
-  height: 65px;
-  border-radius: var(--border-radius-sm);
-  overflow: hidden;
-  flex-shrink: 0;
-}
-
-.itemThumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.miniPlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--color-white);
-}
-
-.miniPlay svg {
-  width: 16px;
-  height: 16px;
-  fill: currentColor;
-}
-
-.itemInfo h4 {
-  font-size: 15px;
-  margin-bottom: 4px;
-  font-family: var(--font-sans);
-  font-weight: 600;
+.videoCardTitle {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--color-primary-dark);
+  margin: 0;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  height: 44px;
 }
 
-.itemInfo p {
+.videoDurationMeta {
+  display: flex;
+  align-items: center;
   font-size: 12px;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+/* Dots navigation */
+.videoDots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 36px;
+}
+
+.videoDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgba(31, 63, 67, 0.15);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.videoDotActive {
+  background-color: var(--color-accent-teal);
+  width: 24px;
+  border-radius: 5px;
 }
 
 /* 6. Why Choose Us / Process Section Styles */
@@ -910,7 +1079,7 @@
 /* 7. Testimonials Section Styles */
 .testimonials {
   padding: 140px 0;
-  background: linear-gradient(to right, rgba(28, 63, 58, 0.1) 0%, rgba(28, 63, 58, 0.85) 42%, rgba(28, 63, 58, 1) 56%), url('/images/process-center.jpg') left center/cover no-repeat;
+  background: linear-gradient(to right, rgba(31, 63, 67, 0.1) 0%, rgba(31, 63, 67, 0.85) 42%, rgba(31, 63, 67, 1) 56%), url('/images/process-center.jpg') left center/cover no-repeat;
   color: var(--color-white);
   position: relative;
 }
@@ -1143,7 +1312,7 @@
   width: 100%;
   padding: 14px 18px;
   border-radius: var(--border-radius-sm);
-  border: 1px solid rgba(28, 63, 58, 0.15);
+  border: 1px solid rgba(31, 63, 67, 0.15);
   font-size: 15px;
   font-family: var(--font-sans);
   color: var(--color-text-dark);
@@ -1355,7 +1524,7 @@
 }
 
 .footerSubscribeBtn:hover {
-  background-color: var(--color-accent-teal-dark);
+  background-color: var(--color-primary-dark);
   transform: translateY(-2px);
 }
 
@@ -1421,7 +1590,7 @@
 }
 
 .backToTop:hover {
-  background-color: var(--color-accent-teal-dark);
+  background-color: var(--color-primary-dark);
   transform: translateY(-5px);
 }
 
@@ -1439,16 +1608,30 @@
   }
 
   .testimonialsGrid {
-    background-color: rgba(28, 63, 58, 0.96);
+    background-color: rgba(31, 63, 67, 0.96);
     padding: 32px;
     border-radius: var(--border-radius-lg);
   }
   
   .servicesGrid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .modalContent {
+    padding: 32px;
+    max-width: 760px;
+  }
+
+  .modalGrid {
+    gap: 28px;
+  }
+
+  .modalImageWrapper {
+    height: 380px;
   }
   
-  .collageContainer {
+  .aboutImageWrapper {
     max-width: 600px;
     margin: 0 auto;
   }
@@ -1477,6 +1660,13 @@
     display: block;
   }
   
+  .hero {
+    height: auto;
+    min-height: 100vh;
+    padding-top: 140px;
+    padding-bottom: 80px;
+  }
+
   .heroTitle {
     font-size: 38px;
   }
@@ -1491,6 +1681,39 @@
   
   .servicesGrid {
     grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .modalContent {
+    padding: 24px;
+    width: 95%;
+    overflow-y: auto;
+    max-height: 90vh;
+  }
+
+  .modalGrid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .modalImageWrapper {
+    height: 200px;
+  }
+  
+  .modalTitle {
+    font-size: 22px;
+  }
+  
+  .modalDesc {
+    font-size: 13.5px;
+  }
+
+  .detailDesc {
+    font-size: 14px;
+  }
+
+  .checklistItem {
+    font-size: 13px;
   }
   
   .formRow {

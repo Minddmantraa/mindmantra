@@ -5,22 +5,141 @@ import styles from "./page.module.css";
 
 // Sample Services Data
 const servicesList = [
-  { id: 1, name: "ERP (Exposure & Response Prevention)", image: "/images/service-counseling.jpg" },
-  { id: 2, name: "CBT (Cognitive Behavioural Therapy)", image: "/images/service-relationship.jpg" },
-  { id: 3, name: "ACT (Acceptance & Commitment Therapy)", image: "/images/service-sexual.jpg" },
-  { id: 4, name: "DBT (Dialectical Behavior Therapy)", image: "/images/service-growth.jpg" },
-  { id: 5, name: "RMT (Relationship/Resource Therapy)", image: "/images/therapist-3.jpg" }
+  {
+    id: 1,
+    name: "ERP (Exposure & Response Prevention)",
+    shortName: "ERP Treatment",
+    image: "/images/service-counseling.jpg",
+    title: "Exposure & Response Prevention (ERP)",
+    desc: "ERP is the gold standard therapy for OCD. It focuses on gradually exposing you to thoughts, images, and situations that make you anxious, while helping you resist performing compulsions.",
+    bullets: [
+      "Systematically face OCD triggers without resorting to compulsions",
+      "De-escalate anxiety and break the cycle of obsessive doubts",
+      "Reclaim control over your daily actions and behavioral choices"
+    ]
+  },
+  {
+    id: 2,
+    name: "CBT (Cognitive Behavioural Therapy)",
+    shortName: "CBT Therapy",
+    image: "/images/service-relationship.jpg",
+    title: "Cognitive Behavioural Therapy (CBT)",
+    desc: "CBT helps you identify, understand, and change negative thought patterns and behaviors. It provides practical tools to manage your responses to intrusive thoughts and distress.",
+    bullets: [
+      "Identify and restructure cognitive distortions and intrusive thoughts",
+      "Develop somatic grounding and mindfulness coping mechanisms",
+      "Establish healthy, actionable daily behavioral routines"
+    ]
+  },
+  {
+    id: 3,
+    name: "ACT (Acceptance & Commitment Therapy)",
+    shortName: "ACT Practice",
+    image: "/images/service-sexual.jpg",
+    title: "Acceptance & Commitment Therapy (ACT)",
+    desc: "ACT teaches you to accept what is out of your personal control and commit to actions that enrich your life. It emphasizes psychological flexibility over struggle.",
+    bullets: [
+      "Learn to coexist with anxiety and intrusive thoughts rather than fighting them",
+      "Clarify your core personal values to drive meaningful life decisions",
+      "Cultivate present-moment awareness and mindfulness techniques"
+    ]
+  },
+  {
+    id: 4,
+    name: "DBT (Dialectical Behavior Therapy)",
+    shortName: "DBT Strategies",
+    image: "/images/service-growth.jpg",
+    title: "Dialectical Behavior Therapy (DBT)",
+    desc: "DBT combines cognitive-behavioral techniques with concepts of distress tolerance and emotional regulation. It is highly effective for managing intense emotional states.",
+    bullets: [
+      "Enhance distress tolerance during moments of acute anxiety",
+      "Master emotional regulation strategies for mood swings",
+      "Develop interpersonal effectiveness to communicate boundaries clearly"
+    ]
+  },
+  {
+    id: 5,
+    name: "RMT (Relationship/Resource Therapy)",
+    shortName: "RMT Counseling",
+    image: "/images/therapist-3.jpg",
+    title: "Relationship & Resource Therapy (RMT)",
+    desc: "RMT focuses on identifying and working directly with the parts of your personality that manage specific emotional responses, helping resolve codependency and trauma.",
+    bullets: [
+      "Address relationship OCD (ROCD) and attachment anxieties",
+      "Identify internal coping resources and resolve emotional conflicts",
+      "Foster secure communication patterns and self-worth"
+    ]
+  },
+  {
+    id: 6,
+    name: "Research & Clinical Training",
+    shortName: "Clinical Training",
+    image: "/images/service-growth.jpg",
+    title: "Research & Clinical Training",
+    desc: "Emotion of Life provides professional clinical training, supervision hours, case study worksheets, and research opportunities for therapists and psychology practitioners.",
+    bullets: [
+      "Clinical worksheets, case study seminars, and supervision hours",
+      "Evidence-based research publications in OCD coping behaviors",
+      "Skill-building workshops for counselors and psychology students"
+    ]
+  }
 ];
+
+const getServiceIcon = (id) => {
+  switch (id) {
+    case 1: // ERP
+      return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ width: "100%", height: "100%" }}>
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+          <path d="M9 11l2 2 4-4" />
+        </svg>
+      );
+    case 2: // CBT
+      return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ width: "100%", height: "100%" }}>
+          <circle cx="12" cy="12" r="10" />
+          <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+          <line x1="9" y1="9" x2="9.01" y2="9" />
+          <line x1="15" y1="9" x2="15.01" y2="9" />
+        </svg>
+      );
+    case 3: // ACT
+      return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ width: "100%", height: "100%" }}>
+          <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z" />
+          <path d="M12 6v6l4 2" />
+        </svg>
+      );
+    case 4: // DBT
+      return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ width: "100%", height: "100%" }}>
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+        </svg>
+      );
+    case 5: // RMT
+      return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ width: "100%", height: "100%" }}>
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+          <circle cx="9" cy="7" r="4" />
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+          <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+        </svg>
+      );
+    case 6: // Research & Clinical Training
+      return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ width: "100%", height: "100%" }}>
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+        </svg>
+      );
+    default:
+      return null;
+  }
+};
+
 
 // Hero Slides Data
 const heroSlides = [
-  {
-    id: 1,
-    badge: "OCD Treatment & Recovery",
-    title: <>Build Emotional Resilience <span className="text-teal">In OCD Recovery</span></>,
-    desc: "Specialized clinical support for adolescents and adults experiencing OCD, contamination ROCD, pure obsessions, intrusive thoughts, and anxiety-driven concerns.",
-    image: "/images/therapist-2.jpg"
-  },
   {
     id: 2,
     badge: "Clinical Modalities",
@@ -34,74 +153,6 @@ const heroSlides = [
     title: <>Coexist With Discomfort <span className="text-teal">To Reclaim Autonomy</span></>,
     desc: "Step beyond mere symptom management. Learn to navigate uncertainty and emotional intensity under the clinical guidance of Ms. Gauri.",
     image: "/images/therapist-2.jpg"
-  }
-];
-
-// Sample Videos Data
-const videoResources = [
-  {
-    id: 1,
-    title: "Mindfulness and Anxiety: Tips for Daily Calm",
-    category: "Psychological Counseling",
-    duration: "12:45",
-    thumbnail: "/images/video-thumb-1.jpg",
-    embedUrl: "https://www.youtube.com/embed/inpok4MKVLM" // peaceful nature/calm
-  },
-  {
-    id: 2,
-    title: "Healthy Boundaries in Relationships",
-    category: "Relationship Counseling",
-    duration: "15:20",
-    thumbnail: "/images/video-thumb-2.jpg",
-    embedUrl: "https://www.youtube.com/embed/z4L2Zg7382c" // boundaries
-  },
-  {
-    id: 3,
-    title: "Understanding Sexual Health & Wellness",
-    category: "Sexual Health",
-    duration: "10:15",
-    thumbnail: "/images/video-thumb-3.jpg",
-    embedUrl: "https://www.youtube.com/embed/tV2y5jE9bXU" // wellness info
-  }
-];
-
-// Sample Recovery Steps Data
-const recoverySteps = [
-  {
-    id: 1,
-    step: "Step:1",
-    title: "Book Your Visit",
-    desc: "Request your booking easily via our web form or directly on WhatsApp to coordinate your slot."
-  },
-  {
-    id: 2,
-    step: "Step:2",
-    title: "Initial Consultation",
-    desc: "Meet with our clinical team for a comprehensive psychological and wellness assessment."
-  },
-  {
-    id: 3,
-    step: "Step:3",
-    title: "Tailored Counseling",
-    desc: "Receive a personalized therapeutic plan aligned with your specific wellness objectives."
-  },
-  {
-    id: 4,
-    step: "Step:4",
-    title: "Skilled Therapy",
-    desc: "Participate in 1-on-1 counseling sessions focused on building cognitive and somatic strength."
-  },
-  {
-    id: 5,
-    step: "Step:5",
-    title: "Relentless Support",
-    desc: "Get continuous check-ins and reflection worksheets to ensure you maintain progress between visits."
-  },
-  {
-    id: 6,
-    step: "Step:6",
-    title: "Improvement & Recovery",
-    desc: "Rebuild your mental resilience, achieve personal growth, and see your emotional wellbeing flourish."
   }
 ];
 
@@ -135,10 +186,10 @@ export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Interaction states
-  const [selectedVideo, setSelectedVideo] = useState(videoResources[0]);
-  const [activeStep, setActiveStep] = useState(1);
   const [activeTestimonial, setActiveTestimonial] = useState(0);
   const [activeSlide, setActiveSlide] = useState(0);
+  const [activeModal, setActiveModal] = useState(null);
+
 
   // Autoplay hero slider
   useEffect(() => {
@@ -152,7 +203,7 @@ export default function Home() {
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
-    service: "Psychological Counseling",
+    service: "ERP Treatment",
     date: "",
     time: "",
     message: ""
@@ -249,12 +300,10 @@ export default function Home() {
           <ul className={styles.navMenu}>
             <li><a href="#about" className={styles.navLink} onClick={(e) => { e.preventDefault(); scrollToSection("about"); }}>About Us</a></li>
             <li><a href="#services" className={styles.navLink} onClick={(e) => { e.preventDefault(); scrollToSection("services"); }}>Services</a></li>
-            <li><a href="#videos" className={styles.navLink} onClick={(e) => { e.preventDefault(); scrollToSection("videos"); }}>Video Resources</a></li>
-            <li><a href="#why-choose-us" className={styles.navLink} onClick={(e) => { e.preventDefault(); scrollToSection("why-choose-us"); }}>Recovery Steps</a></li>
             <li><a href="#testimonials" className={styles.navLink} onClick={(e) => { e.preventDefault(); scrollToSection("testimonials"); }}>Testimonials</a></li>
           </ul>
 
-          <button className={styles.btnAppointment} onClick={() => scrollToSection("booking")}>
+          <button className={styles.btnAppointment} onClick={() => window.open("https://wa.me/917706000771?text=Hello%20Ms.%20Gauri,%20I%20would%20like%20to%20book%20an%20appointment.", "_blank")}>
             <span>Make Appointment</span>
             <div className={styles.arrowIcon}>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ width: "12px", height: "12px" }}>
@@ -328,17 +377,16 @@ export default function Home() {
       {/* About Section */}
       <section id="about" className={styles.about}>
         <div className="container">
+          <div className={styles.aboutHeader}>
+            <div className={styles.sectionBadge}>Our Trusted Support</div>
+            <h2 className={styles.aboutTitle}>
+              Dedicated To <span>Building Resilience</span> & Autonomy in OCD
+            </h2>
+          </div>
+
           <div className={styles.aboutGrid}>
-            <div className={styles.collageContainer}>
-              <div className={styles.largeCard}>
-                <img src="/images/therapist-1.jpg" alt="Counseling session" />
-              </div>
-              <div className={styles.smallCard}>
-                <img src="/images/therapist-2.jpg" alt="Individual counseling" />
-              </div>
-              <div className={styles.smallCard}>
-                <img src="/images/therapist-3.jpg" alt="Mindfulness workshop" />
-              </div>
+            <div className={styles.aboutImageWrapper}>
+              <img src="/images/therapist-1.jpg" alt="OCD Treatment Session" className={styles.aboutSingleImage} />
               <div className={styles.badgeCircle}>
                 <span className={styles.badgeNumber}>18+</span>
                 <span className={styles.badgeText}>Years of<br/>Expertise</span>
@@ -346,10 +394,6 @@ export default function Home() {
             </div>
 
             <div>
-              <div className={styles.sectionBadge}>Our Trusted Support</div>
-              <h2 className={styles.aboutTitle}>
-                Dedicated To <span>Building Resilience</span> & Autonomy in OCD
-              </h2>
               <p className={styles.aboutDesc}>
                 Ms. Gauri is a dedicated Psychologist at <strong>Emotion of Life – OCD Treatment, Research & Training Institute</strong>, widely recognized for her clinical expertise in helping individuals build deep emotional resilience while navigating Obsessive-Compulsive Disorder (OCD). She works extensively with both adolescents and adults experiencing a wide range of OCD presentations (contamination OCD, ROCD, pure obsessions, sexual intrusive thoughts, and anxiety-driven concerns).
               </p>
@@ -370,7 +414,6 @@ export default function Home() {
                     <p>Dedicated Psychologist</p>
                   </div>
                 </div>
-                <div className={styles.signature} style={{ fontSize: "24px" }}>Ms. Gauri</div>
               </div>
             </div>
           </div>
@@ -388,138 +431,104 @@ export default function Home() {
           </div>
 
           <div className={styles.servicesGrid}>
-            {servicesList.map((service) => (
-              <div
-                key={service.id}
-                className={styles.serviceCard}
-                style={{ "--bg-image": `url(${service.image})` }}
-              >
-                {/* Embedded style helper since CSS modules can't easily read dynamic hover background images */}
-                <style jsx>{`
-                  .${styles.serviceCard}:nth-child(${service.id})::before {
-                    background-image: url(${service.image});
-                  }
-                `}</style>
-                <div className={styles.cardArrowBtn}>
-                  <div className={styles.innerCircle}>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ width: "16px", height: "16px" }}>
+            {servicesList.map((service, idx) => {
+              return (
+                <div
+                  key={service.id}
+                  className={styles.serviceCard}
+                  onClick={() => setActiveModal(idx)}
+                >
+                  <div className={styles.serviceIconContainer}>
+                    {getServiceIcon(service.id)}
+                  </div>
+                  
+                  <h3 className={styles.serviceCardTitle}>{service.title}</h3>
+                  <p className={styles.serviceCardDesc}>{service.desc}</p>
+                  
+                  <div className={styles.serviceCardLearnMore}>
+                    <span>Read More</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ width: "14px", height: "14px" }}>
                       <line x1="5" y1="12" x2="19" y2="12" />
                       <polyline points="12 5 19 12 12 19" />
                     </svg>
                   </div>
                 </div>
-                <h3 className={styles.serviceCardTitle}>{service.name}</h3>
-              </div>
-            ))}
-          </div>
-
-          <div className={styles.servicesPagination}>
-            {servicesList.map((_, idx) => (
-              <span key={idx} className={`${styles.dot} ${idx === 0 ? styles.active : ""}`}></span>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Video Resources Section */}
-      <section id="videos" className={styles.videos}>
-        <div className="container">
-          <div className={styles.videosHeader}>
-            <div>
-              <div className={styles.sectionBadge}>Video Resources</div>
-              <h2 className={styles.videosTitle}>
-                Empowering Your <span>Steps Toward Emotional</span> Health
-              </h2>
-            </div>
-          </div>
-
-          <div className={styles.videosGrid}>
-            <div className={styles.playerCard}>
-              <div className={styles.videoWrapper}>
-                <iframe
-                  width="100%"
-                  height="100%"
-                  src={selectedVideo.embedUrl}
-                  title={selectedVideo.title}
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  style={{ position: "absolute", top: 0, left: 0, width: 100 + "%", height: 100 + "%" }}
-                ></iframe>
-              </div>
-              <div className={styles.videoInfoBlock}>
-                <div className={styles.videoCategory}>{selectedVideo.category}</div>
-                <h3 className={styles.activeVideoTitle}>{selectedVideo.title}</h3>
-                <p>Learn clinical techniques and guided practices to maintain mental wellness in your everyday life. Watch other video classes using the menu.</p>
-              </div>
-            </div>
-
-            <div className={styles.videoList}>
-              {videoResources.map((video) => (
-                <div
-                  key={video.id}
-                  className={`${styles.videoItem} ${selectedVideo.id === video.id ? styles.active : ""}`}
-                  onClick={() => setSelectedVideo(video)}
-                >
-                  <div className={styles.itemThumb}>
-                    <img src={video.thumbnail} alt={video.title} />
-                    <div className={styles.miniPlay}>
-                      <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                    </div>
-                  </div>
-                  <div className={styles.itemInfo}>
-                    <h4>{video.title}</h4>
-                    <p className="text-teal">{video.category} • {video.duration}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Why Choose Us / Process Section */}
-      <section id="why-choose-us" className={styles.process}>
-        <div className="container">
-          <div className={styles.processHeader}>
-            <div className={styles.sectionBadge}>Secure Care</div>
-            <h2 className={styles.processTitle}>
-              The Key Steps <span>To Begin Your Recovery</span> Journey
-            </h2>
-          </div>
-
-          <div className={styles.radialLayout}>
-            <div className={styles.radialCircle}>
-              <div className={styles.radialCircleInner}>
-                <div className={styles.centerImage}>
-                  <img src="/images/process-center.jpg" alt="Patient counseling" />
-                </div>
-              </div>
-            </div>
-
-            {recoverySteps.map((item, idx) => {
-              const isActive = activeStep === item.id;
-              return (
-                <div
-                  key={item.id}
-                  className={`${styles.stepNode} ${styles[`pos${item.id}`]} ${isActive ? styles.active : ""}`}
-                  onMouseEnter={() => setActiveStep(item.id)}
-                >
-                  <button className={styles.stepLabel} onClick={() => setActiveStep(item.id)}>
-                    {item.step}
-                  </button>
-                  {isActive && (
-                    <div className={styles.stepCard}>
-                      <h4 style={{ fontSize: "15px", marginBottom: "6px" }}>{item.title}</h4>
-                      <p style={{ color: "var(--color-text-muted)", fontSize: "12px", margin: 0 }}>{item.desc}</p>
-                    </div>
-                  )}
-                </div>
               );
             })}
           </div>
         </div>
+
+        {/* Modal Popup for Details */}
+        {activeModal !== null && (
+          <div className={styles.modalOverlay} onClick={() => setActiveModal(null)}>
+            <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+              <button className={styles.modalCloseBtn} onClick={() => setActiveModal(null)} aria-label="Close details">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ width: "18px", height: "18px" }}>
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+              </button>
+
+              <div className={styles.modalGrid}>
+                {/* Left Column: Cover Image */}
+                <div className={styles.modalImageWrapper}>
+                  <img
+                    src={servicesList[activeModal].image}
+                    alt={servicesList[activeModal].title}
+                    className={styles.modalImage}
+                  />
+                </div>
+
+                {/* Right Column: Modality Info */}
+                <div className={styles.modalInfo}>
+                  <div className={styles.modalIconCircle}>
+                    {getServiceIcon(servicesList[activeModal].id)}
+                  </div>
+
+                  <h3 className={styles.modalTitle}>
+                    {servicesList[activeModal].title}
+                  </h3>
+
+                  <p className={styles.modalDesc}>
+                    {servicesList[activeModal].desc}
+                  </p>
+
+                  <ul className={styles.modalChecklist}>
+                    {servicesList[activeModal].bullets.map((bullet, bIdx) => (
+                      <li key={bIdx} className={styles.modalChecklistItem}>
+                        <div className={styles.modalCheckIconWrapper}>
+                          <svg className={styles.modalCheckIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                            <polyline points="20 6 9 17 4 12" />
+                          </svg>
+                        </div>
+                        <span>{bullet}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <button
+                    className={styles.modalBtn}
+                    onClick={() => {
+                      const serviceShort = servicesList[activeModal].shortName;
+                      setActiveModal(null);
+                      window.open(`https://wa.me/917706000771?text=Hello%20Ms.%20Gauri,%20I%20would%20like%20to%20book%20an%20appointment%20for%20${encodeURIComponent(serviceShort)}.`, "_blank");
+                    }}
+                  >
+                    <span>Book Appointment</span>
+                    <div className={styles.modalBtnInnerCircle}>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ width: "12px", height: "12px" }}>
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                        <polyline points="12 5 19 12 12 19" />
+                      </svg>
+                    </div>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </section>
+
 
       {/* Testimonials Section */}
       <section id="testimonials" className={styles.testimonials}>
@@ -585,144 +594,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Booking Form Section */}
-      <section id="booking" className={styles.booking}>
-        <div className={styles.bookingBgPattern}></div>
-        <div className="container">
-          <div className={styles.bookingGrid}>
-            <div>
-              <div className={styles.sectionBadge} style={{ color: "var(--color-accent-teal)" }}>Appointment Booking</div>
-              <h2 className={styles.bookingTitle}>
-                Book a Session To <span>Begin Your Wellness</span> Plan
-              </h2>
-              <p className={styles.bookingDesc}>
-                Take the first step toward reclaiming your psychological well-being. Fill out the booking form, and our system will format your details and connect you directly to our WhatsApp support number for scheduling confirmations.
-              </p>
 
-              <div className={styles.bookingContactInfo}>
-                <div className={styles.bookingContactItem}>
-                  <div className={styles.bookingIconCircle}>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                  </div>
-                  <div>
-                    <h4 style={{ color: "var(--color-white)", fontSize: "16px" }}>Emergency Call Support</h4>
-                    <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "14px" }}>+91 77060 00771</p>
-                  </div>
-                </div>
-
-                <div className={styles.bookingContactItem}>
-                  <div className={styles.bookingIconCircle}>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                  </div>
-                  <div>
-                    <h4 style={{ color: "var(--color-white)", fontSize: "16px" }}>Email Communications</h4>
-                    <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "14px" }}>info@mindmantra.com</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className={styles.bookingFormContainer}>
-              <form onSubmit={handleFormSubmit}>
-                <div className={styles.formGroup}>
-                  <label className={styles.formLabel} htmlFor="name">Your Full Name *</label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    className={styles.formInput}
-                    placeholder="Enter your name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </div>
-
-                <div className={styles.formRow}>
-                  <div className={styles.formGroup}>
-                    <label className={styles.formLabel} htmlFor="phone">Phone Number *</label>
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      className={styles.formInput}
-                      placeholder="Enter phone number"
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                      required
-                    />
-                  </div>
-
-                  <div className={styles.formGroup}>
-                    <label className={styles.formLabel} htmlFor="service">Select Service *</label>
-                    <select
-                      id="service"
-                      name="service"
-                      className={styles.formSelect}
-                      value={formData.service}
-                      onChange={handleInputChange}
-                      required
-                    >
-                      <option value="Psychological Counseling">Psychological Counseling</option>
-                      <option value="Relationship Counseling">Relationship Counseling</option>
-                      <option value="Sexual Health & Wellness">Sexual Health & Wellness</option>
-                      <option value="Personal Growth & Mindfulness">Personal Growth & Mindfulness</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div className={styles.formRow}>
-                  <div className={styles.formGroup}>
-                    <label className={styles.formLabel} htmlFor="date">Preferred Date *</label>
-                    <input
-                      type="date"
-                      id="date"
-                      name="date"
-                      className={styles.formInput}
-                      value={formData.date}
-                      onChange={handleInputChange}
-                      required
-                    />
-                  </div>
-
-                  <div className={styles.formGroup}>
-                    <label className={styles.formLabel} htmlFor="time">Preferred Time *</label>
-                    <input
-                      type="time"
-                      id="time"
-                      name="time"
-                      className={styles.formInput}
-                      value={formData.time}
-                      onChange={handleInputChange}
-                      required
-                    />
-                  </div>
-                </div>
-
-                <div className={styles.formGroup}>
-                  <label className={styles.formLabel} htmlFor="message">Brief Description of Wellness Request</label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows="3"
-                    className={styles.formTextarea}
-                    placeholder="Describe what you would like to discuss (optional)"
-                    value={formData.message}
-                    onChange={handleInputChange}
-                  ></textarea>
-                </div>
-
-                <button type="submit" className={styles.btnSubmit}>
-                  <span>Submit to WhatsApp</span>
-                  <svg viewBox="0 0 24 24">
-                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.003 5.32 5.325 0 11.866 0c3.168.001 6.147 1.234 8.389 3.477 2.242 2.241 3.472 5.218 3.472 8.388c-.004 6.545-5.327 11.866-11.869 11.866-1.999-.001-3.966-.508-5.711-1.472L0 24zm6.59-4.846c1.6.95 3.488 1.459 5.407 1.46h.007c5.432 0 9.854-4.42 9.858-9.853.002-2.633-1.02-5.107-2.88-6.969C17.166 1.93 14.696.907 12.062.906c-5.434 0-9.857 4.422-9.86 9.855-.001 1.93.502 3.81 1.457 5.429L2.65 20.36l4.004-1.047-.007-.159z"/>
-                  </svg>
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Footer */}
       <footer className={styles.footer}>
@@ -801,7 +673,6 @@ export default function Home() {
                 <li className={styles.footerLinkItem}><a href="#home" onClick={(e) => { e.preventDefault(); scrollToSection("home"); }}>Home</a></li>
                 <li className={styles.footerLinkItem}><a href="#about" onClick={(e) => { e.preventDefault(); scrollToSection("about"); }}>About Us</a></li>
                 <li className={styles.footerLinkItem}><a href="#services" onClick={(e) => { e.preventDefault(); scrollToSection("services"); }}>Services</a></li>
-                <li className={styles.footerLinkItem}><a href="#videos" onClick={(e) => { e.preventDefault(); scrollToSection("videos"); }}>Video Resources</a></li>
                 <li className={styles.footerLinkItem}><a href="#testimonials" onClick={(e) => { e.preventDefault(); scrollToSection("testimonials"); }}>Testimonials</a></li>
               </ul>
             </div>
