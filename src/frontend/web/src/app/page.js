@@ -19,14 +19,14 @@ const heroSlides = [
     badge: "OCD Treatment & Recovery",
     title: <>Build Emotional Resilience <span className="text-teal">In OCD Recovery</span></>,
     desc: "Specialized clinical support for adolescents and adults experiencing OCD, contamination ROCD, pure obsessions, intrusive thoughts, and anxiety-driven concerns.",
-    image: "/images/hero-bg.jpg"
+    image: "/images/therapist-2.jpg"
   },
   {
     id: 2,
     badge: "Clinical Modalities",
     title: <>Clinical Expertise In <span className="text-teal">ERP, CBT, & ACT</span></>,
     desc: "Guiding you to face fears systematically, disengage from compulsive behaviors, and cultivate resilient coping strategies for daily life.",
-    image: "/images/therapist-1.jpg"
+    image: "/images/therapist-2.jpg"
   },
   {
     id: 3,
