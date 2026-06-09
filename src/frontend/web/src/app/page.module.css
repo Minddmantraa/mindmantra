@@ -1138,11 +1138,206 @@
 
 /* 9. Footer Styles */
 .footer {
-  background-color: #122926;
+  background-color: var(--color-primary-dark);
   color: rgba(255, 255, 255, 0.6);
-  padding: 40px 0;
+  padding: 80px 0 40px;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
   font-size: 14px;
+}
+
+.footerGrid {
+  display: grid;
+  grid-template-columns: 1.4fr 1.2fr 0.8fr 0.8fr 1.2fr;
+  gap: 48px;
+  margin-bottom: 60px;
+}
+
+.footerCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.footerLogoImg {
+  height: 52px;
+  width: auto;
+  align-self: flex-start;
+  margin-bottom: 20px;
+}
+
+.footerDesc {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.footerSocialList {
+  display: flex;
+  gap: 12px;
+}
+
+.footerSocialBtn {
+  width: 36px;
+  height: 36px;
+  background-color: var(--color-white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary-dark);
+  transition: var(--transition-smooth);
+}
+
+.footerSocialBtn:hover {
+  background-color: var(--color-accent-teal);
+  color: var(--color-white);
+  transform: translateY(-3px);
+}
+
+.footerSocialBtn svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+.footerHeading {
+  font-size: 18px;
+  font-family: var(--font-serif);
+  font-weight: 600;
+  color: var(--color-white);
+  margin-bottom: 24px;
+}
+
+.footerContactList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.footerContactItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.footerContactIcon {
+  width: 32px;
+  height: 32px;
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-accent-teal);
+  flex-shrink: 0;
+}
+
+.footerContactIcon svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+}
+
+.footerLinks {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footerLinkItem a {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+  transition: var(--transition-smooth);
+}
+
+.footerLinkItem a:hover {
+  color: var(--color-accent-teal);
+  padding-left: 4px;
+}
+
+.footerForm {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footerFormInput {
+  width: 100%;
+  height: 48px;
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0 20px;
+  color: var(--color-white);
+  font-size: 14px;
+  transition: var(--transition-smooth);
+}
+
+.footerFormInput:focus {
+  border-color: var(--color-accent-teal);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(44, 165, 167, 0.2);
+}
+
+.footerFormInput::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.footerSubscribeBtn {
+  background-color: var(--color-accent-teal);
+  color: var(--color-white);
+  height: 48px;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  transition: var(--transition-smooth);
+}
+
+.footerSubscribeBtn:hover {
+  background-color: var(--color-accent-teal-dark);
+  transform: translateY(-2px);
+}
+
+.footerSubscribeBtn svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+.footerDivider {
+  border: 0;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.08);
+  margin-bottom: 24px;
+}
+
+.footerBottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.footerBottomLinks {
+  display: flex;
+  gap: 24px;
+}
+
+.footerBottomLinks a {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.footerBottomLinks a:hover {
+  color: var(--color-accent-teal);
 }
 
 .footerContainer {
@@ -1195,6 +1390,11 @@
   .collageContainer {
     max-width: 600px;
     margin: 0 auto;
+  }
+
+  .footerGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 36px;
   }
 }
 
@@ -1265,5 +1465,10 @@
     margin-top: 8px;
     box-shadow: none;
     border-color: rgba(44, 165, 167, 0.1);
+  }
+
+  .footerGrid {
+    grid-template-columns: 1fr;
+    gap: 36px;
   }
 }
