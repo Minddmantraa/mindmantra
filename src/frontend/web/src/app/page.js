@@ -76,7 +76,7 @@ const servicesList = [
     shortName: "Clinical Training",
     image: "/images/service-growth.jpg",
     title: "Research & Clinical Training",
-    desc: "Emotion of Life provides professional clinical training, supervision hours, case study worksheets, and research opportunities for therapists and psychology practitioners.",
+    desc: "Mind Mantra provides professional clinical training, supervision hours, case study worksheets, and research opportunities for therapists and psychology practitioners.",
     bullets: [
       "Clinical worksheets, case study seminars, and supervision hours",
       "Evidence-based research publications in OCD coping behaviors",
@@ -149,7 +149,7 @@ const heroSlides = [
   },
   {
     id: 3,
-    badge: "Emotion of Life",
+    badge: "Mind Mantra",
     title: <>Coexist With Discomfort <span className="text-teal">To Reclaim Autonomy</span></>,
     desc: "Step beyond mere symptom management. Learn to navigate uncertainty and emotional intensity under the clinical guidance of Ms. Gauri.",
     image: "/images/therapist-2.jpg"
@@ -226,7 +226,7 @@ const testimonialsList = [
   },
   {
     id: 3,
-    text: "The distress tolerance techniques I learned at Emotion of Life have given me my autonomy back. Learning to coexist with discomfort was intense, but it brought sustainable and long-term recovery.",
+    text: "The distress tolerance techniques I learned at Mind Mantra have given me my autonomy back. Learning to coexist with discomfort was intense, but it brought sustainable and long-term recovery.",
     clientName: "Julian Barnes",
     role: "Adolescent Client",
     avatar: "/images/therapist-3.jpg"
@@ -305,7 +305,7 @@ export default function Home() {
     
     // Formatting message for WhatsApp
     const textMessage = 
-      `*EMOTION OF LIFE APPOINTMENT REQUEST*\n` +
+      `*MIND MANTRA APPOINTMENT REQUEST*\n` +
       `---------------------------------------\n` +
       `*Client Name:* ${name}\n` +
       `*Phone Number:* ${phone}\n` +
@@ -348,7 +348,7 @@ export default function Home() {
                 <circle cx="12" cy="12" r="10" />
                 <polyline points="12 6 12 12 16 14" />
               </svg>
-              <span>Our Working Time: 09:00 am To 06:00 pm</span>
+              <span>Working Time: 24/7</span>
             </div>
           </div>
           <div className={styles.socials}>
@@ -379,7 +379,7 @@ export default function Home() {
       <div className={styles.navWrapper}>
         <nav className={styles.navbar}>
           <a href="#" className={styles.logo} onClick={(e) => { e.preventDefault(); scrollToSection("home"); }}>
-            <img src="/images/logo.png" alt="Emotion of Life" className={styles.logoImage} />
+            <img src="/images/logo.png" alt="Mind Mantra" className={styles.logoImage} />
           </a>
 
           <ul className={styles.navMenu}>
@@ -481,7 +481,7 @@ export default function Home() {
 
             <div>
               <p className={styles.aboutDesc}>
-                Ms. Gauri is a dedicated Psychologist at <strong>Emotion of Life – OCD Treatment, Research & Training Institute</strong>, widely recognized for her clinical expertise in helping individuals build deep emotional resilience while navigating Obsessive-Compulsive Disorder (OCD). She works extensively with both adolescents and adults experiencing a wide range of OCD presentations (contamination OCD, ROCD, pure obsessions, sexual intrusive thoughts, and anxiety-driven concerns).
+                Ms. Gauri is a dedicated Psychologist at <strong>Mind Mantra – OCD Treatment, Research & Training Institute</strong>, widely recognized for her clinical expertise in helping individuals build deep emotional resilience while navigating Obsessive-Compulsive Disorder (OCD). She works extensively with both adolescents and adults experiencing a wide range of OCD presentations (contamination OCD, ROCD, pure obsessions, sexual intrusive thoughts, and anxiety-driven concerns).
               </p>
               <div className={styles.quoteBlock}>
                 "Rather than aiming only to reduce compulsions or intrusive thoughts, we emphasize strengthening emotional tolerance, psychological flexibility, and inner stability—core capacities that support sustainable and long-term OCD recovery. True healing occurs when individuals learn to coexist with discomfort, uncertainty, and emotional intensity without being controlled by them."
@@ -776,7 +776,7 @@ export default function Home() {
           <div className={styles.footerGrid}>
             {/* Column 1: Logo, description, socials */}
             <div className={styles.footerCol}>
-              <img src="/images/logo.png" alt="Emotion of Life" className={styles.footerLogoImg} style={{ filter: "brightness(0) invert(1)" }} />
+              <img src="/images/logo.png" alt="Mind Mantra" className={styles.footerLogoImg} style={{ filter: "brightness(0) invert(1)" }} />
               <p className={styles.footerDesc}>
                 We help build deep emotional resilience, distress tolerance, and psychological flexibility to empower your journey to recovery every single day.
               </p>
@@ -871,7 +871,7 @@ export default function Home() {
           <hr className={styles.footerDivider} />
 
           <div className={styles.footerBottom}>
-            <p>&copy; {new Date().getFullYear()} Emotion of Life. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} Mind Mantra. All rights reserved.</p>
             <div className={styles.footerBottomLinks}>
               <a href="#">Conditions of Use</a>
               <span>|</span>
