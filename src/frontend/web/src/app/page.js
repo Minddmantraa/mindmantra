@@ -156,6 +156,58 @@ const heroSlides = [
   }
 ];
 
+// Sample Videos Data
+const videoResources = [
+  {
+    id: 1,
+    title: "Understanding OCD: Intrusive Thoughts & Compulsive Cycles",
+    category: "OCD Education",
+    duration: "10:15",
+    thumbnail: "/images/video-thumb-1.jpg",
+    embedUrl: "https://www.youtube.com/embed/inpok4MKVLM"
+  },
+  {
+    id: 2,
+    title: "Exposure & Response Prevention (ERP) Therapy In Action",
+    category: "ERP Treatment",
+    duration: "12:40",
+    thumbnail: "/images/video-thumb-2.jpg",
+    embedUrl: "https://www.youtube.com/embed/z4L2Zg7382c"
+  },
+  {
+    id: 3,
+    title: "Cognitive Behavioral Therapy (CBT) for Intrusive Thoughts",
+    category: "CBT Modalities",
+    duration: "14:20",
+    thumbnail: "/images/video-thumb-3.jpg",
+    embedUrl: "https://www.youtube.com/embed/tV2y5jE9bXU"
+  },
+  {
+    id: 4,
+    title: "Acceptance & Commitment Therapy (ACT) - Coexisting With OCD",
+    category: "ACT Practice",
+    duration: "11:50",
+    thumbnail: "/images/service-counseling.jpg",
+    embedUrl: "https://www.youtube.com/embed/H7L6qB1W0Qo"
+  },
+  {
+    id: 5,
+    title: "DBT Strategies for Distress Tolerance & Emotional Regulation",
+    category: "DBT Strategies",
+    duration: "15:10",
+    thumbnail: "/images/service-relationship.jpg",
+    embedUrl: "https://www.youtube.com/embed/K-S8e7_uD3A"
+  },
+  {
+    id: 6,
+    title: "Mindfulness & Somatic Grounding Worksheets for OCD Anxiety",
+    category: "Mindfulness",
+    duration: "09:45",
+    thumbnail: "/images/service-growth.jpg",
+    embedUrl: "https://www.youtube.com/embed/2_YI07g8dFw"
+  }
+];
+
 // Sample Testimonials Data
 const testimonialsList = [
   {
@@ -190,6 +242,39 @@ export default function Home() {
   const [activeSlide, setActiveSlide] = useState(0);
   const [activeModal, setActiveModal] = useState(null);
 
+  // Video slider states
+  const [videoSlideIndex, setVideoSlideIndex] = useState(0);
+  const [playingVideoId, setPlayingVideoId] = useState(null);
+  const [windowWidth, setWindowWidth] = useState(1200);
+
+  // Manage window resize for responsive slider calculations
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setWindowWidth(window.innerWidth);
+      const handleResize = () => setWindowWidth(window.innerWidth);
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
+    }
+  }, []);
+
+  // Compute how many cards are visible based on width
+  let visibleCards = 3;
+  if (windowWidth <= 600) {
+    visibleCards = 1;
+  } else if (windowWidth <= 992) {
+    visibleCards = 2;
+  }
+
+  const maxVideoIndex = Math.max(0, videoResources.length - visibleCards);
+
+  // Autoplay video slider
+  useEffect(() => {
+    if (playingVideoId !== null) return;
+    const timer = setInterval(() => {
+      setVideoSlideIndex((prev) => (prev >= maxVideoIndex ? 0 : prev + 1));
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [maxVideoIndex, playingVideoId]);
 
   // Autoplay hero slider
   useEffect(() => {
@@ -300,6 +385,7 @@ export default function Home() {
           <ul className={styles.navMenu}>
             <li><a href="#about" className={styles.navLink} onClick={(e) => { e.preventDefault(); scrollToSection("about"); }}>About Us</a></li>
             <li><a href="#services" className={styles.navLink} onClick={(e) => { e.preventDefault(); scrollToSection("services"); }}>Services</a></li>
+            <li><a href="#videos" className={styles.navLink} onClick={(e) => { e.preventDefault(); scrollToSection("videos"); }}>Video Resources</a></li>
             <li><a href="#testimonials" className={styles.navLink} onClick={(e) => { e.preventDefault(); scrollToSection("testimonials"); }}>Testimonials</a></li>
           </ul>
 
@@ -529,6 +615,94 @@ export default function Home() {
         )}
       </section>
 
+      {/* Video Resources Section */}
+      <section id="videos" className={styles.videos}>
+        <div className="container">
+          <div className={styles.videosHeader}>
+            <div className={styles.sectionBadge}>Video Resources</div>
+            <h2 className={styles.videosTitle}>
+              Empowering Your Steps <span>With Expert Clinical Insights</span>
+            </h2>
+            <p className={styles.videosDesc}>
+              Watch Ms. Gauri discuss key OCD mechanisms, ERP treatment protocols, and daily coping tools designed to support your psychological flexibility.
+            </p>
+          </div>
+
+          <div className={styles.videoSliderContainer}>
+            <div
+              className={styles.videoSliderTrack}
+              style={{
+                transform: `translateX(-${videoSlideIndex * (100 / visibleCards)}%)`,
+              }}
+            >
+              {videoResources.map((video) => (
+                <div
+                  key={video.id}
+                  className={styles.videoSliderCard}
+                  style={{ width: `${100 / visibleCards}%` }}
+                >
+                  <div className={styles.videoPlayerWrapper}>
+                    {playingVideoId === video.id ? (
+                      <iframe
+                        className={styles.videoIframe}
+                        src={`${video.embedUrl}?autoplay=1`}
+                        title={video.title}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      ></iframe>
+                    ) : (
+                      <div
+                        className={styles.videoThumbnailContainer}
+                        onClick={() => setPlayingVideoId(video.id)}
+                      >
+                        <img
+                          src={video.thumbnail}
+                          alt={video.title}
+                          className={styles.videoThumbnail}
+                        />
+                        <div className={styles.videoPlayOverlay}>
+                          <div className={styles.playButtonCircle}>
+                            <svg viewBox="0 0 24 24" fill="currentColor" style={{ width: "24px", height: "24px", marginLeft: "4px" }}>
+                              <path d="M8 5v14l11-7z" />
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className={styles.videoCardInfo}>
+                    <span className={styles.videoCategoryBadge}>{video.category}</span>
+                    <h3 className={styles.videoCardTitle}>{video.title}</h3>
+                    <div className={styles.videoDurationMeta}>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ width: "14px", height: "14px", marginRight: "6px", color: "var(--color-accent-teal)" }}>
+                        <circle cx="12" cy="12" r="10" />
+                        <polyline points="12 6 12 12 16 14" />
+                      </svg>
+                      <span>Duration: {video.duration} Mins</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {maxVideoIndex > 0 && (
+            <div className={styles.videoDots}>
+              {Array.from({ length: maxVideoIndex + 1 }).map((_, idx) => (
+                <span
+                  key={idx}
+                  className={`${styles.videoDot} ${videoSlideIndex === idx ? styles.videoDotActive : ""}`}
+                  onClick={() => {
+                    setVideoSlideIndex(idx);
+                    setPlayingVideoId(null);
+                  }}
+                ></span>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
 
       {/* Testimonials Section */}
       <section id="testimonials" className={styles.testimonials}>
@@ -673,6 +847,7 @@ export default function Home() {
                 <li className={styles.footerLinkItem}><a href="#home" onClick={(e) => { e.preventDefault(); scrollToSection("home"); }}>Home</a></li>
                 <li className={styles.footerLinkItem}><a href="#about" onClick={(e) => { e.preventDefault(); scrollToSection("about"); }}>About Us</a></li>
                 <li className={styles.footerLinkItem}><a href="#services" onClick={(e) => { e.preventDefault(); scrollToSection("services"); }}>Services</a></li>
+                <li className={styles.footerLinkItem}><a href="#videos" onClick={(e) => { e.preventDefault(); scrollToSection("videos"); }}>Video Resources</a></li>
                 <li className={styles.footerLinkItem}><a href="#testimonials" onClick={(e) => { e.preventDefault(); scrollToSection("testimonials"); }}>Testimonials</a></li>
               </ul>
             </div>
