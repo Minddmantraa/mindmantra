@@ -82,17 +82,13 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 24px;
-  font-family: var(--font-sans);
-  font-weight: 700;
-  color: var(--color-primary-dark);
-  letter-spacing: -0.5px;
 }
 
-.logoIcon {
-  width: 32px;
-  height: 32px;
-  color: var(--color-accent-teal);
+.logoImage {
+  height: 52px;
+  width: auto;
+  object-fit: contain;
+  display: block;
 }
 
 .navMenu {
@@ -478,7 +474,7 @@
 
 .servicesGrid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 24px;
 }
 

@@ -5,33 +5,34 @@ import styles from "./page.module.css";
 
 // Sample Services Data
 const servicesList = [
-  { id: 1, name: "Psychological Counseling", image: "/images/service-counseling.jpg" },
-  { id: 2, name: "Relationship Counseling", image: "/images/service-relationship.jpg" },
-  { id: 3, name: "Sexual Health & Wellness", image: "/images/service-sexual.jpg" },
-  { id: 4, name: "Personal Growth & Mindfulness", image: "/images/service-growth.jpg" }
+  { id: 1, name: "ERP (Exposure & Response Prevention)", image: "/images/service-counseling.jpg" },
+  { id: 2, name: "CBT (Cognitive Behavioural Therapy)", image: "/images/service-relationship.jpg" },
+  { id: 3, name: "ACT (Acceptance & Commitment Therapy)", image: "/images/service-sexual.jpg" },
+  { id: 4, name: "DBT (Dialectical Behavior Therapy)", image: "/images/service-growth.jpg" },
+  { id: 5, name: "RMT (Relationship/Resource Therapy)", image: "/images/therapist-3.jpg" }
 ];
 
 // Hero Slides Data
 const heroSlides = [
   {
     id: 1,
-    badge: "Helping Hands",
-    title: <>Stretch Your Hands To <span className="text-teal">Reduce Daily Pain</span></>,
-    desc: "Daily tasks like typing, texting, or lifting can place constant stress on your hands, leading to stiffness, soreness, and fatigue.",
+    badge: "OCD Treatment & Recovery",
+    title: <>Build Emotional Resilience <span className="text-teal">In OCD Recovery</span></>,
+    desc: "Specialized clinical support for adolescents and adults experiencing OCD, contamination ROCD, pure obsessions, intrusive thoughts, and anxiety-driven concerns.",
     image: "/images/hero-bg.jpg"
   },
   {
     id: 2,
-    badge: "Senior Care",
-    title: <>Simple Hand Workouts <span className="text-teal">To Boost</span></>,
-    desc: "Unlock the power in your hands with easy yet effective exercises designed to improve grip strength and finger flexibility.",
+    badge: "Clinical Modalities",
+    title: <>Clinical Expertise In <span className="text-teal">ERP, CBT, & ACT</span></>,
+    desc: "Guiding you to face fears systematically, disengage from compulsive behaviors, and cultivate resilient coping strategies for daily life.",
     image: "/images/therapist-1.jpg"
   },
   {
     id: 3,
-    badge: "Mental Wellness",
-    title: <>Empathetic Support To <span className="text-teal">Find Balance</span></>,
-    desc: "Mental health is about daily habits and trusted guidance. We work with you to find your balance, process emotions, and flourish.",
+    badge: "Emotion of Life",
+    title: <>Coexist With Discomfort <span className="text-teal">To Reclaim Autonomy</span></>,
+    desc: "Step beyond mere symptom management. Learn to navigate uncertainty and emotional intensity under the clinical guidance of Ms. Gauri.",
     image: "/images/therapist-2.jpg"
   }
 ];
@@ -165,7 +166,7 @@ export default function Home() {
     
     // Formatting message for WhatsApp
     const textMessage = 
-      `*MIND MANTRA APPOINTMENT REQUEST*\n` +
+      `*EMOTION OF LIFE APPOINTMENT REQUEST*\n` +
       `---------------------------------------\n` +
       `*Client Name:* ${name}\n` +
       `*Phone Number:* ${phone}\n` +
@@ -239,12 +240,7 @@ export default function Home() {
       <div className={styles.navWrapper}>
         <nav className={styles.navbar}>
           <a href="#" className={styles.logo} onClick={(e) => { e.preventDefault(); scrollToSection("home"); }}>
-            <svg className={styles.logoIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8z"/>
-              <path d="M12 6c-3.3 0-6 2.7-6 6s2.7 6 6 6 6-2.7 6-6-2.7-6-6-6zm0 10c-2.2 0-4-1.8-4-4s1.8-4 4-4 4 1.8 4 4-1.8 4-4 4z"/>
-              <path d="M12 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
-            </svg>
-            <span>MIND MANTRA</span>
+            <img src="/images/logo.png" alt="Emotion of Life" className={styles.logoImage} />
           </a>
 
           <ul className={styles.navMenu}>
@@ -349,26 +345,29 @@ export default function Home() {
             <div>
               <div className={styles.sectionBadge}>Our Trusted Support</div>
               <h2 className={styles.aboutTitle}>
-                Passionate About <span>Providing Expert Guidance</span> And Emotional Support
+                Dedicated To <span>Building Resilience</span> & Autonomy in OCD
               </h2>
               <p className={styles.aboutDesc}>
-                Behind every successful recovery is a therapist's passion for care, continuous support, and clinical guidance. We believe in providing an atmosphere of trust where you can comfortably process experiences and grow.
+                Ms. Gauri is a dedicated Psychologist at <strong>Emotion of Life – OCD Treatment, Research & Training Institute</strong>, widely recognized for her clinical expertise in helping individuals build deep emotional resilience while navigating Obsessive-Compulsive Disorder (OCD). She works extensively with both adolescents and adults experiencing a wide range of OCD presentations (contamination OCD, ROCD, pure obsessions, sexual intrusive thoughts, and anxiety-driven concerns).
               </p>
               <div className={styles.quoteBlock}>
-                "True Healing Comes From More Than Treatments—It's Built On Trust, Patience, And Compassion, Reflected In Each Small Victory And Ongoing Encouragement. Effective Care Goes Beyond Treatment."
+                "Rather than aiming only to reduce compulsions or intrusive thoughts, we emphasize strengthening emotional tolerance, psychological flexibility, and inner stability—core capacities that support sustainable and long-term OCD recovery. True healing occurs when individuals learn to coexist with discomfort, uncertainty, and emotional intensity without being controlled by them."
               </div>
+              <p className={styles.aboutDesc} style={{ marginBottom: "32px", fontSize: "15px", fontStyle: "italic", borderLeft: "3px solid var(--color-accent-teal)", paddingLeft: "20px" }}>
+                Special focus on emotional resilience building, distress tolerance, and psychological flexibility in OCD recovery. Working with adolescents and adults across diverse OCD presentations.
+              </p>
 
               <div className={styles.doctorProfile}>
                 <div className={styles.doctorInfo}>
                   <div className={styles.doctorAvatar}>
-                    <img src="/images/dr-marco.jpg" alt="Senior Psychologist Ferdinand Marco" />
+                    <img src="/images/dr-gauri.jpg" alt="Dedicated Psychologist Ms. Gauri" />
                   </div>
                   <div className={styles.doctorMeta}>
-                    <h4>Ferdinand Marco</h4>
-                    <p>Senior Doctor & Founder</p>
+                    <h4>Ms. Gauri</h4>
+                    <p>Dedicated Psychologist</p>
                   </div>
                 </div>
-                <div className={styles.signature}>Ferdinand Marco</div>
+                <div className={styles.signature} style={{ fontSize: "24px" }}>Ms. Gauri</div>
               </div>
             </div>
           </div>
@@ -412,9 +411,9 @@ export default function Home() {
           </div>
 
           <div className={styles.servicesPagination}>
-            <span className={`${styles.dot} ${styles.active}`}></span>
-            <span className={styles.dot}></span>
-            <span className={styles.dot}></span>
+            {servicesList.map((_, idx) => (
+              <span key={idx} className={`${styles.dot} ${idx === 0 ? styles.active : ""}`}></span>
+            ))}
           </div>
         </div>
       </section>
@@ -704,7 +703,7 @@ export default function Home() {
       <footer className={styles.footer}>
         <div className={`${styles.footerContainer} container`}>
           <div>
-            <p style={{ color: "rgba(255,255,255,0.4)" }}>&copy; {new Date().getFullYear()} Mind Mantra. All rights reserved.</p>
+            <p style={{ color: "rgba(255,255,255,0.4)" }}>&copy; {new Date().getFullYear()} Emotion of Life. All rights reserved.</p>
           </div>
           <div>
             <p style={{ color: "rgba(255,255,255,0.4)" }}>Designed & developed with care for client psychological wellness.</p>
