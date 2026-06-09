@@ -109,21 +109,24 @@ const recoverySteps = [
 const testimonialsList = [
   {
     id: 1,
-    text: "True healing began for me here. The guidance is built on immense trust, patience, and compassion. Ferdinand Marco and the staff provided ongoing encouragement that helped me step past my anxieties into a happier life.",
-    clientName: "Eleanor Vance",
-    role: "Therapy Client"
+    text: "When I started ERP treatment, the intrusive thoughts felt completely overwhelming. The customized exposures and gentle guidance from Ms. Gauri changed everything. Today, I feel in control and lead a balanced life.",
+    clientName: "Kai Gerold",
+    role: "OCD Recovery Client",
+    avatar: "/images/dr-gauri.jpg"
   },
   {
     id: 2,
-    text: "The relationship counseling sessions saved our marriage. We learned how to communicate productively, build healthy boundaries, and rediscover our mutual trust in a safe, non-judgmental environment.",
-    clientName: "David & Sarah Jenkins",
-    role: "Couples Counseling"
+    text: "I struggled with relationship OCD (ROCD) for years, constantly doubting every feeling. Through CBT and ACT exercises, Ms. Gauri guided me to face uncertainty. I've rebuilt my confidence and self-trust.",
+    clientName: "Sarah Jenkins",
+    role: "ROCD Counseling Client",
+    avatar: "/images/therapist-2.jpg"
   },
   {
     id: 3,
-    text: "A truly professional center. The sexual wellness programs are informative, empathetic, and tailored. I highly recommend Mind Mantra to anyone seeking a comprehensive approach to mental wellness.",
+    text: "The distress tolerance techniques I learned at Emotion of Life have given me my autonomy back. Learning to coexist with discomfort was intense, but it brought sustainable and long-term recovery.",
     clientName: "Julian Barnes",
-    role: "Wellness Client"
+    role: "Adolescent Client",
+    avatar: "/images/therapist-3.jpg"
   }
 ];
 
@@ -521,40 +524,62 @@ export default function Home() {
       {/* Testimonials Section */}
       <section id="testimonials" className={styles.testimonials}>
         <div className="container">
-          <div className={styles.testimonialsHeader}>
-            <div className={styles.sectionBadge}>Client Reviews</div>
-            <h2 className={styles.testimonialsTitle}>
-              What People Say <span>About Their Recovery</span>
-            </h2>
-          </div>
+          <div className={styles.testimonialsGrid}>
+            {/* Left Column (Empty on desktop for visual alignment on right) */}
+            <div className={styles.testimonialEmptyCol}></div>
 
-          <div className={styles.testimonialSlider}>
-            <div className={styles.testimonialCard}>
-              <div className={styles.quoteIcon}>
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
-              </div>
-              <p className={styles.testimonialText}>
-                "{testimonialsList[activeTestimonial].text}"
-              </p>
-              <div className={styles.clientMeta}>
-                <div className={styles.clientStars}>
+            {/* Right Column containing the slider content */}
+            <div className={styles.testimonialsContent}>
+              <div className={styles.testimonialsBadge}>Client Feedback</div>
+              <h2 className={styles.testimonialsHeading}>
+                Hear Our <span>Clients Share True Stories</span> Of Health And Healing
+              </h2>
+
+              <div className={styles.testimonialSlider}>
+                <p className={styles.testimonialText}>
+                  "{testimonialsList[activeTestimonial].text}"
+                </p>
+
+                <div className={styles.testimonialStars}>
                   {[...Array(5)].map((_, i) => (
                     <svg key={i} viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
                   ))}
                 </div>
-                <h4 className={styles.clientName}>{testimonialsList[activeTestimonial].clientName}</h4>
-                <p className={styles.clientRole}>{testimonialsList[activeTestimonial].role}</p>
-              </div>
-            </div>
 
-            <div className={styles.servicesPagination}>
-              {testimonialsList.map((_, idx) => (
-                <span
-                  key={idx}
-                  className={`${styles.dot} ${activeTestimonial === idx ? styles.active : ""}`}
-                  onClick={() => setActiveTestimonial(idx)}
-                ></span>
-              ))}
+                <div className={styles.testimonialProfile}>
+                  <div className={styles.testimonialAvatar}>
+                    <img src={testimonialsList[activeTestimonial].avatar} alt={testimonialsList[activeTestimonial].clientName} />
+                  </div>
+                  <div className={styles.testimonialMeta}>
+                    <h4>{testimonialsList[activeTestimonial].clientName}</h4>
+                    <p>{testimonialsList[activeTestimonial].role}</p>
+                  </div>
+                </div>
+
+                {/* Left/Right Arrow Controls */}
+                <div className={styles.testimonialControls}>
+                  <button
+                    className={styles.testimonialArrowBtn}
+                    onClick={() => setActiveTestimonial((prev) => (prev - 1 + testimonialsList.length) % testimonialsList.length)}
+                    aria-label="Previous testimonial"
+                  >
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ width: "16px", height: "16px" }}>
+                      <line x1="19" y1="12" x2="5" y2="12" />
+                      <polyline points="12 19 5 12 12 5" />
+                    </svg>
+                  </button>
+                  <button
+                    className={styles.testimonialArrowBtn}
+                    onClick={() => setActiveTestimonial((prev) => (prev + 1) % testimonialsList.length)}
+                    aria-label="Next testimonial"
+                  >
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ width: "16px", height: "16px" }}>
+                      <line x1="5" y1="12" x2="19" y2="12" />
+                      <polyline points="12 5 19 12 12 19" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
