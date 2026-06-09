@@ -4,119 +4,166 @@ import { useState, useEffect } from "react";
 import styles from "./page.module.css";
 
 // Sample Services Data
+// Sample Services Data
 const servicesList = [
   {
     id: 1,
-    name: "ERP (Exposure & Response Prevention)",
-    shortName: "ERP Treatment",
-    image: "/images/service-counseling.jpg",
-    title: "Exposure & Response Prevention (ERP)",
-    desc: "ERP is the gold standard therapy for OCD. It focuses on gradually exposing you to thoughts, images, and situations that make you anxious, while helping you resist performing compulsions.",
+    name: "Obsessive Compulsive Disorder Recovery",
+    shortName: "OCD Recovery",
+    image: "/images/dr-gauri.jpg",
+    title: "Obsessive Compulsive Disorder Recovery",
+    desc: "Evidence-based, gold-standard clinical protocols (ERP, CBT, ACT) to help individuals break free from obsessive doubts and compulsive rituals, building sustainable emotional resilience.",
     bullets: [
-      "Systematically face OCD triggers without resorting to compulsions",
-      "De-escalate anxiety and break the cycle of obsessive doubts",
-      "Reclaim control over your daily actions and behavioral choices"
-    ]
+      "Exposure & Response Prevention (ERP) to face triggers systematically",
+      "ACT techniques to tolerate distress and coexist with uncertainty",
+      "Tailored strategies for Pure O, contamination, ROCD, and intrusive thoughts"
+    ],
+    isFeatured: true
   },
   {
     id: 2,
-    name: "CBT (Cognitive Behavioural Therapy)",
-    shortName: "CBT Therapy",
-    image: "/images/service-relationship.jpg",
-    title: "Cognitive Behavioural Therapy (CBT)",
-    desc: "CBT helps you identify, understand, and change negative thought patterns and behaviors. It provides practical tools to manage your responses to intrusive thoughts and distress.",
+    name: "Sexual Dysfunctionality",
+    shortName: "Sexual Dysfunctionality",
+    image: "/images/service-sexual.jpg",
+    title: "Sexual Dysfunctionality (ED, PME & Compulsive Masturbation)",
+    desc: "Professional and confidential clinical counseling for Erectile Dysfunction (ED), Premature Ejaculation (PME), and compulsive sexual behaviors to resolve performance anxiety and restore intimacy.",
     bullets: [
-      "Identify and restructure cognitive distortions and intrusive thoughts",
-      "Develop somatic grounding and mindfulness coping mechanisms",
-      "Establish healthy, actionable daily behavioral routines"
-    ]
+      "Cognitive restructuring of performance-related anxieties",
+      "Behavioral training and somatic grounding practices",
+      "Couples integration and relational intimacy rebuilding"
+    ],
+    isFeatured: true
   },
   {
     id: 3,
-    name: "ACT (Acceptance & Commitment Therapy)",
-    shortName: "ACT Practice",
-    image: "/images/service-sexual.jpg",
-    title: "Acceptance & Commitment Therapy (ACT)",
-    desc: "ACT teaches you to accept what is out of your personal control and commit to actions that enrich your life. It emphasizes psychological flexibility over struggle.",
+    name: "Bipolar Disorder Support",
+    shortName: "Bipolar Support",
+    image: "/images/service-growth.jpg",
+    title: "Bipolar Disorder Support",
+    desc: "Comprehensive therapeutic management for Bipolar I and II, focused on mood tracking, stabilization strategies, and cognitive behavioral training to maintain equilibrium.",
     bullets: [
-      "Learn to coexist with anxiety and intrusive thoughts rather than fighting them",
-      "Clarify your core personal values to drive meaningful life decisions",
-      "Cultivate present-moment awareness and mindfulness techniques"
+      "Psychoeducation on mood cycles and early trigger identification",
+      "Collaborative relapse prevention plans and routine structuring",
+      "Family support programs to enhance mutual understanding"
     ]
   },
   {
     id: 4,
-    name: "DBT (Dialectical Behavior Therapy)",
-    shortName: "DBT Strategies",
-    image: "/images/service-growth.jpg",
-    title: "Dialectical Behavior Therapy (DBT)",
-    desc: "DBT combines cognitive-behavioral techniques with concepts of distress tolerance and emotional regulation. It is highly effective for managing intense emotional states.",
+    name: "Sleep Disorder Management",
+    shortName: "Sleep Therapy",
+    image: "/images/service-counseling.jpg",
+    title: "Sleep Disorder Management",
+    desc: "Evidence-based Cognitive Behavioral Therapy for Insomnia (CBT-I) to tackle chronic sleeplessness, sleep anxiety, and irregular sleep cycles without dependency.",
     bullets: [
-      "Enhance distress tolerance during moments of acute anxiety",
-      "Master emotional regulation strategies for mood swings",
-      "Develop interpersonal effectiveness to communicate boundaries clearly"
+      "Detailed sleep hygiene protocols and circadian rhythm retraining",
+      "Stimulus control therapy and sleep restriction coaching",
+      "Cognitive reframing of nighttime anxieties and overthinking"
     ]
   },
   {
     id: 5,
-    name: "RMT (Relationship/Resource Therapy)",
-    shortName: "RMT Counseling",
-    image: "/images/therapist-3.jpg",
-    title: "Relationship & Resource Therapy (RMT)",
-    desc: "RMT focuses on identifying and working directly with the parts of your personality that manage specific emotional responses, helping resolve codependency and trauma.",
+    name: "Eating Disorder Therapy",
+    shortName: "Eating Disorder Support",
+    image: "/images/service-relationship.jpg",
+    title: "Eating Disorder Therapy",
+    desc: "Holistic therapeutic support for Anorexia, Bulimia, and Binge Eating Disorder, centering on rebuilding a healthy relationship with food, body image, and self-worth.",
     bullets: [
-      "Address relationship OCD (ROCD) and attachment anxieties",
-      "Identify internal coping resources and resolve emotional conflicts",
-      "Foster secure communication patterns and self-worth"
+      "Cognitive restructuring of body image distortions",
+      "Emotional regulation skills to address stress-related eating",
+      "Integrated mindfulness during meal times and somatic reconnection"
     ]
   },
   {
     id: 6,
-    name: "Research & Clinical Training",
-    shortName: "Clinical Training",
-    image: "/images/service-growth.jpg",
-    title: "Research & Clinical Training",
-    desc: "Mind Mantra provides professional clinical training, supervision hours, case study worksheets, and research opportunities for therapists and psychology practitioners.",
+    name: "Relationship Management",
+    shortName: "Relationship Therapy",
+    image: "/images/service-relationship.jpg",
+    title: "Relationship Management",
+    desc: "Systemic therapy for couples and family dynamics, designed to resolve persistent conflicts, repair attachment wounds, and establish secure, conscious communication patterns.",
     bullets: [
-      "Clinical worksheets, case study seminars, and supervision hours",
-      "Evidence-based research publications in OCD coping behaviors",
-      "Skill-building workshops for counselors and psychology students"
+      "Conflict resolution through non-violent communication protocols",
+      "Identifying codependency cycles and setting healthy boundaries",
+      "Pre-marital and marital counseling to align core partnership values"
+    ]
+  },
+  {
+    id: 7,
+    name: "Schizophrenia Support",
+    shortName: "Schizophrenia Support",
+    image: "/images/therapist-3.jpg",
+    title: "Schizophrenia & Psychosis Support",
+    desc: "Clinical support focusing on social skills, reality testing, cognitive rehabilitation, and family intervention to help individuals lead functional, meaningful lives.",
+    bullets: [
+      "Cognitive behavior therapy for psychosis (CBTp) to manage hallucinations",
+      "Social skills training and daily functioning restoration",
+      "Supportive psychoeducation for caregivers and families"
+    ]
+  },
+  {
+    id: 8,
+    name: "Anxiety & Depression Support",
+    shortName: "Anxiety & Depression",
+    image: "/images/service-counseling.jpg",
+    title: "Anxiety and Depression Recovery",
+    desc: "Personalized therapeutic interventions targeting generalized anxiety, panic attacks, social phobias, and clinical depression to rebuild joy, motivation, and calmness.",
+    bullets: [
+      "Somatic grounding, progressive relaxation, and breathing exercises",
+      "Cognitive restructuring of depressive thoughts and catastrophizing",
+      "Behavioral activation to rebuild interest in daily routines"
+    ]
+  },
+  {
+    id: 9,
+    name: "Addiction & De-addiction Support",
+    shortName: "Addiction Therapy",
+    image: "/images/service-growth.jpg",
+    title: "Addiction & De-addiction Support (Alcohol, Opium & Smoke)",
+    desc: "Specialized clinical therapy utilizing Motivational Interviewing (MI) and relapse prevention strategies to overcome addictions to alcohol, opium, tobacco, and nicotine.",
+    bullets: [
+      "Motivational Enhancement Therapy to strengthen commitment to change",
+      "Cognitive behavioral coping skills to manage cravings and triggers",
+      "Relapse prevention planning and supportive lifestyle design"
     ]
   }
 ];
 
 const getServiceIcon = (id) => {
   switch (id) {
-    case 1: // ERP
+    case 1: // OCD Recovery
       return (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ width: "100%", height: "100%" }}>
           <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
           <path d="M9 11l2 2 4-4" />
         </svg>
       );
-    case 2: // CBT
-      return (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ width: "100%", height: "100%" }}>
-          <circle cx="12" cy="12" r="10" />
-          <path d="M8 14s1.5 2 4 2 4-2 4-2" />
-          <line x1="9" y1="9" x2="9.01" y2="9" />
-          <line x1="15" y1="9" x2="15.01" y2="9" />
-        </svg>
-      );
-    case 3: // ACT
-      return (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ width: "100%", height: "100%" }}>
-          <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z" />
-          <path d="M12 6v6l4 2" />
-        </svg>
-      );
-    case 4: // DBT
+    case 2: // Sexual Dysfunctionality
       return (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ width: "100%", height: "100%" }}>
           <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
         </svg>
       );
-    case 5: // RMT
+    case 3: // Bipolar
+      return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ width: "100%", height: "100%" }}>
+          <line x1="12" y1="5" x2="12" y2="19" />
+          <line x1="5" y1="9" x2="19" y2="9" />
+          <path d="M5 9c0 4 3 6 7 6s7-2 7-6" />
+        </svg>
+      );
+    case 4: // Sleep
+      return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ width: "100%", height: "100%" }}>
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+        </svg>
+      );
+    case 5: // Eating
+      return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ width: "100%", height: "100%" }}>
+          <path d="M12 22c4.97 0 9-3.07 9-9 0-4.75-2.67-8.15-5.5-8.15C14 4.85 13 6 12 6s-2-1.15-3.5-1.15C5.67 4.85 3 8.25 3 13c0 5.93 4.03 9 9 9z" />
+          <path d="M12 6c0-2 1-3 3-3" />
+        </svg>
+      );
+    case 6: // Relationship
       return (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ width: "100%", height: "100%" }}>
           <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
@@ -125,11 +172,32 @@ const getServiceIcon = (id) => {
           <path d="M16 3.13a4 4 0 0 1 0 7.75" />
         </svg>
       );
-    case 6: // Research & Clinical Training
+    case 7: // Schizophrenia
       return (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ width: "100%", height: "100%" }}>
-          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
-          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+          <circle cx="12" cy="12" r="3" />
+          <circle cx="6" cy="6" r="3" />
+          <circle cx="18" cy="6" r="3" />
+          <circle cx="6" cy="18" r="3" />
+          <circle cx="18" cy="18" r="3" />
+          <line x1="8.5" y1="8.5" x2="9.5" y2="9.5" />
+          <line x1="15.5" y1="8.5" x2="14.5" y2="9.5" />
+          <line x1="8.5" y1="15.5" x2="9.5" y2="14.5" />
+          <line x1="15.5" y1="15.5" x2="14.5" y2="14.5" />
+        </svg>
+      );
+    case 8: // Anxiety & Depression
+      return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ width: "100%", height: "100%" }}>
+          <path d="M17 18a5 5 0 0 0-10 0" />
+          <path d="M12 2v2M4.93 4.93l1.41 1.41M2 12h2M6.34 17.66l-1.41 1.41M12 20v2M17.66 17.66l1.41 1.41M20 12h2M19.07 4.93l-1.41 1.41" />
+        </svg>
+      );
+    case 9: // Addiction
+      return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ width: "100%", height: "100%" }}>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 21.5 21.5 0 0 1-4 10 15.3 15.3 0 0 1-4-10 21.5 21.5 0 0 1 4-10z" />
+          <path d="M12 2v20" />
         </svg>
       );
     default:
@@ -137,22 +205,28 @@ const getServiceIcon = (id) => {
   }
 };
 
-
 // Hero Slides Data
 const heroSlides = [
   {
+    id: 1,
+    badge: "Core Specialization",
+    title: <>Pioneering <span className="text-teal">OCD Recovery</span> & Resilience</>,
+    desc: "Learn to coexist with discomfort, distress, and uncertainty under the clinical guidance of Ms. Gauri, utilizing gold-standard therapies like ERP, CBT, and ACT.",
+    image: "/images/hero.jpg"
+  },
+  {
     id: 2,
-    badge: "Clinical Modalities",
-    title: <>Clinical Expertise In <span className="text-teal">ERP, CBT, & ACT</span></>,
-    desc: "Guiding you to face fears systematically, disengage from compulsive behaviors, and cultivate resilient coping strategies for daily life.",
-    image: "/images/therapist-2.jpg"
+    badge: "Core Specialization",
+    title: <>Clinical Support For <span className="text-teal">Sexual Dysfunctionality</span></>,
+    desc: "Compassionate, evidence-based therapy for ED, PME, and compulsive intimacy concerns, designed to restore confidence and relational harmony.",
+    image: "/images/hero.jpg"
   },
   {
     id: 3,
-    badge: "Mind Mantra",
-    title: <>Coexist With Discomfort <span className="text-teal">To Reclaim Autonomy</span></>,
-    desc: "Step beyond mere symptom management. Learn to navigate uncertainty and emotional intensity under the clinical guidance of Ms. Gauri.",
-    image: "/images/therapist-2.jpg"
+    badge: "Mind Mantra Institute",
+    title: <>Build Deep <span className="text-teal">Psychological Flexibility</span></>,
+    desc: "Step beyond mere symptom management. Strengthen your emotional tolerance and inner stability to reclaim autonomy and lead a values-driven life.",
+    image: "/images/hero.jpg"
   }
 ];
 
@@ -208,37 +282,13 @@ const videoResources = [
   }
 ];
 
-// Sample Testimonials Data
-const testimonialsList = [
-  {
-    id: 1,
-    text: "When I started ERP treatment, the intrusive thoughts felt completely overwhelming. The customized exposures and gentle guidance from Ms. Gauri changed everything. Today, I feel in control and lead a balanced life.",
-    clientName: "Kai Gerold",
-    role: "OCD Recovery Client",
-    avatar: "/images/dr-gauri.jpg"
-  },
-  {
-    id: 2,
-    text: "I struggled with relationship OCD (ROCD) for years, constantly doubting every feeling. Through CBT and ACT exercises, Ms. Gauri guided me to face uncertainty. I've rebuilt my confidence and self-trust.",
-    clientName: "Sarah Jenkins",
-    role: "ROCD Counseling Client",
-    avatar: "/images/therapist-2.jpg"
-  },
-  {
-    id: 3,
-    text: "The distress tolerance techniques I learned at Mind Mantra have given me my autonomy back. Learning to coexist with discomfort was intense, but it brought sustainable and long-term recovery.",
-    clientName: "Julian Barnes",
-    role: "Adolescent Client",
-    avatar: "/images/therapist-3.jpg"
-  }
-];
+
 
 export default function Home() {
   // Navigation states
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Interaction states
-  const [activeTestimonial, setActiveTestimonial] = useState(0);
   const [activeSlide, setActiveSlide] = useState(0);
   const [activeModal, setActiveModal] = useState(null);
 
@@ -284,13 +334,14 @@ export default function Home() {
     return () => clearInterval(timer);
   }, []);
 
-  // Booking Form state
+  // Booking Form states
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
-    service: "ERP Treatment",
+    email: "",
+    service: "Obsessive Compulsive Disorder Recovery",
     date: "",
-    time: "",
+    timeSlot: "Morning (09:00 AM - 12:00 PM)",
     message: ""
   });
 
@@ -301,18 +352,26 @@ export default function Home() {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    const { name, phone, service, date, time, message } = formData;
+    const { name, phone, email, service, date, timeSlot, message } = formData;
+
+    if (!name || !phone) {
+      alert("Please enter your name and phone number.");
+      return;
+    }
     
+    const requestHeader = "*MIND MANTRA - CLINICAL APPOINTMENT REQUEST*";
+
     // Formatting message for WhatsApp
     const textMessage = 
-      `*MIND MANTRA APPOINTMENT REQUEST*\n` +
+      `${requestHeader}\n` +
       `---------------------------------------\n` +
       `*Client Name:* ${name}\n` +
       `*Phone Number:* ${phone}\n` +
-      `*Selected Service:* ${service}\n` +
-      `*Preferred Date:* ${date}\n` +
-      `*Preferred Time:* ${time}\n` +
-      `*Additional Details:* ${message || "None"}\n` +
+      `*Email Address:* ${email || "Not provided"}\n` +
+      `*Focus Area/Service:* ${service}\n` +
+      `*Preferred Date:* ${date || "Flexible / First Available"}\n` +
+      `*Preferred Time Slot:* ${timeSlot}\n` +
+      `*Clinical Note:* ${message || "None"}\n` +
       `---------------------------------------\n` +
       `_Submitted via website portal._`;
 
@@ -336,20 +395,19 @@ export default function Home() {
       <div className={styles.topBar}>
         <div className={`${styles.topBarContainer} container`}>
           <div className={styles.topInfo}>
-            <div className={styles.infoItem}>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: "16px", height: "16px", color: "var(--color-accent-teal)" }}>
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                <circle cx="12" cy="10" r="3" />
+            <a href="tel:+917706000771" className={styles.topBarLink}>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: "16px", height: "16px", color: "var(--color-accent-teal)" }}>
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
               </svg>
-              <span>Safdarjung Enclave, Delhi, India 110023</span>
-            </div>
-            <div className={styles.infoItem}>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: "16px", height: "16px", color: "var(--color-accent-teal)" }}>
-                <circle cx="12" cy="12" r="10" />
-                <polyline points="12 6 12 12 16 14" />
+              <span>+91 77060 00771</span>
+            </a>
+            <a href="mailto:info@mindmantra.com" className={styles.topBarLink}>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: "16px", height: "16px", color: "var(--color-accent-teal)" }}>
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                <polyline points="22,6 12,13 2,6" />
               </svg>
-              <span>Working Time: 24/7</span>
-            </div>
+              <span>info@mindmantra.com</span>
+            </a>
           </div>
           <div className={styles.socials}>
             {["Telegram", "Instagram", "Facebook", "YouTube", "LinkedIn"].map((platform) => (
@@ -358,7 +416,7 @@ export default function Home() {
                   <svg viewBox="0 0 24 24"><path d="M21.9 2.1c-.2-.1-.5-.1-.7 0L1.6 9.8c-.5.2-.7.7-.6 1.2c.1.5.5.9 1 .9h5.1l1.6 5.8c.1.3.4.5.7.5c.2 0 .4-.1.6-.2l3.4-2.8l4.7 3.5c.2.2.5.2.8 0c.2-.2.3-.5.2-.8l3.6-15.1c0-.3-.1-.6-.3-.7zm-13.4 9.9L4.8 11l13.1-5.2l-9.4 6.2z"/></svg>
                 )}
                 {platform === "Instagram" && (
-                  <svg viewBox="0 0 24 24"><path d="M12 2.1c3.2 0 3.6 0 4.9.1c1.2.1 1.8.3 2.2.5c.6.2 1 .5 1.4.9c.4.4.7.8.9 1.4c.2.4.4 1 .5 2.2c.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.5 2.2c-.2.6-.5 1-.9 1.4c-.4.4-.8.7-1.4.9c-.4.2-1 .4-2.2.5c-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.5c-.6-.2-1-.5-1.4-.9c-.4-.4-.7-.8-.9-1.4c-.2-.4-.4-1-.5-2.2c-.1-1.3-.1-1.7-.1-4.9s0-3.6.1-4.9c.1-1.2.3-1.8.5-2.2c.2-.6.5-1 .9-1.4c.4-.4.8-.7 1.4-.9c.4-.2 1-.4 2.2-.5c1.3-.1 1.7-.1 4.9-.1M12 0C8.7 0 8.3 0 7 1c-1.3.1-2.2.3-3 .6c-.8.3-1.5.7-2.1 1.4C1.2 3.6.8 4.3.5 5.1C.2 5.9.1 6.8 0 8c0 1.3 0 1.7 0 5s0 3.7.1 5c.1 1.2.3 2.1.6 2.9c.3.8.7 1.5 1.4 2.1c.6.6 1.3 1.1 2.1 1.4c.8.3 1.7.4 2.9.5c1.3.1 1.7.1 5 .1s3.7 0 5-.1c1.2-.1 2.1-.3 2.9-.5c.8-.3 1.5-.7 2.1-1.4c.6-.6 1.1-1.3 1.4-2.1c.3-.8.4-1.7.5-2.9c.1-1.3.1-1.7.1-5s0-3.7-.1-5c-.1-1.2-.3-2.1-.6-2.9c-.3-.8-.7-1.5-1.4-2.1c-.6-.6-1.3-1.1-2.1-1.4c-.8-.3-1.7-.4-2.9-.5c-1.3-.1-1.7-.1-5-.1z"/><path d="M12 5.8c-3.4 0-6.2 2.8-6.2 6.2s2.8 6.2 6.2 6.2s6.2-2.8 6.2-6.2s-2.8-6.2-6.2-6.2zm0 10.3c-2.3 0-4.1-1.8-4.1-4.1s1.8-4.1 4.1-4.1s4.1 1.8 4.1 4.1s-1.8 4.1-4.1 4.1z"/><circle cx="18.4" cy="5.6" r="1.4"/></svg>
+                  <svg viewBox="0 0 24 24"><path d="M12 2.1c3.2 0 3.6 0 4.9.1c1.2.1 1.8.3 2.2.5c.6.2 1 .5 1.4.9c.4.4.7.8.9 1.4c.2.4.4 1 .5 2.2c.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.5 2.2c-.2.6-.5 1-.9 1.4c-.4.4-.8.7-1.4.9c-.4.2-1 .4-2.2.5c-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.5c-.6-.2-1-.5-1.4-.9c-.4-.4-.7-.8-.9-1.4c-.2-.4-.4-1-.5-2.2c-.1-1.3-.1-1.7-.1-4.9s0-3.5.1-4.9c.1-1.2.3-1.8.5-2.2c.2-.6.5-1 .9-1.4c.4-.4.8-.7 1.4-.9c.4-.2 1-.4 2.2-.5c1.3-.1 1.7-.1 4.9-.1M12 0C8.7 0 8.3 0 7 1c-1.3.1-2.2.3-3 .6c-.8.3-1.5.7-2.1 1.4C1.2 3.6.8 4.3.5 5.1C.2 5.9.1 6.8 0 8c0 1.3 0 1.7 0 5s0 3.7.1 5c.1 1.2.3 2.1.6 2.9c.3.8.7 1.5 1.4 2.1c.6.6 1.3 1.1 2.1 1.4c.8.3 1.7.4 2.9.5c1.3.1 1.7.1 5 .1s3.7 0 5-.1c1.2-.1 2.1-.3 2.9-.5c.8-.3 1.5-.7 2.1-1.4c.6-.6 1.1-1.3 1.4-2.1c.3-.8.4-1.7.5-2.9c.1-1.3.1-1.7.1-5s0-3.7-.1-5c-.1-1.2-.3-2.1-.6-2.9c-.3-.8-.7-1.5-1.4-2.1c-.6-.6-1.3-1.1-2.1-1.4c-.8-.3-1.7-.4-2.9-.5c-1.3-.1-1.7-.1-5-.1z"/><path d="M12 5.8c-3.4 0-6.2 2.8-6.2 6.2s2.8 6.2 6.2 6.2s6.2-2.8 6.2-6.2s-2.8-6.2-6.2-6.2zm0 10.3c-2.3 0-4.1-1.8-4.1-4.1s1.8-4.1 4.1-4.1s4.1 1.8 4.1 4.1s-1.8 4.1-4.1 4.1z"/><circle cx="18.4" cy="5.6" r="1.4"/></svg>
                 )}
                 {platform === "Facebook" && (
                   <svg viewBox="0 0 24 24"><path d="M24 12c0-6.6-5.4-12-12-12S0 5.4 0 12c0 6 4.4 10.9 10.1 11.9v-8.4H7.1V12h3v-2.7c0-3 1.8-4.7 4.5-4.7c1.3 0 2.6.2 2.6.2v2.9h-1.5c-1.5 0-2 1-2 1.9V12h3.3l-.5 3.5h-2.8v8.4C19.6 22.9 24 18 24 12z"/></svg>
@@ -386,17 +444,17 @@ export default function Home() {
             <li><a href="#about" className={styles.navLink} onClick={(e) => { e.preventDefault(); scrollToSection("about"); }}>About Us</a></li>
             <li><a href="#services" className={styles.navLink} onClick={(e) => { e.preventDefault(); scrollToSection("services"); }}>Services</a></li>
             <li><a href="#videos" className={styles.navLink} onClick={(e) => { e.preventDefault(); scrollToSection("videos"); }}>Video Resources</a></li>
-            <li><a href="#testimonials" className={styles.navLink} onClick={(e) => { e.preventDefault(); scrollToSection("testimonials"); }}>Testimonials</a></li>
+            <li><a href="#booking" className={styles.navLink} onClick={(e) => { e.preventDefault(); scrollToSection("booking"); }}>Book a Call</a></li>
           </ul>
 
-          <button className={styles.btnAppointment} onClick={() => window.open("https://wa.me/917706000771?text=Hello%20Ms.%20Gauri,%20I%20would%20like%20to%20book%20an%20appointment.", "_blank")}>
-            <span>Make Appointment</span>
-            <div className={styles.arrowIcon}>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ width: "12px", height: "12px" }}>
-                <line x1="5" y1="12" x2="19" y2="12" />
-                <polyline points="12 5 19 12 12 19" />
-              </svg>
-            </div>
+          <button className={styles.btnAppointment} onClick={() => scrollToSection("booking")}>
+            <span>Appointment</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ width: "14px", height: "14px" }}>
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+              <line x1="16" y1="2" x2="16" y2="6" />
+              <line x1="8" y1="2" x2="8" y2="6" />
+              <line x1="3" y1="10" x2="21" y2="10" />
+            </svg>
           </button>
 
           <button className={styles.mobileMenuBtn} onClick={() => setMobileMenuOpen(!mobileMenuOpen)} aria-label="Toggle menu">
@@ -411,12 +469,43 @@ export default function Home() {
         </nav>
       </div>
 
+      {/* Mobile Drawer Menu */}
+      {mobileMenuOpen && (
+        <div className={styles.mobileDrawer}>
+          <div className={styles.mobileDrawerContent}>
+            <ul className={styles.mobileNavMenu}>
+              <li><a href="#about" className={styles.mobileNavLink} onClick={() => scrollToSection("about")}>About Us</a></li>
+              <li><a href="#services" className={styles.mobileNavLink} onClick={() => scrollToSection("services")}>Services</a></li>
+              <li><a href="#videos" className={styles.mobileNavLink} onClick={() => scrollToSection("videos")}>Video Resources</a></li>
+              <li><a href="#booking" className={styles.mobileNavLink} onClick={() => scrollToSection("booking")}>Book a Call</a></li>
+            </ul>
+            <button className={styles.mobileBtnAppointment} onClick={() => scrollToSection("booking")}>
+              <span>Appointment</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ width: "14px", height: "14px" }}>
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                <line x1="16" y1="2" x2="16" y2="6" />
+                <line x1="8" y1="2" x2="8" y2="6" />
+                <line x1="3" y1="10" x2="21" y2="10" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* Hero Section with Slider */}
-      <section
-        id="home"
-        className={styles.hero}
-        style={{ "--hero-bg": `url(${heroSlides[activeSlide].image})` }}
-      >
+      <section id="home" className={styles.hero}>
+        {/* Background Images with Crossfade and Zoom Effect */}
+        <div className={styles.heroBgContainer}>
+          {heroSlides.map((slide, idx) => (
+            <div
+              key={slide.id}
+              className={`${styles.heroBgImage} ${activeSlide === idx ? styles.activeHeroBg : ""}`}
+              style={{ backgroundImage: `url(${slide.image})` }}
+            ></div>
+          ))}
+          <div className={styles.heroOverlay}></div>
+        </div>
+
         <div className="container">
           <div className={styles.heroContent} key={activeSlide} style={{ animation: "fadeIn 0.6s ease-in-out" }}>
             <div className={styles.sectionBadge}>{heroSlides[activeSlide].badge}</div>
@@ -447,17 +536,6 @@ export default function Home() {
             </div>
           </div>
         </div>
-
-        {/* Three Vertical Dots on the Right */}
-        <div className={styles.heroDots}>
-          {heroSlides.map((_, idx) => (
-            <span
-              key={idx}
-              className={`${styles.heroDot} ${activeSlide === idx ? styles.heroDotActive : ""}`}
-              onClick={() => setActiveSlide(idx)}
-            ></span>
-          ))}
-        </div>
       </section>
 
       {/* About Section */}
@@ -472,11 +550,7 @@ export default function Home() {
 
           <div className={styles.aboutGrid}>
             <div className={styles.aboutImageWrapper}>
-              <img src="/images/therapist-1.jpg" alt="OCD Treatment Session" className={styles.aboutSingleImage} />
-              <div className={styles.badgeCircle}>
-                <span className={styles.badgeNumber}>18+</span>
-                <span className={styles.badgeText}>Years of<br/>Expertise</span>
-              </div>
+              <img src="/images/about.jpg" alt="OCD Treatment Session" className={styles.aboutSingleImage} />
             </div>
 
             <div>
@@ -521,7 +595,7 @@ export default function Home() {
               return (
                 <div
                   key={service.id}
-                  className={styles.serviceCard}
+                  className={`${styles.serviceCard} ${service.isFeatured ? styles.featuredCard : ""}`}
                   onClick={() => setActiveModal(idx)}
                 >
                   <div className={styles.serviceIconContainer}>
@@ -704,69 +778,251 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section id="testimonials" className={styles.testimonials}>
-        <div className="container">
-          <div className={styles.testimonialsGrid}>
-            {/* Left Column (Empty on desktop for visual alignment on right) */}
-            <div className={styles.testimonialEmptyCol}></div>
+      {/* Why Choose Us Section */}
+      <section id="why-choose-us" className={styles.whyChooseUs}>
+        {/* Left Column: Full height image */}
+        <div className={styles.whyChooseUsImageCol}>
+          <img src="/images/why-choose-us.png" alt="Why Choose Mind Mantra" />
+        </div>
 
-            {/* Right Column containing the slider content */}
-            <div className={styles.testimonialsContent}>
-              <div className={styles.testimonialsBadge}>Client Feedback</div>
-              <h2 className={styles.testimonialsHeading}>
-                Hear Our <span>Clients Share True Stories</span> Of Health And Healing
-              </h2>
+        {/* Right Column: Content */}
+        <div className={styles.whyChooseUsContentCol}>
+          <div className={styles.whyChooseUsBadge}>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <span>Why Choose Us</span>
+          </div>
+          
+          <h2 className={styles.whyChooseUsTitle}>
+            Your Mind Deserves Peace and Care
+          </h2>
+          
+          <p className={styles.whyChooseUsDesc}>
+            At Mind Mantra, we step beyond traditional symptom reduction. We work directly on building long-term emotional resilience, distress tolerance, and psychological flexibility so you can reclaim absolute control of your life.
+          </p>
 
-              <div className={styles.testimonialSlider}>
-                <p className={styles.testimonialText}>
-                  "{testimonialsList[activeTestimonial].text}"
-                </p>
+          <div className={styles.whyChooseUsList}>
+            {/* Item 1 */}
+            <div className={styles.whyChooseUsItem}>
+              <div className={styles.whyChooseUsIcon}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ width: "20px", height: "20px" }}>
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                </svg>
+              </div>
+              <div className={styles.whyChooseUsItemContent}>
+                <h4>Expert Psychologists</h4>
+                <p>Guided by Ms. Gauri's clinical expertise, we utilize evidence-based clinical protocols like ERP, CBT, and ACT for sustainable OCD recovery and sexual wellness.</p>
+              </div>
+            </div>
 
-                <div className={styles.testimonialStars}>
-                  {[...Array(5)].map((_, i) => (
-                    <svg key={i} viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                  ))}
-                </div>
+            {/* Item 2 */}
+            <div className={styles.whyChooseUsItem}>
+              <div className={styles.whyChooseUsIcon}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ width: "20px", height: "20px" }}>
+                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                </svg>
+              </div>
+              <div className={styles.whyChooseUsItemContent}>
+                <h4>Personalized Care</h4>
+                <p>No cookie-cutter templates. We design custom treatment plans tailored to contamination concerns, intrusive obsessions, sleep health, or relational goals.</p>
+              </div>
+            </div>
 
-                <div className={styles.testimonialProfile}>
-                  <div className={styles.testimonialAvatar}>
-                    <img src={testimonialsList[activeTestimonial].avatar} alt={testimonialsList[activeTestimonial].clientName} />
-                  </div>
-                  <div className={styles.testimonialMeta}>
-                    <h4>{testimonialsList[activeTestimonial].clientName}</h4>
-                    <p>{testimonialsList[activeTestimonial].role}</p>
-                  </div>
-                </div>
-
-                {/* Left/Right Arrow Controls */}
-                <div className={styles.testimonialControls}>
-                  <button
-                    className={styles.testimonialArrowBtn}
-                    onClick={() => setActiveTestimonial((prev) => (prev - 1 + testimonialsList.length) % testimonialsList.length)}
-                    aria-label="Previous testimonial"
-                  >
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ width: "16px", height: "16px" }}>
-                      <line x1="19" y1="12" x2="5" y2="12" />
-                      <polyline points="12 19 5 12 12 5" />
-                    </svg>
-                  </button>
-                  <button
-                    className={styles.testimonialArrowBtn}
-                    onClick={() => setActiveTestimonial((prev) => (prev + 1) % testimonialsList.length)}
-                    aria-label="Next testimonial"
-                  >
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ width: "16px", height: "16px" }}>
-                      <line x1="5" y1="12" x2="19" y2="12" />
-                      <polyline points="12 5 19 12 12 19" />
-                    </svg>
-                  </button>
-                </div>
+            {/* Item 3 */}
+            <div className={styles.whyChooseUsItem}>
+              <div className={styles.whyChooseUsIcon}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ width: "20px", height: "20px" }}>
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                  <line x1="16" y1="2" x2="16" y2="6" />
+                  <line x1="8" y1="2" x2="8" y2="6" />
+                  <line x1="3" y1="10" x2="21" y2="10" />
+                </svg>
+              </div>
+              <div className={styles.whyChooseUsItemContent}>
+                <h4>Flexible Scheduling</h4>
+                <p>We provide highly confidential support with virtual and in-person sessions. Easy scheduling with options across morning, afternoon, and evening slots.</p>
               </div>
             </div>
           </div>
         </div>
       </section>
+
+      {/* Booking Section */}
+      <section id="booking" className={styles.booking}>
+        <div className="container">
+          <div className={styles.bookingGrid}>
+            
+            {/* Left Column: Info/Value Props */}
+            <div className={styles.bookingInfo}>
+              <div className={styles.sectionBadge}>Get Started Today</div>
+              <h2 className={styles.bookingTitle}>
+                Take Your First Step <span>Towards Psychological Wellness</span>
+              </h2>
+              <p className={styles.bookingDesc}>
+                Whether you want to explore how our clinical protocols can help you, or you are ready to begin regular therapeutic sessions, we provide a structured, private environment.
+              </p>
+              
+              <div className={styles.bookingValueList}>
+                <div className={styles.bookingValueItem}>
+                  <div className={styles.bookingValueIcon}>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" /></svg>
+                  </div>
+                  <div>
+                    <h4>Location</h4>
+                    <p>Safdarjung Enclave, Delhi, India 110023</p>
+                  </div>
+                </div>
+
+                <div className={styles.bookingValueItem}>
+                  <div className={styles.bookingValueIcon}>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" /></svg>
+                  </div>
+                  <div>
+                    <h4>Email</h4>
+                    <p>
+                      <a href="mailto:info@mindmantra.com" className={styles.bookingLink}>
+                        info@mindmantra.com
+                      </a>
+                    </p>
+                  </div>
+                </div>
+
+                <div className={styles.bookingValueItem}>
+                  <div className={styles.bookingValueIcon}>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
+                  </div>
+                  <div>
+                    <h4>Phone Number</h4>
+                    <p>
+                      <a href="tel:+917706000771" className={styles.bookingLink}>
+                        +91 77060 00771
+                      </a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column: Dynamic Form */}
+            <div className={styles.bookingFormContainer}>
+              <div className={styles.bookingFormCard}>
+                <form onSubmit={handleFormSubmit} className={styles.bookingForm}>
+                  <div className={styles.formGrid}>
+                    <div className={styles.formGroup}>
+                      <label htmlFor="name">Full Name *</label>
+                      <input 
+                        type="text" 
+                        id="name" 
+                        name="name" 
+                        value={formData.name} 
+                        onChange={handleInputChange} 
+                        placeholder="Enter your name" 
+                        required 
+                      />
+                    </div>
+                    
+                    <div className={styles.formGroup}>
+                      <label htmlFor="phone">Phone Number *</label>
+                      <input 
+                        type="tel" 
+                        id="phone" 
+                        name="phone" 
+                        value={formData.phone} 
+                        onChange={handleInputChange} 
+                        placeholder="e.g. +91 98765 43210" 
+                        required 
+                      />
+                    </div>
+                  </div>
+
+                  <div className={styles.formGroup}>
+                    <label htmlFor="email">Email Address (Optional)</label>
+                    <input 
+                      type="email" 
+                      id="email" 
+                      name="email" 
+                      value={formData.email} 
+                      onChange={handleInputChange} 
+                      placeholder="yourname@example.com" 
+                    />
+                  </div>
+
+                  <div className={styles.formGroup}>
+                    <label htmlFor="service">Focus Area / Vertical</label>
+                    <select 
+                      id="service" 
+                      name="service" 
+                      value={formData.service} 
+                      onChange={handleInputChange}
+                      style={{ width: "100%" }}
+                    >
+                      {servicesList.map((service) => (
+                        <option key={service.id} value={service.name}>
+                          {service.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div className={styles.formGrid}>
+                    <div className={styles.formGroup}>
+                      <label htmlFor="date">Preferred Date</label>
+                      <input 
+                        type="date" 
+                        id="date" 
+                        name="date" 
+                        value={formData.date} 
+                        onChange={handleInputChange} 
+                      />
+                    </div>
+
+                    <div className={styles.formGroup}>
+                      <label htmlFor="timeSlot">Preferred Time Slot</label>
+                      <select 
+                        id="timeSlot" 
+                        name="timeSlot" 
+                        value={formData.timeSlot} 
+                        onChange={handleInputChange}
+                      >
+                        <option value="Morning (09:00 AM - 12:00 PM)">Morning (09:00 AM - 12:00 PM)</option>
+                        <option value="Afternoon (12:00 PM - 04:00 PM)">Afternoon (12:00 PM - 04:00 PM)</option>
+                        <option value="Evening (04:00 PM - 08:00 PM)">Evening (04:00 PM - 08:00 PM)</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className={styles.formGroup}>
+                    <label htmlFor="message">Describe your clinical concerns / symptoms</label>
+                    <textarea 
+                      id="message" 
+                      name="message" 
+                      rows="3" 
+                      value={formData.message} 
+                      onChange={handleInputChange} 
+                      placeholder="Provide details about your concerns or symptoms to help us prepare for the session..."
+                    ></textarea>
+                  </div>
+
+                  <button type="submit" className={styles.btnBookingSubmit}>
+                    <span>Book Appointment</span>
+                    <div className={styles.btnBookingSubmitIcon}>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ width: "14px", height: "14px" }}>
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                        <polyline points="12 5 19 12 12 19" />
+                      </svg>
+                    </div>
+                  </button>
+                </form>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+
 
 
 
@@ -832,11 +1088,11 @@ export default function Home() {
             <div className={styles.footerCol}>
               <h4 className={styles.footerHeading}>Services</h4>
               <ul className={styles.footerLinks}>
-                <li className={styles.footerLinkItem}><a href="#services" onClick={(e) => { e.preventDefault(); scrollToSection("services"); }}>ERP Treatment</a></li>
-                <li className={styles.footerLinkItem}><a href="#services" onClick={(e) => { e.preventDefault(); scrollToSection("services"); }}>CBT Therapy</a></li>
-                <li className={styles.footerLinkItem}><a href="#services" onClick={(e) => { e.preventDefault(); scrollToSection("services"); }}>ACT Practice</a></li>
-                <li className={styles.footerLinkItem}><a href="#services" onClick={(e) => { e.preventDefault(); scrollToSection("services"); }}>DBT Strategies</a></li>
-                <li className={styles.footerLinkItem}><a href="#services" onClick={(e) => { e.preventDefault(); scrollToSection("services"); }}>RMT Counseling</a></li>
+                <li className={styles.footerLinkItem}><a href="#services" onClick={(e) => { e.preventDefault(); scrollToSection("services"); }}>OCD Recovery</a></li>
+                <li className={styles.footerLinkItem}><a href="#services" onClick={(e) => { e.preventDefault(); scrollToSection("services"); }}>Sexual Wellness</a></li>
+                <li className={styles.footerLinkItem}><a href="#services" onClick={(e) => { e.preventDefault(); scrollToSection("services"); }}>Bipolar Support</a></li>
+                <li className={styles.footerLinkItem}><a href="#services" onClick={(e) => { e.preventDefault(); scrollToSection("services"); }}>Anxiety & Depression</a></li>
+                <li className={styles.footerLinkItem}><a href="#services" onClick={(e) => { e.preventDefault(); scrollToSection("services"); }}>Addiction Support</a></li>
               </ul>
             </div>
 
@@ -847,8 +1103,7 @@ export default function Home() {
                 <li className={styles.footerLinkItem}><a href="#home" onClick={(e) => { e.preventDefault(); scrollToSection("home"); }}>Home</a></li>
                 <li className={styles.footerLinkItem}><a href="#about" onClick={(e) => { e.preventDefault(); scrollToSection("about"); }}>About Us</a></li>
                 <li className={styles.footerLinkItem}><a href="#services" onClick={(e) => { e.preventDefault(); scrollToSection("services"); }}>Services</a></li>
-                <li className={styles.footerLinkItem}><a href="#videos" onClick={(e) => { e.preventDefault(); scrollToSection("videos"); }}>Video Resources</a></li>
-                <li className={styles.footerLinkItem}><a href="#testimonials" onClick={(e) => { e.preventDefault(); scrollToSection("testimonials"); }}>Testimonials</a></li>
+                <li className={styles.footerLinkItem}><a href="#booking" onClick={(e) => { e.preventDefault(); scrollToSection("booking"); }}>Book a Call</a></li>
               </ul>
             </div>
 
