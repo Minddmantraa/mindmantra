@@ -1035,6 +1035,314 @@
   border-radius: 5px;
 }
 
+.testimonials {
+  background-color: var(--color-white);
+  padding: 120px 0 180px 0;
+  overflow: visible;
+  position: relative;
+  min-height: 800px;
+}
+
+.testimonialsHeaderContainer {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.testimonialsHeaderLeft {
+  margin: 0 auto;
+  max-width: 800px;
+  text-align: center;
+}
+
+.testimonialsTitle {
+  font-size: 42px;
+  margin-top: 16px;
+  line-height: 1.25;
+}
+
+.testimonialsTitle span {
+  color: var(--color-accent-teal);
+}
+
+.testimonialsDesc {
+  font-size: 16px;
+  color: var(--color-text-muted);
+  margin-top: 20px;
+  line-height: 1.6;
+}
+
+/* Google rating widget */
+.googleSummaryBadge {
+  background: var(--color-white);
+  border: 1px solid rgba(31, 63, 67, 0.08);
+  box-shadow: 0 10px 30px rgba(31, 63, 67, 0.04);
+  border-radius: var(--border-radius-md);
+  padding: 24px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-width: 250px;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.googleSummaryLogoRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.googleGLogo {
+  width: 24px;
+  height: 24px;
+}
+
+.googleReviewLabel {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  letter-spacing: 0.5px;
+}
+
+.googleSummaryRatingRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.googleSummaryScore {
+  font-family: var(--font-sans);
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  line-height: 1;
+}
+
+.googleSummaryStars {
+  display: flex;
+  gap: 2px;
+}
+
+.goldStarIcon {
+  width: 18px;
+  height: 18px;
+  color: #FFB300;
+}
+
+.googleReviewsCount {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+/* Slider Track & Container */
+.reviewsSliderContainer {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  margin: 0 -15px; /* Negative margin to balance card paddings */
+  padding: 10px 0;
+}
+
+.reviewsGridTrack {
+  display: flex;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.reviewCardWrapper {
+  flex-shrink: 0;
+  padding: 0 15px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.reviewCard {
+  background-color: var(--color-white);
+  border: 1px solid rgba(31, 63, 67, 0.06);
+  box-shadow: 0 10px 30px rgba(31, 63, 67, 0.02);
+  border-radius: 20px;
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  transition: var(--transition-smooth);
+}
+
+.reviewCard:hover {
+  transform: translateY(-6px);
+  border-color: rgba(181, 76, 98, 0.15);
+  box-shadow: 0 20px 40px rgba(31, 63, 67, 0.06);
+}
+
+.reviewUserRow {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.reviewerAvatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.reviewUserMeta {
+  display: flex;
+  flex-direction: column;
+  margin-left: 14px;
+}
+
+.reviewerNameRow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.reviewerName {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--color-primary-dark);
+}
+
+.verifiedBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 600;
+  color: #2E7D32;
+  background-color: #E8F5E9;
+  padding: 2px 6px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.verifiedCheckIcon {
+  width: 10px;
+  height: 10px;
+}
+
+.reviewDate {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}
+
+.googleCardIcon {
+  margin-left: auto;
+  align-self: flex-start;
+  display: flex;
+  opacity: 0.85;
+}
+
+.reviewStarsRow {
+  display: flex;
+  gap: 3px;
+  margin-bottom: 20px;
+}
+
+.reviewStarsRow .goldStarIcon {
+  width: 16px;
+  height: 16px;
+}
+
+.reviewText {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--color-text-dark);
+  font-style: italic;
+  margin-bottom: 24px;
+}
+
+.reviewVerticalBadge {
+  margin-top: auto;
+  align-self: flex-start;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  background-color: rgba(181, 76, 98, 0.06);
+  color: var(--color-accent-teal);
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+/* Dots navigation */
+.testimonialDots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 40px;
+}
+
+.testimonialDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgba(31, 63, 67, 0.15);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.testimonialDotActive {
+  background-color: var(--color-accent-teal);
+  width: 24px;
+  border-radius: 5px;
+}
+
+/* Media query rules for testimonials */
+@media (max-width: 992px) {
+  .testimonials {
+    padding: 80px 0;
+  }
+  
+  .testimonialsHeaderContainer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 30px;
+    margin-bottom: 40px;
+  }
+  
+  .googleSummaryBadge {
+    width: 100%;
+    min-width: unset;
+    align-items: center;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .testimonialsTitle {
+    font-size: 32px;
+  }
+  
+  .reviewCard {
+    padding: 24px;
+  }
+}
+
 /* 6. Why Choose Us / Process Section Styles */
 .process {
   background-color: var(--color-white);
@@ -1160,11 +1468,15 @@
 
 /* 6. Booking Section Styles */
 .booking {
-  background-color: var(--color-white);
+  background-image: linear-gradient(rgba(31, 63, 67, 0.92), rgba(31, 63, 67, 0.92)), url('/images/hero-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   padding: 120px 0;
   position: relative;
   overflow: hidden;
   flex-shrink: 0;
+  color: var(--color-white);
 }
 
 .bookingGrid {
@@ -1183,19 +1495,18 @@
 .bookingTitle {
   font-size: 42px;
   line-height: 1.2;
-  color: var(--color-primary-dark);
+  color: var(--color-white);
   margin-top: 10px;
 }
 
 .bookingTitle span {
-  color: var(--color-accent-teal);
+  color: #ff8fa3;
 }
 
 .bookingDesc {
   font-size: 16px;
-  color: var(--color-text-dark);
+  color: rgba(255, 255, 255, 0.8);
   line-height: 1.6;
-  opacity: 0.85;
 }
 
 .bookingValueList {
@@ -1215,26 +1526,27 @@
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background-color: rgba(44, 165, 167, 0.1);
-  color: var(--color-accent-teal);
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #ff8fa3;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
   padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .bookingValueItem h4 {
   font-size: 18px;
   font-weight: 700;
-  color: var(--color-primary-dark);
+  color: var(--color-white);
   margin-bottom: 6px;
 }
 
 .bookingValueItem p {
   font-size: 14.5px;
   line-height: 1.5;
-  color: var(--color-text-muted);
+  color: rgba(255, 255, 255, 0.65);
 }
 
 .bookingLink {
@@ -1244,7 +1556,7 @@
 }
 
 .bookingLink:hover {
-  color: var(--color-accent-teal);
+  color: #ff8fa3;
 }
 
 /* Booking Form Card (Glassmorphism inspired on Light bg) */

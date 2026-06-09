@@ -282,7 +282,75 @@ const videoResources = [
   }
 ];
 
-
+// Google Reviews Client Testimonials Data
+const reviewsList = [
+  {
+    id: 1,
+    name: "Rohan Sharma",
+    initials: "RS",
+    avatarBg: "#E0F2F1",
+    avatarColor: "#00796B",
+    rating: 5,
+    date: "2 weeks ago",
+    vertical: "OCD Recovery",
+    text: "Ms. Gauri's ERP sessions literally gave me my life back. I was trapped in contamination loops for 4 hours a day. Her step-by-step guidance was compassionate but firm, helping me face my fears. Highly recommend her clinical expertise."
+  },
+  {
+    id: 2,
+    name: "Aanya Verma",
+    initials: "AV",
+    avatarBg: "#FCE4EC",
+    avatarColor: "#C2185B",
+    rating: 5,
+    date: "1 month ago",
+    vertical: "Anxiety Support",
+    text: "The anxiety management techniques taught here are very practical. I used to get severe panic attacks before meetings. The somatic grounding and cognitive reframing tools have helped me regain my confidence completely."
+  },
+  {
+    id: 3,
+    name: "Vikram Malhotra",
+    initials: "VM",
+    avatarBg: "#E8EAF6",
+    avatarColor: "#303F9F",
+    rating: 5,
+    date: "3 weeks ago",
+    vertical: "Sexual Wellness",
+    text: "Very professional and completely confidential. I was extremely hesitant to discuss erectile dysfunction and performance anxiety, but Ms. Gauri created a safe, non-judgmental space that helped me heal my relationship."
+  },
+  {
+    id: 4,
+    name: "Priya Patel",
+    initials: "PP",
+    avatarBg: "#EFEBE9",
+    avatarColor: "#5D4037",
+    rating: 5,
+    date: "2 months ago",
+    vertical: "Depression Recovery",
+    text: "Mind Mantra's holistic approach to mental health is outstanding. The behavioral activation routines helped me climb out of a deep depressive episode. I feel structured, motivated, and emotionally resilient again."
+  },
+  {
+    id: 5,
+    name: "Kabir Mehta",
+    initials: "KM",
+    avatarBg: "#E1F5FE",
+    avatarColor: "#0288D1",
+    rating: 5,
+    date: "1 month ago",
+    vertical: "OCD Pure O Support",
+    text: "I suffered from Pure O intrusive thoughts for years, feeling extremely isolated. Learning ACT with Ms. Gauri helped me understand that thoughts are just thoughts. Her sessions are worth every single penny."
+  },
+  {
+    id: 6,
+    name: "Sneha Reddy",
+    initials: "SR",
+    avatarBg: "#FFF3E0",
+    avatarColor: "#F57C00",
+    rating: 5,
+    date: "5 days ago",
+    vertical: "Sleep Therapy",
+    text: "The CBT-I program for chronic insomnia worked wonders for me. I went from sleeping 3 hours a night to a consistent 7 hours. No pills, just scientific circadian retraining and sleep hygiene. Life-changing!"
+  }
+];
 
 export default function Home() {
   // Navigation states
@@ -296,6 +364,9 @@ export default function Home() {
   const [videoSlideIndex, setVideoSlideIndex] = useState(0);
   const [playingVideoId, setPlayingVideoId] = useState(null);
   const [windowWidth, setWindowWidth] = useState(1200);
+
+  // Testimonial slider states
+  const [testimonialSlideIndex, setTestimonialSlideIndex] = useState(0);
 
   // Manage window resize for responsive slider calculations
   useEffect(() => {
@@ -333,6 +404,31 @@ export default function Home() {
     }, 6000);
     return () => clearInterval(timer);
   }, []);
+
+  // Compute how many testimonial cards are visible
+  let visibleTestimonialCards = 3;
+  if (windowWidth <= 600) {
+    visibleTestimonialCards = 1;
+  } else if (windowWidth <= 992) {
+    visibleTestimonialCards = 2;
+  }
+
+  const maxTestimonialIndex = Math.max(0, reviewsList.length - visibleTestimonialCards);
+
+  // Autoplay testimonials slider
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTestimonialSlideIndex((prev) => (prev >= maxTestimonialIndex ? 0 : prev + 1));
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [maxTestimonialIndex]);
+
+  // Handle bounding constraint when resizing
+  useEffect(() => {
+    if (testimonialSlideIndex > maxTestimonialIndex) {
+      setTestimonialSlideIndex(maxTestimonialIndex);
+    }
+  }, [maxTestimonialIndex, testimonialSlideIndex]);
 
   // Booking Form states
   const [formData, setFormData] = useState({
@@ -443,8 +539,8 @@ export default function Home() {
           <ul className={styles.navMenu}>
             <li><a href="#about" className={styles.navLink} onClick={(e) => { e.preventDefault(); scrollToSection("about"); }}>About Us</a></li>
             <li><a href="#services" className={styles.navLink} onClick={(e) => { e.preventDefault(); scrollToSection("services"); }}>Services</a></li>
-            <li><a href="#videos" className={styles.navLink} onClick={(e) => { e.preventDefault(); scrollToSection("videos"); }}>Video Resources</a></li>
-            <li><a href="#booking" className={styles.navLink} onClick={(e) => { e.preventDefault(); scrollToSection("booking"); }}>Book a Call</a></li>
+            <li><a href="#why-choose-us" className={styles.navLink} onClick={(e) => { e.preventDefault(); scrollToSection("why-choose-us"); }}>Why Us</a></li>
+            <li><a href="#testimonials" className={styles.navLink} onClick={(e) => { e.preventDefault(); scrollToSection("testimonials"); }}>Testimonials</a></li>
           </ul>
 
           <button className={styles.btnAppointment} onClick={() => scrollToSection("booking")}>
@@ -476,8 +572,8 @@ export default function Home() {
             <ul className={styles.mobileNavMenu}>
               <li><a href="#about" className={styles.mobileNavLink} onClick={() => scrollToSection("about")}>About Us</a></li>
               <li><a href="#services" className={styles.mobileNavLink} onClick={() => scrollToSection("services")}>Services</a></li>
-              <li><a href="#videos" className={styles.mobileNavLink} onClick={() => scrollToSection("videos")}>Video Resources</a></li>
-              <li><a href="#booking" className={styles.mobileNavLink} onClick={() => scrollToSection("booking")}>Book a Call</a></li>
+              <li><a href="#why-choose-us" className={styles.mobileNavLink} onClick={() => scrollToSection("why-choose-us")}>Why Us</a></li>
+              <li><a href="#testimonials" className={styles.mobileNavLink} onClick={() => scrollToSection("testimonials")}>Testimonials</a></li>
             </ul>
             <button className={styles.mobileBtnAppointment} onClick={() => scrollToSection("booking")}>
               <span>Appointment</span>
@@ -778,6 +874,8 @@ export default function Home() {
         </div>
       </section>
 
+
+
       {/* Why Choose Us Section */}
       <section id="why-choose-us" className={styles.whyChooseUs}>
         {/* Left Column: Full height image */}
@@ -846,6 +944,115 @@ export default function Home() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section id="testimonials" className={styles.testimonials}>
+        <div className="container">
+          <div className={styles.testimonialsHeaderContainer}>
+            <div className={styles.testimonialsHeaderLeft}>
+              <div className={styles.sectionBadge}>Client Stories</div>
+              <h2 className={styles.testimonialsTitle}>
+                What Our Clients Say <span>About Their Recovery</span>
+              </h2>
+              <p className={styles.testimonialsDesc}>
+                Read authentic feedback from individuals who have reclaimed their lives and built emotional resilience through our evidence-based clinical therapies.
+              </p>
+            </div>
+          </div>
+
+          {/* Slider Container */}
+          <div className={styles.reviewsSliderContainer}>
+            <div
+              className={styles.reviewsGridTrack}
+              style={{
+                transform: `translateX(-${testimonialSlideIndex * (100 / visibleTestimonialCards)}%)`,
+              }}
+            >
+              {reviewsList.map((review) => (
+                <div
+                  key={review.id}
+                  className={styles.reviewCardWrapper}
+                  style={{ width: `${100 / visibleTestimonialCards}%` }}
+                >
+                  <div className={styles.reviewCard}>
+                    {/* Reviewer Info */}
+                    <div className={styles.reviewUserRow}>
+                      <div
+                        className={styles.reviewerAvatar}
+                        style={{
+                          backgroundColor: review.avatarBg,
+                          color: review.avatarColor,
+                        }}
+                      >
+                        {review.initials}
+                      </div>
+                      <div className={styles.reviewUserMeta}>
+                        <div className={styles.reviewerNameRow}>
+                          <h4 className={styles.reviewerName}>{review.name}</h4>
+                          <span className={styles.verifiedBadge} title="Verified Client">
+                            <svg viewBox="0 0 24 24" fill="currentColor" className={styles.verifiedCheckIcon}>
+                              <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                            </svg>
+                            <span>Verified</span>
+                          </span>
+                        </div>
+                        <span className={styles.reviewDate}>{review.date}</span>
+                      </div>
+                      
+                      {/* Google Review G Logo */}
+                      <div className={styles.googleCardIcon}>
+                        <svg viewBox="0 0 24 24" style={{ width: "16px", height: "16px" }}>
+                          <path
+                            fill="#4285F4"
+                            d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                          />
+                          <path
+                            fill="#34A853"
+                            d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                          />
+                          <path
+                            fill="#FBBC05"
+                            d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l3.66-2.85z"
+                          />
+                          <path
+                            fill="#EA4335"
+                            d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.85c.87-2.6 3.3-4.53 6.16-4.53z"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+
+                    {/* Ratings */}
+                    <div className={styles.reviewStarsRow}>
+                      {Array.from({ length: review.rating }).map((_, i) => (
+                        <svg key={i} className={styles.goldStarIcon} viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                        </svg>
+                      ))}
+                    </div>
+
+                    {/* Text */}
+                    <p className={styles.reviewText}>"{review.text}"</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Slider Indicators */}
+          {maxTestimonialIndex > 0 && (
+            <div className={styles.testimonialDots}>
+              {Array.from({ length: maxTestimonialIndex + 1 }).map((_, idx) => (
+                <span
+                  key={idx}
+                  className={`${styles.testimonialDot} ${testimonialSlideIndex === idx ? styles.testimonialDotActive : ""}`}
+                  onClick={() => setTestimonialSlideIndex(idx)}
+                ></span>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -1103,7 +1310,7 @@ export default function Home() {
                 <li className={styles.footerLinkItem}><a href="#home" onClick={(e) => { e.preventDefault(); scrollToSection("home"); }}>Home</a></li>
                 <li className={styles.footerLinkItem}><a href="#about" onClick={(e) => { e.preventDefault(); scrollToSection("about"); }}>About Us</a></li>
                 <li className={styles.footerLinkItem}><a href="#services" onClick={(e) => { e.preventDefault(); scrollToSection("services"); }}>Services</a></li>
-                <li className={styles.footerLinkItem}><a href="#booking" onClick={(e) => { e.preventDefault(); scrollToSection("booking"); }}>Book a Call</a></li>
+                <li className={styles.footerLinkItem}><a href="#testimonials" onClick={(e) => { e.preventDefault(); scrollToSection("testimonials"); }}>Testimonials</a></li>
               </ul>
             </div>
 
