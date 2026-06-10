@@ -21,13 +21,13 @@ export const metadata = {
     description:
       "Learn about Mind Mantra's evidence-based clinical approach and Ms. Gauri, our specialist in OCD, anxiety, depression, and relationship therapy.",
     url: "https://mindmantraa.com/about",
-    images: [{ url: "/images/og-image.jpg", width: 1200, height: 630, alt: "About Mind Mantra" }],
+    images: [{ url: "/images/logo.png", width: 1200, height: 630, alt: "About Mind Mantra" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "About Us | Mind Mantra",
     description: "Meet Ms. Gauri and the Mind Mantra clinical team — specialists in OCD, anxiety, depression, and relationship therapy.",
-    images: ["/images/og-image.jpg"],
+    images: ["/images/logo.png"],
   },
 };
 

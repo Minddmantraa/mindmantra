@@ -21,13 +21,13 @@ export const metadata = {
     description:
       "Book your session with Ms. Gauri for OCD, anxiety, depression, relationship counseling, or sexual wellness therapy.",
     url: "https://mindmantraa.com/appointment",
-    images: [{ url: "/images/og-image.jpg", width: 1200, height: 630, alt: "Book a Session at Mind Mantra" }],
+    images: [{ url: "/images/logo.png", width: 1200, height: 630, alt: "Book a Session at Mind Mantra" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Book a Therapy Session | Mind Mantra",
     description: "Schedule your OCD, anxiety, depression or relationship counseling session with Ms. Gauri online.",
-    images: ["/images/og-image.jpg"],
+    images: ["/images/logo.png"],
   },
 };
 

@@ -22,13 +22,13 @@ export const metadata = {
     description:
       "Evidence-based therapies (CBT, ERP, ACT, DBT, EMDR) for OCD, anxiety, depression, relationship therapy, and sexual wellness.",
     url: "https://mindmantraa.com/services",
-    images: [{ url: "/images/og-image.jpg", width: 1200, height: 630, alt: "Mind Mantra Services" }],
+    images: [{ url: "/images/logo.png", width: 1200, height: 630, alt: "Mind Mantra Services" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Mental Health Services | Mind Mantra",
     description: "CBT, ERP, ACT, DBT & EMDR for OCD, anxiety, depression, relationship & sexual wellness therapy.",
-    images: ["/images/og-image.jpg"],
+    images: ["/images/logo.png"],
   },
 };
 

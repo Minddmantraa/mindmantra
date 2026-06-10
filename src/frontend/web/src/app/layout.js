@@ -67,7 +67,7 @@ export const metadata = {
       "Where Healing Begins, Growth Continues, and Wellbeing Flourishes. Expert psychological counseling, OCD treatment & relationship therapy in India.",
     images: [
       {
-        url: "/images/og-image.jpg",
+        url: "/images/logo.png",
         width: 1200,
         height: 630,
         alt: "Mind Mantra - Mental Health & Psychological Wellness Center",
@@ -79,7 +79,7 @@ export const metadata = {
     title: "Mind Mantra | Mental Health & Psychological Wellness Center",
     description:
       "Expert psychological counseling, OCD treatment & relationship therapy in India. Book a session today.",
-    images: ["/images/og-image.jpg"],
+    images: ["/images/logo.png"],
   },
   alternates: {
     canonical: BASE_URL,

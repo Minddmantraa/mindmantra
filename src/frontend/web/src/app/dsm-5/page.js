@@ -23,13 +23,13 @@ export const metadata = {
     description:
       "Clinical reference guide covering OCD, anxiety, depression, ADHD, autism, trauma, bipolar, and eating disorders — with treatment options at Mind Mantra.",
     url: "https://mindmantraa.com/dsm-5",
-    images: [{ url: "/images/og-image.jpg", width: 1200, height: 630, alt: "Mind Mantra DSM-5 Guide" }],
+    images: [{ url: "/images/logo.png", width: 1200, height: 630, alt: "Mind Mantra DSM-5 Guide" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Mental Health Conditions Guide | Mind Mantra",
     description: "Comprehensive DSM-5 guide covering OCD, anxiety, depression, ADHD, autism, trauma and more.",
-    images: ["/images/og-image.jpg"],
+    images: ["/images/logo.png"],
   },
 };
 

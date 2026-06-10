@@ -24,13 +24,13 @@ export const metadata = {
     description:
       "Specialised in OCD (ERP & CBT), anxiety, trauma, depression, ADHD, autism, and medical psychology — evidence-based clinical care.",
     url: "https://mindmantraa.com/clinical-expertise",
-    images: [{ url: "/images/og-image.jpg", width: 1200, height: 630, alt: "Mind Mantra Clinical Expertise" }],
+    images: [{ url: "/images/logo.png", width: 1200, height: 630, alt: "Mind Mantra Clinical Expertise" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Clinical Expertise | Mind Mantra",
     description: "OCD, anxiety, trauma, ADHD, depression — evidence-based ERP, CBT, ACT, DBT & EMDR therapy by Ms. Gauri.",
-    images: ["/images/og-image.jpg"],
+    images: ["/images/logo.png"],
   },
 };
 

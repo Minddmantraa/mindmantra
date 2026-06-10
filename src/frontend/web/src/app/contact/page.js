@@ -21,13 +21,13 @@ export const metadata = {
     description:
       "Reach our clinical team at Safdarjung Enclave, New Delhi. Phone, email, or fill our contact form to begin your wellness journey.",
     url: "https://mindmantraa.com/contact",
-    images: [{ url: "/images/og-image.jpg", width: 1200, height: 630, alt: "Contact Mind Mantra" }],
+    images: [{ url: "/images/logo.png", width: 1200, height: 630, alt: "Contact Mind Mantra" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Contact Mind Mantra",
     description: "Get in touch with our clinical team in New Delhi for OCD, anxiety, depression & relationship therapy.",
-    images: ["/images/og-image.jpg"],
+    images: ["/images/logo.png"],
   },
 };
 
