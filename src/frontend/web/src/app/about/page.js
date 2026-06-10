@@ -53,7 +53,7 @@ export default function AboutPage() {
 
           <div className={styles.aboutContentFull}>
             <p className={styles.aboutDesc}>
-              Ms. Gauri is a highly dedicated Clinical Psychologist with <strong>6+ years of experience</strong> in psychological assessment, psychotherapy, mental health rehabilitation, and evidence-based clinical interventions. She has received extensive training across premier healthcare and psychiatric institutions, including AIIMS New Delhi, Lady Hardinge Medical College (LHMC), and specialized mental health organizations.
+              Ms. Gauri is a highly dedicated Clinical Psychologist with <strong>6+ years of experience</strong> in psychological assessment, psychotherapy, mental health rehabilitation, and evidence-based clinical interventions. She has received extensive training across premier healthcare and psychiatric institutions, including All India Institute of Medical Sciences (AIIMS) New Delhi, Lady Hardinge Medical College (LHMC), and specialized mental health organizations.
             </p>
             <p className={styles.aboutDesc}>
               Her professional journey spans hospital-based psychiatry, neuropsychological assessment, psychotherapy services, addiction psychiatry, psycho-oncology, trauma-focused care, and tele-mental health practice. She works with adolescents, adults, couples, and families, helping individuals navigate emotional distress, psychiatric conditions, interpersonal difficulties, and life transitions through compassionate, evidence-based care.
