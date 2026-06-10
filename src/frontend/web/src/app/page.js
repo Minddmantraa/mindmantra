@@ -496,7 +496,7 @@ export default function Home() {
 
           <div className={styles.aboutGrid}>
             <div className={styles.aboutImageWrapper}>
-              <img src="/images/about-2.jpeg" alt="OCD Treatment Session" className={styles.aboutSingleImage} />
+              <img src="/images/about-3.jpeg" alt="OCD Treatment Session" className={styles.aboutSingleImage} />
             </div>
 
             <div>
