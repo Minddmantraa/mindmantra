@@ -1,0 +1,97 @@
+.ctaSection {
+  background-image: linear-gradient(rgba(31, 63, 67, 0.92), rgba(31, 63, 67, 0.92)), url('/images/hero-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+  color: var(--color-white);
+  text-align: center;
+}
+
+.ctaContent {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.ctaBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 18px;
+  border-radius: 9999px;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--color-accent-teal);
+  background-color: rgba(44, 165, 167, 0.1);
+  border: 1px solid rgba(44, 165, 167, 0.15);
+}
+
+.ctaTitle {
+  font-size: 44px;
+  font-family: var(--font-serif);
+  line-height: 1.2;
+  color: var(--color-white);
+}
+
+.ctaDesc {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.ctaButtons {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+}
+
+.ctaBtnPrimary {
+  background-color: var(--color-accent-teal);
+  color: var(--color-white);
+  padding: 16px 36px;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  transition: var(--transition-smooth);
+  box-shadow: 0 4px 15px rgba(44, 165, 167, 0.3);
+}
+
+.ctaBtnPrimary:hover {
+  background-color: var(--color-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(31, 63, 67, 0.35);
+  border-color: transparent;
+}
+
+.ctaBtnPrimary svg {
+  transition: transform 0.3s ease;
+}
+
+.ctaBtnPrimary:hover svg {
+  transform: translateX(4px);
+}
+
+@media (max-width: 768px) {
+  .ctaTitle {
+    font-size: 32px;
+  }
+  .ctaDesc {
+    font-size: 16px;
+  }
+  .ctaSection {
+    padding: 80px 0;
+  }
+}

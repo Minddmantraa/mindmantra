@@ -1,0 +1,361 @@
+/* About Page Styles */
+.subpageHero {
+  background-image: linear-gradient(rgba(31, 63, 67, 0.85), rgba(31, 63, 67, 0.85)), url('/images/hero.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding-top: 180px; /* Accounts for topBar + absolute navbar */
+  padding-bottom: 80px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.subpageHero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 30% 70%, rgba(181, 76, 98, 0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.subpageTitle {
+  font-size: 48px;
+  color: var(--color-white);
+  font-family: var(--font-serif);
+  line-height: 1.2;
+}
+
+.sectionBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+  color: var(--color-accent-teal);
+}
+
+.sectionBadge::before {
+  content: '';
+  width: 30px;
+  height: 2px;
+  background-color: var(--color-accent-teal);
+}
+
+/* About Section */
+.about {
+  background-color: var(--color-secondary-light);
+  padding: 120px 0;
+  position: relative;
+  z-index: 10;
+}
+
+.aboutHeader {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.aboutGrid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.aboutContentFull {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.aboutImageWrapper {
+  position: relative;
+  border-radius: var(--border-radius-lg);
+  overflow: visible;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
+}
+
+.aboutSingleImage {
+  width: 100%;
+  height: 520px;
+  object-fit: cover;
+  border-radius: var(--border-radius-lg);
+  display: block;
+}
+
+.aboutTitle {
+  font-size: 42px;
+  line-height: 1.2;
+  margin: 10px auto 0 auto;
+  max-width: 700px;
+}
+
+.aboutTitle span {
+  color: var(--color-accent-teal);
+}
+
+.aboutDesc {
+  font-size: 16px;
+  margin-bottom: 24px;
+  text-align: justify;
+}
+
+.quoteBlock {
+  border-left: 3px solid var(--color-accent-teal);
+  padding-left: 20px;
+  font-family: var(--font-sans);
+  font-style: italic;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+
+/* Testimonials Section */
+.testimonials {
+  background-color: var(--color-white);
+  padding: 120px 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.testimonialsHeaderContainer {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.testimonialsHeaderLeft {
+  margin: 0 auto;
+  max-width: 800px;
+  text-align: center;
+}
+
+.testimonialsTitle {
+  font-size: 42px;
+  margin-top: 16px;
+  line-height: 1.25;
+}
+
+.testimonialsTitle span {
+  color: var(--color-accent-teal);
+}
+
+.testimonialsDesc {
+  font-size: 16px;
+  color: var(--color-text-muted);
+  margin-top: 20px;
+  line-height: 1.6;
+}
+
+/* Slider Track & Container */
+.reviewsSliderContainer {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  margin: 0 -15px;
+  padding: 10px 0;
+}
+
+.reviewsGridTrack {
+  display: flex;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.reviewCardWrapper {
+  flex-shrink: 0;
+  padding: 0 15px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.reviewCard {
+  background-color: var(--color-white);
+  border: 1px solid rgba(31, 63, 67, 0.06);
+  box-shadow: 0 10px 30px rgba(31, 63, 67, 0.02);
+  border-radius: 20px;
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  transition: var(--transition-smooth);
+}
+
+.reviewCard:hover {
+  transform: translateY(-6px);
+  border-color: rgba(181, 76, 98, 0.15);
+  box-shadow: 0 20px 40px rgba(31, 63, 67, 0.06);
+}
+
+.reviewUserRow {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.reviewerAvatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.reviewUserMeta {
+  display: flex;
+  flex-direction: column;
+  margin-left: 14px;
+}
+
+.reviewerNameRow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.reviewerName {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--color-primary-dark);
+}
+
+.verifiedBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 600;
+  color: #2E7D32;
+  background-color: #E8F5E9;
+  padding: 2px 6px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.verifiedCheckIcon {
+  width: 10px;
+  height: 10px;
+}
+
+.reviewDate {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}
+
+.googleCardIcon {
+  margin-left: auto;
+  align-self: flex-start;
+  display: flex;
+  opacity: 0.85;
+}
+
+.reviewStarsRow {
+  display: flex;
+  gap: 3px;
+  margin-bottom: 20px;
+}
+
+.reviewStarsRow .goldStarIcon {
+  width: 16px;
+  height: 16px;
+}
+
+.goldStarIcon {
+  width: 18px;
+  height: 18px;
+  color: #FFB300;
+}
+
+.reviewText {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--color-text-dark);
+  font-style: italic;
+  margin-bottom: 24px;
+}
+
+/* Dots navigation */
+.testimonialDots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 64px;
+  padding-bottom: 40px;
+}
+
+.testimonialDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgba(31, 63, 67, 0.15);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.testimonialDotActive {
+  background-color: var(--color-accent-teal);
+  width: 24px;
+  border-radius: 5px;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .subpageHero {
+    padding-top: 150px;
+    padding-bottom: 60px;
+  }
+  .subpageTitle {
+    font-size: 38px;
+  }
+  .aboutGrid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .aboutSingleImage {
+    height: 380px;
+  }
+  .aboutTitle {
+    font-size: 32px;
+  }
+  .testimonials {
+    padding: 80px 0;
+  }
+  .testimonialsTitle {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 576px) {
+  .subpageHero {
+    padding-top: 140px;
+    padding-bottom: 50px;
+  }
+  .subpageTitle {
+    font-size: 32px;
+  }
+  .about {
+    padding: 60px 0;
+  }
+  .testimonials {
+    padding: 60px 0;
+  }
+}

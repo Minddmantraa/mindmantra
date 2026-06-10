@@ -1,0 +1,230 @@
+/* Services Page Styles */
+.subpageHero {
+  background-image: linear-gradient(rgba(31, 63, 67, 0.85), rgba(31, 63, 67, 0.85)), url('/images/hero.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding-top: 180px; /* Accounts for topBar + absolute navbar */
+  padding-bottom: 80px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.subpageHero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 30% 70%, rgba(181, 76, 98, 0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.subpageTitle {
+  font-size: 48px;
+  color: var(--color-white);
+  font-family: var(--font-serif);
+  line-height: 1.2;
+}
+
+.servicesSection {
+  padding: 100px 0;
+  background-color: var(--color-white);
+}
+
+.servicesIntro {
+  max-width: 800px;
+  margin: 0 auto 80px auto;
+  text-align: center;
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+}
+
+/* Alternating service blocks */
+.serviceBlock {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  margin-bottom: 100px;
+  padding-bottom: 80px;
+  border-bottom: 1px solid rgba(31, 63, 67, 0.08);
+}
+
+.serviceBlock:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+/* Reverse layout for even items */
+.serviceBlock.even {
+  grid-template-columns: 1fr 1.1fr;
+}
+
+.serviceImageWrapper {
+  position: relative;
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.07);
+}
+
+.serviceImage {
+  width: 100%;
+  height: 460px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.serviceImageWrapper:hover .serviceImage {
+  transform: scale(1.02);
+}
+
+.serviceContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.serviceBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  margin-bottom: 16px;
+  color: var(--color-accent-teal);
+}
+
+.serviceBadge::before {
+  content: '';
+  width: 25px;
+  height: 2px;
+  background-color: var(--color-accent-teal);
+}
+
+.serviceTitle {
+  font-size: 36px;
+  margin-bottom: 20px;
+  line-height: 1.2;
+  font-family: var(--font-serif);
+  color: var(--color-primary-dark);
+}
+
+.serviceDesc {
+  font-size: 15.5px;
+  line-height: 1.75;
+  color: var(--color-text-muted);
+  margin-bottom: 24px;
+  text-align: justify;
+}
+
+.bulletsHeader {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  margin-bottom: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.bulletsList {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.bulletItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14.5px;
+  color: var(--color-text-dark);
+  line-height: 1.45;
+}
+
+.checkIcon {
+  color: var(--color-accent-teal);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* Buttons */
+.bookBtn {
+  background-color: var(--color-accent-teal);
+  color: var(--color-white) !important;
+  padding: 14px 32px;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 15px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: var(--transition-smooth);
+  box-shadow: 0 4px 12px rgba(181, 76, 98, 0.2);
+  align-self: flex-start;
+  border: none;
+  cursor: pointer;
+}
+
+.bookBtn:hover {
+  background-color: var(--color-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(31, 63, 67, 0.25);
+}
+
+.bookBtn svg {
+  transition: transform 0.3s ease;
+}
+
+.bookBtn:hover svg {
+  transform: translateX(4px);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .subpageTitle {
+    font-size: 38px;
+  }
+  .serviceBlock, .serviceBlock.even {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .serviceBlock.even .serviceImageWrapper {
+    order: -1; /* Image stays on top in mobile */
+  }
+  .serviceImage {
+    height: 350px;
+  }
+  .serviceTitle {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 576px) {
+  .subpageHero {
+    padding-top: 150px;
+    padding-bottom: 60px;
+  }
+  .subpageTitle {
+    font-size: 32px;
+  }
+  .servicesSection {
+    padding: 60px 0;
+  }
+  .servicesIntro {
+    margin-bottom: 50px;
+  }
+  .serviceBlock {
+    margin-bottom: 60px;
+    padding-bottom: 40px;
+  }
+}

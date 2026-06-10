@@ -1,0 +1,292 @@
+/* Subpage Layouts & Expertise styling */
+.subpageHero {
+  background-image: linear-gradient(rgba(31, 63, 67, 0.85), rgba(31, 63, 67, 0.85)), url('/images/hero.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding-top: 180px; /* Accounts for topBar + absolute navbar */
+  padding-bottom: 80px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.subpageHero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 70% 30%, rgba(181, 76, 98, 0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.subpageTitle {
+  font-size: 48px;
+  color: var(--color-white);
+  font-family: var(--font-serif);
+  line-height: 1.2;
+}
+
+/* Sections */
+.expertiseSection {
+  padding: 100px 0;
+  background-color: var(--color-white);
+}
+
+.expertiseIntro {
+  max-width: 800px;
+  margin: 0 auto 60px auto;
+  text-align: center;
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+}
+
+.expertiseGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+
+.expertiseCard {
+  background-color: var(--color-secondary-light);
+  border-radius: var(--border-radius-lg);
+  padding: 40px;
+  border: 1px solid rgba(181, 76, 98, 0.08);
+  transition: var(--transition-smooth);
+}
+
+.expertiseCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.03);
+  border-color: rgba(181, 76, 98, 0.2);
+}
+
+.expertiseCardTitle {
+  font-size: 22px;
+  margin-bottom: 20px;
+  color: var(--color-primary-dark);
+  font-family: var(--font-serif);
+  border-bottom: 2px solid rgba(181, 76, 98, 0.15);
+  padding-bottom: 10px;
+}
+
+.expertiseList {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.expertiseItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 15px;
+  color: var(--color-text-dark);
+  line-height: 1.5;
+}
+
+.checkIcon {
+  color: var(--color-accent-teal);
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+/* Modalities */
+.modalitiesSection {
+  padding: 100px 0;
+  background-color: var(--color-secondary-light);
+  text-align: center;
+}
+
+.sectionHeading {
+  font-size: 36px;
+  margin-bottom: 16px;
+  color: var(--color-primary-dark);
+  text-align: center;
+}
+
+.sectionBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+  color: var(--color-accent-teal);
+}
+
+.sectionBadge::before {
+  content: '';
+  width: 30px;
+  height: 2px;
+  background-color: var(--color-accent-teal);
+}
+
+.modalitiesIntro {
+  max-width: 700px;
+  margin: 0 auto 50px auto;
+  font-size: 16px;
+  color: var(--color-text-muted);
+}
+
+.modalitiesGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.modalityBadge {
+  background-color: var(--color-white);
+  color: var(--color-primary-dark);
+  border: 1px solid rgba(31, 63, 67, 0.1);
+  padding: 12px 24px;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 14px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+  transition: var(--transition-smooth);
+}
+
+.modalityBadge:hover {
+  background-color: var(--color-accent-teal);
+  color: var(--color-white);
+  border-color: var(--color-accent-teal);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(181, 76, 98, 0.15);
+}
+
+/* OCD Specialization */
+.specializationSection {
+  padding: 100px 0;
+  background-color: var(--color-white);
+}
+
+.specializationGrid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.specializationImageWrapper {
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
+}
+
+.specializationImage {
+  width: 100%;
+  height: 480px;
+  object-fit: cover;
+  display: block;
+}
+
+.specializationContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.specializationTitle {
+  font-size: 36px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.specializationTitle span {
+  color: var(--color-accent-teal);
+}
+
+.specializationText {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+  margin-bottom: 20px;
+  text-align: justify;
+}
+
+/* Philosophy */
+.philosophySection {
+  padding: 120px 0;
+  background-image: linear-gradient(rgba(31, 63, 67, 0.95), rgba(31, 63, 67, 0.95)), url('/images/hero-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: var(--color-white);
+  text-align: center;
+}
+
+.philosophyTitle {
+  font-size: 36px;
+  color: var(--color-white);
+  margin-bottom: 24px;
+}
+
+.philosophyQuote {
+  max-width: 900px;
+  margin: 0 auto;
+  font-size: 22px;
+  font-style: italic;
+  font-family: var(--font-serif);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.philosophyAuthor {
+  margin-top: 30px;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--color-accent-teal);
+  font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .subpageTitle {
+    font-size: 38px;
+  }
+  .expertiseGrid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .specializationGrid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .specializationImage {
+    height: 350px;
+  }
+}
+
+@media (max-width: 576px) {
+  .subpageHero {
+    padding-top: 150px;
+    padding-bottom: 60px;
+  }
+  .subpageTitle {
+    font-size: 32px;
+  }
+  .expertiseSection, .modalitiesSection, .specializationSection, .philosophySection {
+    padding: 60px 0;
+  }
+  .sectionHeading, .specializationTitle, .philosophyTitle {
+    font-size: 28px;
+  }
+  .philosophyQuote {
+    font-size: 18px;
+  }
+  .expertiseCard {
+    padding: 24px;
+  }
+}

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import styles from "./page.module.css";
 
 // Sample Services Data
@@ -353,12 +354,8 @@ const reviewsList = [
 ];
 
 export default function Home() {
-  // Navigation states
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
   // Interaction states
   const [activeSlide, setActiveSlide] = useState(0);
-  const [activeModal, setActiveModal] = useState(null);
 
   // Video slider states
   const [videoSlideIndex, setVideoSlideIndex] = useState(0);
@@ -430,164 +427,17 @@ export default function Home() {
     }
   }, [maxTestimonialIndex, testimonialSlideIndex]);
 
-  // Booking Form states
-  const [formData, setFormData] = useState({
-    name: "",
-    phone: "",
-    email: "",
-    service: "Obsessive Compulsive Disorder Recovery",
-    date: "",
-    timeSlot: "Morning (09:00 AM - 12:00 PM)",
-    message: ""
-  });
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    const { name, phone, email, service, date, timeSlot, message } = formData;
-
-    if (!name || !phone) {
-      alert("Please enter your name and phone number.");
-      return;
-    }
-    
-    const requestHeader = "*MIND MANTRA - CLINICAL APPOINTMENT REQUEST*";
-
-    // Formatting message for WhatsApp
-    const textMessage = 
-      `${requestHeader}\n` +
-      `---------------------------------------\n` +
-      `*Client Name:* ${name}\n` +
-      `*Phone Number:* ${phone}\n` +
-      `*Email Address:* ${email || "Not provided"}\n` +
-      `*Focus Area/Service:* ${service}\n` +
-      `*Preferred Date:* ${date || "Flexible / First Available"}\n` +
-      `*Preferred Time Slot:* ${timeSlot}\n` +
-      `*Clinical Note:* ${message || "None"}\n` +
-      `---------------------------------------\n` +
-      `_Submitted via website portal._`;
-
-    const encodedMessage = encodeURIComponent(textMessage);
-    const whatsappUrl = `https://api.whatsapp.com/send?phone=917706000771&text=${encodedMessage}`;
-    
-    window.open(whatsappUrl, "_blank");
-  };
 
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
-    setMobileMenuOpen(false);
   };
 
   return (
     <>
-      {/* Top Bar Info */}
-      <div className={styles.topBar}>
-        <div className={`${styles.topBarContainer} container`}>
-          <div className={styles.topInfo}>
-            <a href="tel:+917706000771" className={styles.topBarLink}>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: "16px", height: "16px", color: "var(--color-accent-teal)" }}>
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-              </svg>
-              <span>+91 77060 00771</span>
-            </a>
-            <a href="mailto:info@mindmantra.com" className={styles.topBarLink}>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: "16px", height: "16px", color: "var(--color-accent-teal)" }}>
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                <polyline points="22,6 12,13 2,6" />
-              </svg>
-              <span>info@mindmantra.com</span>
-            </a>
-          </div>
-          <div className={styles.socials}>
-            {["Telegram", "Instagram", "Facebook", "YouTube", "LinkedIn"].map((platform) => (
-              <a key={platform} href="#" className={styles.socialLink} title={platform}>
-                {platform === "Telegram" && (
-                  <svg viewBox="0 0 24 24"><path d="M21.9 2.1c-.2-.1-.5-.1-.7 0L1.6 9.8c-.5.2-.7.7-.6 1.2c.1.5.5.9 1 .9h5.1l1.6 5.8c.1.3.4.5.7.5c.2 0 .4-.1.6-.2l3.4-2.8l4.7 3.5c.2.2.5.2.8 0c.2-.2.3-.5.2-.8l3.6-15.1c0-.3-.1-.6-.3-.7zm-13.4 9.9L4.8 11l13.1-5.2l-9.4 6.2z"/></svg>
-                )}
-                {platform === "Instagram" && (
-                  <svg viewBox="0 0 24 24"><path d="M12 2.1c3.2 0 3.6 0 4.9.1c1.2.1 1.8.3 2.2.5c.6.2 1 .5 1.4.9c.4.4.7.8.9 1.4c.2.4.4 1 .5 2.2c.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.5 2.2c-.2.6-.5 1-.9 1.4c-.4.4-.8.7-1.4.9c-.4.2-1 .4-2.2.5c-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.5c-.6-.2-1-.5-1.4-.9c-.4-.4-.7-.8-.9-1.4c-.2-.4-.4-1-.5-2.2c-.1-1.3-.1-1.7-.1-4.9s0-3.5.1-4.9c.1-1.2.3-1.8.5-2.2c.2-.6.5-1 .9-1.4c.4-.4.8-.7 1.4-.9c.4-.2 1-.4 2.2-.5c1.3-.1 1.7-.1 4.9-.1M12 0C8.7 0 8.3 0 7 1c-1.3.1-2.2.3-3 .6c-.8.3-1.5.7-2.1 1.4C1.2 3.6.8 4.3.5 5.1C.2 5.9.1 6.8 0 8c0 1.3 0 1.7 0 5s0 3.7.1 5c.1 1.2.3 2.1.6 2.9c.3.8.7 1.5 1.4 2.1c.6.6 1.3 1.1 2.1 1.4c.8.3 1.7.4 2.9.5c1.3.1 1.7.1 5 .1s3.7 0 5-.1c1.2-.1 2.1-.3 2.9-.5c.8-.3 1.5-.7 2.1-1.4c.6-.6 1.1-1.3 1.4-2.1c.3-.8.4-1.7.5-2.9c.1-1.3.1-1.7.1-5s0-3.7-.1-5c-.1-1.2-.3-2.1-.6-2.9c-.3-.8-.7-1.5-1.4-2.1c-.6-.6-1.3-1.1-2.1-1.4c-.8-.3-1.7-.4-2.9-.5c-1.3-.1-1.7-.1-5-.1z"/><path d="M12 5.8c-3.4 0-6.2 2.8-6.2 6.2s2.8 6.2 6.2 6.2s6.2-2.8 6.2-6.2s-2.8-6.2-6.2-6.2zm0 10.3c-2.3 0-4.1-1.8-4.1-4.1s1.8-4.1 4.1-4.1s4.1 1.8 4.1 4.1s-1.8 4.1-4.1 4.1z"/><circle cx="18.4" cy="5.6" r="1.4"/></svg>
-                )}
-                {platform === "Facebook" && (
-                  <svg viewBox="0 0 24 24"><path d="M24 12c0-6.6-5.4-12-12-12S0 5.4 0 12c0 6 4.4 10.9 10.1 11.9v-8.4H7.1V12h3v-2.7c0-3 1.8-4.7 4.5-4.7c1.3 0 2.6.2 2.6.2v2.9h-1.5c-1.5 0-2 1-2 1.9V12h3.3l-.5 3.5h-2.8v8.4C19.6 22.9 24 18 24 12z"/></svg>
-                )}
-                {platform === "YouTube" && (
-                  <svg viewBox="0 0 24 24"><path d="M23.5 6.2c-.3-1-1-1.8-2-2C19.7 3.8 12 3.8 12 3.8s-7.7 0-9.5.4c-1 .3-1.7 1-2 2C.1 8 .1 12 .1 12s0 4 .4 5.8c.3 1 1 1.8 2 2c1.8.4 9.5.4 9.5.4s7.7 0 9.5-.4c1-.3 1.7-1 2-2c.4-1.8.4-5.8.4-5.8s0-4-.4-5.8zM9.5 15.5V8.5l6.5 3.5l-6.5 3.5z"/></svg>
-                )}
-                {platform === "LinkedIn" && (
-                  <svg viewBox="0 0 24 24"><path d="M22.2 0H1.8C.8 0 0 .8 0 1.7v20.6C0 23.2.8 24 1.8 24h20.5c1 0 1.8-.8 1.8-1.7V1.7c0-.9-.8-1.7-1.8-1.7zM7.1 20.4H3.6V9h3.6v11.4zM5.3 7.6c-1.1 0-2-.9-2-2s.9-2 2-2s2 .9 2 2s-.8 2-2 2zm15.1 12.8H17V14.8c0-1.3 0-3-1.9-3c-1.9 0-2.2 1.5-2.2 2.9v5.7h-3.6V9h3.4v1.6h.1c.5-.9 1.6-1.9 3.5-1.9c3.7 0 4.4 2.5 4.4 5.7v6z"/></svg>
-                )}
-              </a>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Floating Navigation Bar */}
-      <div className={styles.navWrapper}>
-        <nav className={styles.navbar}>
-          <a href="#" className={styles.logo} onClick={(e) => { e.preventDefault(); scrollToSection("home"); }}>
-            <img src="/images/logo.png" alt="Mind Mantra" className={styles.logoImage} />
-          </a>
-
-          <ul className={styles.navMenu}>
-            <li><a href="#about" className={styles.navLink} onClick={(e) => { e.preventDefault(); scrollToSection("about"); }}>About Us</a></li>
-            <li><a href="#services" className={styles.navLink} onClick={(e) => { e.preventDefault(); scrollToSection("services"); }}>Services</a></li>
-            <li><a href="#why-choose-us" className={styles.navLink} onClick={(e) => { e.preventDefault(); scrollToSection("why-choose-us"); }}>Why Us</a></li>
-            <li><a href="#testimonials" className={styles.navLink} onClick={(e) => { e.preventDefault(); scrollToSection("testimonials"); }}>Testimonials</a></li>
-          </ul>
-
-          <button className={styles.btnAppointment} onClick={() => scrollToSection("booking")}>
-            <span>Appointment</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ width: "14px", height: "14px" }}>
-              <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-              <line x1="16" y1="2" x2="16" y2="6" />
-              <line x1="8" y1="2" x2="8" y2="6" />
-              <line x1="3" y1="10" x2="21" y2="10" />
-            </svg>
-          </button>
-
-          <button className={styles.mobileMenuBtn} onClick={() => setMobileMenuOpen(!mobileMenuOpen)} aria-label="Toggle menu">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ width: "24px", height: "24px" }}>
-              {mobileMenuOpen ? (
-                <path d="M18 6L6 18M6 6l12 12" />
-              ) : (
-                <path d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
-          </button>
-        </nav>
-      </div>
-
-      {/* Mobile Drawer Menu */}
-      {mobileMenuOpen && (
-        <div className={styles.mobileDrawer}>
-          <div className={styles.mobileDrawerContent}>
-            <ul className={styles.mobileNavMenu}>
-              <li><a href="#about" className={styles.mobileNavLink} onClick={() => scrollToSection("about")}>About Us</a></li>
-              <li><a href="#services" className={styles.mobileNavLink} onClick={() => scrollToSection("services")}>Services</a></li>
-              <li><a href="#why-choose-us" className={styles.mobileNavLink} onClick={() => scrollToSection("why-choose-us")}>Why Us</a></li>
-              <li><a href="#testimonials" className={styles.mobileNavLink} onClick={() => scrollToSection("testimonials")}>Testimonials</a></li>
-            </ul>
-            <button className={styles.mobileBtnAppointment} onClick={() => scrollToSection("booking")}>
-              <span>Appointment</span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ width: "14px", height: "14px" }}>
-                <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-                <line x1="16" y1="2" x2="16" y2="6" />
-                <line x1="8" y1="2" x2="8" y2="6" />
-                <line x1="3" y1="10" x2="21" y2="10" />
-              </svg>
-            </button>
-          </div>
-        </div>
-      )}
-
       {/* Hero Section with Slider */}
       <section id="home" className={styles.hero}>
         {/* Background Images with Crossfade and Zoom Effect */}
@@ -612,23 +462,23 @@ export default function Home() {
               {heroSlides[activeSlide].desc}
             </p>
             <div className={styles.heroContactList}>
-              <a href="mailto:info@mindmantra.com" className={`${styles.heroContactPill} ${styles.teal}`}>
-                <span>info@mindmantra.com</span>
+              <Link href="/services" className={`${styles.heroContactPill} ${styles.teal}`}>
+                <span>Our Services</span>
                 <div className={styles.pillIcon}>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ width: "14px", height: "14px" }}>
-                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                    <polyline points="22,6 12,13 2,6" />
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                    <polyline points="12 5 19 12 12 19" />
                   </svg>
                 </div>
-              </a>
-              <a href="tel:+917706000771" className={`${styles.heroContactPill} ${styles.outline}`}>
-                <span>+91 77060 00771</span>
+              </Link>
+              <Link href="/contact" className={`${styles.heroContactPill} ${styles.outline}`}>
+                <span>Contact Us</span>
                 <div className={styles.pillIcon}>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ width: "14px", height: "14px" }}>
                     <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
                   </svg>
                 </div>
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -651,26 +501,18 @@ export default function Home() {
 
             <div>
               <p className={styles.aboutDesc}>
-                Ms. Gauri is a dedicated Psychologist at <strong>Mind Mantra – OCD Treatment, Research & Training Institute</strong>, widely recognized for her clinical expertise in helping individuals build deep emotional resilience while navigating Obsessive-Compulsive Disorder (OCD). She works extensively with both adolescents and adults experiencing a wide range of OCD presentations (contamination OCD, ROCD, pure obsessions, sexual intrusive thoughts, and anxiety-driven concerns).
+                Ms. Gauri is a highly dedicated Clinical Psychologist with <strong>6+ years of experience</strong> in psychological assessment, psychotherapy, mental health rehabilitation, and evidence-based clinical interventions. She has received extensive training across premier healthcare and psychiatric institutions, including AIIMS New Delhi, Lady Hardinge Medical College (LHMC), and specialized mental health organizations. Her professional journey spans hospital-based psychiatry, neuropsychological assessment, psychotherapy services, addiction psychiatry, psycho-oncology, trauma-focused care, and tele-mental health practice. She works with adolescents, adults, couples, and families to navigate emotional distress and psychiatric conditions through compassionate, evidence-based care.
               </p>
-              <div className={styles.quoteBlock}>
-                "Rather than aiming only to reduce compulsions or intrusive thoughts, we emphasize strengthening emotional tolerance, psychological flexibility, and inner stability—core capacities that support sustainable and long-term OCD recovery. True healing occurs when individuals learn to coexist with discomfort, uncertainty, and emotional intensity without being controlled by them."
-              </div>
-              <p className={styles.aboutDesc} style={{ marginBottom: "32px", fontSize: "15px", fontStyle: "italic", borderLeft: "3px solid var(--color-accent-teal)", paddingLeft: "20px" }}>
-                Special focus on emotional resilience building, distress tolerance, and psychological flexibility in OCD recovery. Working with adolescents and adults across diverse OCD presentations.
+              <p className={styles.aboutDesc}>
+                Our practice is built on the principle of developing long-term emotional resilience, distress tolerance, and psychological flexibility, helping individuals coexist with discomfort and uncertainty.
               </p>
-
-              <div className={styles.doctorProfile}>
-                <div className={styles.doctorInfo}>
-                  <div className={styles.doctorAvatar}>
-                    <img src="/images/dr-gauri.jpg" alt="Dedicated Psychologist Ms. Gauri" />
-                  </div>
-                  <div className={styles.doctorMeta}>
-                    <h4>Ms. Gauri</h4>
-                    <p>Dedicated Psychologist</p>
-                  </div>
-                </div>
-              </div>
+              <Link href="/about" className={styles.btnReadMore}>
+                <span>View More</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ width: "14px", height: "14px" }}>
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+              </Link>
             </div>
           </div>
         </div>
@@ -687,12 +529,12 @@ export default function Home() {
           </div>
 
           <div className={styles.servicesGrid}>
-            {servicesList.map((service, idx) => {
+            {servicesList.map((service) => {
               return (
-                <div
+                <Link
                   key={service.id}
+                  href={`/services#service-${service.id}`}
                   className={`${styles.serviceCard} ${service.isFeatured ? styles.featuredCard : ""}`}
-                  onClick={() => setActiveModal(idx)}
                 >
                   <div className={styles.serviceIconContainer}>
                     {getServiceIcon(service.id)}
@@ -708,81 +550,11 @@ export default function Home() {
                       <polyline points="12 5 19 12 12 19" />
                     </svg>
                   </div>
-                </div>
+                </Link>
               );
             })}
           </div>
         </div>
-
-        {/* Modal Popup for Details */}
-        {activeModal !== null && (
-          <div className={styles.modalOverlay} onClick={() => setActiveModal(null)}>
-            <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-              <button className={styles.modalCloseBtn} onClick={() => setActiveModal(null)} aria-label="Close details">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ width: "18px", height: "18px" }}>
-                  <line x1="18" y1="6" x2="6" y2="18" />
-                  <line x1="6" y1="6" x2="18" y2="18" />
-                </svg>
-              </button>
-
-              <div className={styles.modalGrid}>
-                {/* Left Column: Cover Image */}
-                <div className={styles.modalImageWrapper}>
-                  <img
-                    src={servicesList[activeModal].image}
-                    alt={servicesList[activeModal].title}
-                    className={styles.modalImage}
-                  />
-                </div>
-
-                {/* Right Column: Modality Info */}
-                <div className={styles.modalInfo}>
-                  <div className={styles.modalIconCircle}>
-                    {getServiceIcon(servicesList[activeModal].id)}
-                  </div>
-
-                  <h3 className={styles.modalTitle}>
-                    {servicesList[activeModal].title}
-                  </h3>
-
-                  <p className={styles.modalDesc}>
-                    {servicesList[activeModal].desc}
-                  </p>
-
-                  <ul className={styles.modalChecklist}>
-                    {servicesList[activeModal].bullets.map((bullet, bIdx) => (
-                      <li key={bIdx} className={styles.modalChecklistItem}>
-                        <div className={styles.modalCheckIconWrapper}>
-                          <svg className={styles.modalCheckIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
-                            <polyline points="20 6 9 17 4 12" />
-                          </svg>
-                        </div>
-                        <span>{bullet}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <button
-                    className={styles.modalBtn}
-                    onClick={() => {
-                      const serviceShort = servicesList[activeModal].shortName;
-                      setActiveModal(null);
-                      window.open(`https://wa.me/917706000771?text=Hello%20Ms.%20Gauri,%20I%20would%20like%20to%20book%20an%20appointment%20for%20${encodeURIComponent(serviceShort)}.`, "_blank");
-                    }}
-                  >
-                    <span>Book Appointment</span>
-                    <div className={styles.modalBtnInnerCircle}>
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ width: "12px", height: "12px" }}>
-                        <line x1="5" y1="12" x2="19" y2="12" />
-                        <polyline points="12 5 19 12 12 19" />
-                      </svg>
-                    </div>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
       </section>
 
       {/* Video Resources Section */}
@@ -903,15 +675,13 @@ export default function Home() {
             <div className={styles.whyChooseUsItem}>
               <div className={styles.whyChooseUsIcon}>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ width: "20px", height: "20px" }}>
-                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                  <circle cx="9" cy="7" r="4" />
-                  <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-                  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
                 </svg>
               </div>
               <div className={styles.whyChooseUsItemContent}>
-                <h4>Expert Psychologists</h4>
-                <p>Guided by Ms. Gauri's clinical expertise, we utilize evidence-based clinical protocols like ERP, CBT, and ACT for sustainable OCD recovery and sexual wellness.</p>
+                <h4>Specialized Treatment & Training</h4>
+                <p>As a dedicated treatment, research, and training institute, Mind Mantra combines clinical excellence with scientific-backed protocols to provide gold-standard, specialized psychological care.</p>
               </div>
             </div>
 
@@ -919,16 +689,30 @@ export default function Home() {
             <div className={styles.whyChooseUsItem}>
               <div className={styles.whyChooseUsIcon}>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ width: "20px", height: "20px" }}>
-                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                  <polyline points="22 4 12 14.01 9 11.01" />
                 </svg>
               </div>
               <div className={styles.whyChooseUsItemContent}>
-                <h4>Personalized Care</h4>
-                <p>No cookie-cutter templates. We design custom treatment plans tailored to contamination concerns, intrusive obsessions, sleep health, or relational goals.</p>
+                <h4>Gold-Standard Modalities</h4>
+                <p>We leverage internationally recognized, evidence-based frameworks, specializing in Exposure and Response Prevention (ERP) for OCD, Cognitive Behavioral Therapy (CBT), Acceptance and Commitment Therapy (ACT), and DBT.</p>
               </div>
             </div>
 
             {/* Item 3 */}
+            <div className={styles.whyChooseUsItem}>
+              <div className={styles.whyChooseUsIcon}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ width: "20px", height: "20px" }}>
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                </svg>
+              </div>
+              <div className={styles.whyChooseUsItemContent}>
+                <h4>Resilience & Autonomy Focus</h4>
+                <p>We work directly on building distress tolerance, emotional resilience, and psychological flexibility, ensuring you develop the capacity to coexist with discomfort and navigate uncertainty independently.</p>
+              </div>
+            </div>
+
+            {/* Item 4 */}
             <div className={styles.whyChooseUsItem}>
               <div className={styles.whyChooseUsIcon}>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ width: "20px", height: "20px" }}>
@@ -939,8 +723,8 @@ export default function Home() {
                 </svg>
               </div>
               <div className={styles.whyChooseUsItemContent}>
-                <h4>Flexible Scheduling</h4>
-                <p>We provide highly confidential support with virtual and in-person sessions. Easy scheduling with options across morning, afternoon, and evening slots.</p>
+                <h4>Tailored Treatment Spectrum</h4>
+                <p>Comprehensive diagnostic assessments and customized therapy programs spanning neurodevelopmental concerns (ADHD, ASD), anxiety/OCD, complex trauma, addiction support, and medical psychology.</p>
               </div>
             </div>
           </div>
@@ -991,36 +775,8 @@ export default function Home() {
                       <div className={styles.reviewUserMeta}>
                         <div className={styles.reviewerNameRow}>
                           <h4 className={styles.reviewerName}>{review.name}</h4>
-                          <span className={styles.verifiedBadge} title="Verified Client">
-                            <svg viewBox="0 0 24 24" fill="currentColor" className={styles.verifiedCheckIcon}>
-                              <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
-                            </svg>
-                            <span>Verified</span>
-                          </span>
                         </div>
                         <span className={styles.reviewDate}>{review.date}</span>
-                      </div>
-                      
-                      {/* Google Review G Logo */}
-                      <div className={styles.googleCardIcon}>
-                        <svg viewBox="0 0 24 24" style={{ width: "16px", height: "16px" }}>
-                          <path
-                            fill="#4285F4"
-                            d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
-                          />
-                          <path
-                            fill="#34A853"
-                            d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
-                          />
-                          <path
-                            fill="#FBBC05"
-                            d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l3.66-2.85z"
-                          />
-                          <path
-                            fill="#EA4335"
-                            d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.85c.87-2.6 3.3-4.53 6.16-4.53z"
-                          />
-                        </svg>
                       </div>
                     </div>
 
@@ -1056,292 +812,27 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Booking Section */}
-      <section id="booking" className={styles.booking}>
+      {/* CTA Section */}
+      <section id="cta" className={styles.ctaSection}>
         <div className="container">
-          <div className={styles.bookingGrid}>
-            
-            {/* Left Column: Info/Value Props */}
-            <div className={styles.bookingInfo}>
-              <div className={styles.sectionBadge}>Get Started Today</div>
-              <h2 className={styles.bookingTitle}>
-                Take Your First Step <span>Towards Psychological Wellness</span>
-              </h2>
-              <p className={styles.bookingDesc}>
-                Whether you want to explore how our clinical protocols can help you, or you are ready to begin regular therapeutic sessions, we provide a structured, private environment.
-              </p>
-              
-              <div className={styles.bookingValueList}>
-                <div className={styles.bookingValueItem}>
-                  <div className={styles.bookingValueIcon}>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" /></svg>
-                  </div>
-                  <div>
-                    <h4>Location</h4>
-                    <p>Safdarjung Enclave, Delhi, India 110023</p>
-                  </div>
-                </div>
-
-                <div className={styles.bookingValueItem}>
-                  <div className={styles.bookingValueIcon}>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" /></svg>
-                  </div>
-                  <div>
-                    <h4>Email</h4>
-                    <p>
-                      <a href="mailto:info@mindmantra.com" className={styles.bookingLink}>
-                        info@mindmantra.com
-                      </a>
-                    </p>
-                  </div>
-                </div>
-
-                <div className={styles.bookingValueItem}>
-                  <div className={styles.bookingValueIcon}>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
-                  </div>
-                  <div>
-                    <h4>Phone Number</h4>
-                    <p>
-                      <a href="tel:+917706000771" className={styles.bookingLink}>
-                        +91 77060 00771
-                      </a>
-                    </p>
-                  </div>
-                </div>
-              </div>
+          <div className={styles.ctaContent}>
+            <div className={styles.ctaBadge}>Get Started Today</div>
+            <h2 className={styles.ctaTitle}>Ready to Take the First Step?</h2>
+            <p className={styles.ctaDesc}>
+              Schedule a clinical consultation with Ms. Gauri today and begin your journey towards sustainable recovery, emotional resilience, and psychological flexibility.
+            </p>
+            <div className={styles.ctaButtons}>
+              <Link href="/appointment" className={styles.ctaBtnPrimary}>
+                <span>Book a Session</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ width: "14px", height: "14px" }}>
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+              </Link>
             </div>
-
-            {/* Right Column: Dynamic Form */}
-            <div className={styles.bookingFormContainer}>
-              <div className={styles.bookingFormCard}>
-                <form onSubmit={handleFormSubmit} className={styles.bookingForm}>
-                  <div className={styles.formGrid}>
-                    <div className={styles.formGroup}>
-                      <label htmlFor="name">Full Name *</label>
-                      <input 
-                        type="text" 
-                        id="name" 
-                        name="name" 
-                        value={formData.name} 
-                        onChange={handleInputChange} 
-                        placeholder="Enter your name" 
-                        required 
-                      />
-                    </div>
-                    
-                    <div className={styles.formGroup}>
-                      <label htmlFor="phone">Phone Number *</label>
-                      <input 
-                        type="tel" 
-                        id="phone" 
-                        name="phone" 
-                        value={formData.phone} 
-                        onChange={handleInputChange} 
-                        placeholder="e.g. +91 98765 43210" 
-                        required 
-                      />
-                    </div>
-                  </div>
-
-                  <div className={styles.formGroup}>
-                    <label htmlFor="email">Email Address (Optional)</label>
-                    <input 
-                      type="email" 
-                      id="email" 
-                      name="email" 
-                      value={formData.email} 
-                      onChange={handleInputChange} 
-                      placeholder="yourname@example.com" 
-                    />
-                  </div>
-
-                  <div className={styles.formGroup}>
-                    <label htmlFor="service">Focus Area / Vertical</label>
-                    <select 
-                      id="service" 
-                      name="service" 
-                      value={formData.service} 
-                      onChange={handleInputChange}
-                      style={{ width: "100%" }}
-                    >
-                      {servicesList.map((service) => (
-                        <option key={service.id} value={service.name}>
-                          {service.name}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div className={styles.formGrid}>
-                    <div className={styles.formGroup}>
-                      <label htmlFor="date">Preferred Date</label>
-                      <input 
-                        type="date" 
-                        id="date" 
-                        name="date" 
-                        value={formData.date} 
-                        onChange={handleInputChange} 
-                      />
-                    </div>
-
-                    <div className={styles.formGroup}>
-                      <label htmlFor="timeSlot">Preferred Time Slot</label>
-                      <select 
-                        id="timeSlot" 
-                        name="timeSlot" 
-                        value={formData.timeSlot} 
-                        onChange={handleInputChange}
-                      >
-                        <option value="Morning (09:00 AM - 12:00 PM)">Morning (09:00 AM - 12:00 PM)</option>
-                        <option value="Afternoon (12:00 PM - 04:00 PM)">Afternoon (12:00 PM - 04:00 PM)</option>
-                        <option value="Evening (04:00 PM - 08:00 PM)">Evening (04:00 PM - 08:00 PM)</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div className={styles.formGroup}>
-                    <label htmlFor="message">Describe your clinical concerns / symptoms</label>
-                    <textarea 
-                      id="message" 
-                      name="message" 
-                      rows="3" 
-                      value={formData.message} 
-                      onChange={handleInputChange} 
-                      placeholder="Provide details about your concerns or symptoms to help us prepare for the session..."
-                    ></textarea>
-                  </div>
-
-                  <button type="submit" className={styles.btnBookingSubmit}>
-                    <span>Book Appointment</span>
-                    <div className={styles.btnBookingSubmitIcon}>
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ width: "14px", height: "14px" }}>
-                        <line x1="5" y1="12" x2="19" y2="12" />
-                        <polyline points="12 5 19 12 12 19" />
-                      </svg>
-                    </div>
-                  </button>
-                </form>
-              </div>
-            </div>
-
           </div>
         </div>
       </section>
-
-
-
-
-
-      {/* Footer */}
-      <footer className={styles.footer}>
-        <div className="container">
-          <div className={styles.footerGrid}>
-            {/* Column 1: Logo, description, socials */}
-            <div className={styles.footerCol}>
-              <img src="/images/logo.png" alt="Mind Mantra" className={styles.footerLogoImg} style={{ filter: "brightness(0) invert(1)" }} />
-              <p className={styles.footerDesc}>
-                We help build deep emotional resilience, distress tolerance, and psychological flexibility to empower your journey to recovery every single day.
-              </p>
-              <div className={styles.footerSocialList}>
-                {["Telegram", "Instagram", "Facebook", "YouTube", "LinkedIn"].map((platform) => (
-                  <a key={platform} href="#" className={styles.footerSocialBtn} title={platform}>
-                    {platform === "Telegram" && (
-                      <svg viewBox="0 0 24 24"><path d="M21.9 2.1c-.2-.1-.5-.1-.7 0L1.6 9.8c-.5.2-.7.7-.6 1.2c.1.5.5.9 1 .9h5.1l1.6 5.8c.1.3.4.5.7.5c.2 0 .4-.1.6-.2l3.4-2.8l4.7 3.5c.2.2.5.2.8 0c.2-.2.3-.5.2-.8l3.6-15.1c0-.3-.1-.6-.3-.7zm-13.4 9.9L4.8 11l13.1-5.2l-9.4 6.2z"/></svg>
-                    )}
-                    {platform === "Instagram" && (
-                      <svg viewBox="0 0 24 24"><path d="M12 2.1c3.2 0 3.6 0 4.9.1c1.2.1 1.8.3 2.2.5c.6.2 1 .5 1.4.9c.4.4.7.8.9 1.4c.2.4.4 1 .5 2.2c.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.5 2.2c-.2.6-.5 1-.9 1.4c-.4.4-.8.7-1.4.9c-.4.2-1 .4-2.2.5c-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.5c-.6-.2-1-.5-1.4-.9c-.4-.4-.7-.8-.9-1.4c-.2-.4-.4-1-.5-2.2c-.1-1.3-.1-1.7-.1-4.9s0-3.6.1-4.9c.1-1.2.3-1.8.5-2.2c.2-.6.5-1 .9-1.4c.4-.4.8-.7 1.4-.9c.4-.2 1-.4 2.2-.5c1.3-.1 1.7-.1 4.9-.1M12 0C8.7 0 8.3 0 7 1c-1.3.1-2.2.3-3 .6c-.8.3-1.5.7-2.1 1.4C1.2 3.6.8 4.3.5 5.1C.2 5.9.1 6.8 0 8c0 1.3 0 1.7 0 5s0 3.7.1 5c.1 1.2.3 2.1.6 2.9c.3.8.7 1.5 1.4 2.1c.6.6 1.3 1.1 2.1 1.4c.8.3 1.7.4 2.9.5c1.3.1 1.7.1 5 .1s3.7 0 5-.1c1.2-.1 2.1-.3 2.9-.5c.8-.3 1.5-.7 2.1-1.4c.6-.6 1.1-1.3 1.4-2.1c.3-.8.4-1.7.5-2.9c.1-1.3.1-1.7.1-5s0-3.7-.1-5c-.1-1.2-.3-2.1-.6-2.9c-.3-.8-.7-1.5-1.4-2.1c-.6-.6-1.3-1.1-2.1-1.4c-.8-.3-1.7-.4-2.9-.5c-1.3-.1-1.7-.1-5-.1z"/><path d="M12 5.8c-3.4 0-6.2 2.8-6.2 6.2s2.8 6.2 6.2 6.2s6.2-2.8 6.2-6.2s-2.8-6.2-6.2-6.2zm0 10.3c-2.3 0-4.1-1.8-4.1-4.1s1.8-4.1 4.1-4.1s4.1 1.8 4.1 4.1s-1.8 4.1-4.1 4.1z"/><circle cx="18.4" cy="5.6" r="1.4"/></svg>
-                    )}
-                    {platform === "Facebook" && (
-                      <svg viewBox="0 0 24 24"><path d="M24 12c0-6.6-5.4-12-12-12S0 5.4 0 12c0 6 4.4 10.9 10.1 11.9v-8.4H7.1V12h3v-2.7c0-3 1.8-4.7 4.5-4.7c1.3 0 2.6.2 2.6.2v2.9h-1.5c-1.5 0-2 1-2 1.9V12h3.3l-.5 3.5h-2.8v8.4C19.6 22.9 24 18 24 12z"/></svg>
-                    )}
-                    {platform === "YouTube" && (
-                      <svg viewBox="0 0 24 24"><path d="M23.5 6.2c-.3-1-1-1.8-2-2C19.7 3.8 12 3.8 12 3.8s-7.7 0-9.5.4c-1 .3-1.7 1-2 2C.1 8 .1 12 .1 12s0 4 .4 5.8c.3 1 1 1.8 2 2c1.8.4 9.5.4 9.5.4s7.7 0 9.5-.4c1-.3 1.7-1 2-2c.4-1.8.4-5.8.4-5.8s0-4-.4-5.8zM9.5 15.5V8.5l6.5 3.5l-6.5 3.5z"/></svg>
-                    )}
-                    {platform === "LinkedIn" && (
-                      <svg viewBox="0 0 24 24"><path d="M22.2 0H1.8C.8 0 0 .8 0 1.7v20.6C0 23.2.8 24 1.8 24h20.5c1 0 1.8-.8 1.8-1.7V1.7c0-.9-.8-1.7-1.8-1.7zM7.1 20.4H3.6V9h3.6v11.4zM5.3 7.6c-1.1 0-2-.9-2-2s.9-2 2-2s2 .9 2 2s-.8 2-2 2zm15.1 12.8H17V14.8c0-1.3 0-3-1.9-3c-1.9 0-2.2 1.5-2.2 2.9v5.7h-3.6V9h3.4v1.6h.1c.5-.9 1.6-1.9 3.5-1.9c3.7 0 4.4 2.5 4.4 5.7v6z"/></svg>
-                    )}
-                  </a>
-                ))}
-              </div>
-            </div>
-
-            {/* Column 2: Contact Info */}
-            <div className={styles.footerCol}>
-              <h4 className={styles.footerHeading}>Contact Us</h4>
-              <div className={styles.footerContactList}>
-                <div className={styles.footerContactItem}>
-                  <div className={styles.footerContactIcon}>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                  </div>
-                  <span>Safdarjung Enclave, Delhi, India 110023</span>
-                </div>
-                <div className={styles.footerContactItem}>
-                  <div className={styles.footerContactIcon}>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                  </div>
-                  <span>+91 77060 00771</span>
-                </div>
-                <div className={styles.footerContactItem}>
-                  <div className={styles.footerContactIcon}>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                  </div>
-                  <span>info@mindmantra.com</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Column 3: Services */}
-            <div className={styles.footerCol}>
-              <h4 className={styles.footerHeading}>Services</h4>
-              <ul className={styles.footerLinks}>
-                <li className={styles.footerLinkItem}><a href="#services" onClick={(e) => { e.preventDefault(); scrollToSection("services"); }}>OCD Recovery</a></li>
-                <li className={styles.footerLinkItem}><a href="#services" onClick={(e) => { e.preventDefault(); scrollToSection("services"); }}>Sexual Wellness</a></li>
-                <li className={styles.footerLinkItem}><a href="#services" onClick={(e) => { e.preventDefault(); scrollToSection("services"); }}>Bipolar Support</a></li>
-                <li className={styles.footerLinkItem}><a href="#services" onClick={(e) => { e.preventDefault(); scrollToSection("services"); }}>Anxiety & Depression</a></li>
-                <li className={styles.footerLinkItem}><a href="#services" onClick={(e) => { e.preventDefault(); scrollToSection("services"); }}>Addiction Support</a></li>
-              </ul>
-            </div>
-
-            {/* Column 4: Quick Links */}
-            <div className={styles.footerCol}>
-              <h4 className={styles.footerHeading}>Quick Links</h4>
-              <ul className={styles.footerLinks}>
-                <li className={styles.footerLinkItem}><a href="#home" onClick={(e) => { e.preventDefault(); scrollToSection("home"); }}>Home</a></li>
-                <li className={styles.footerLinkItem}><a href="#about" onClick={(e) => { e.preventDefault(); scrollToSection("about"); }}>About Us</a></li>
-                <li className={styles.footerLinkItem}><a href="#services" onClick={(e) => { e.preventDefault(); scrollToSection("services"); }}>Services</a></li>
-                <li className={styles.footerLinkItem}><a href="#testimonials" onClick={(e) => { e.preventDefault(); scrollToSection("testimonials"); }}>Testimonials</a></li>
-              </ul>
-            </div>
-
-            {/* Column 5: Stay Informed */}
-            <div className={styles.footerCol}>
-              <h4 className={styles.footerHeading}>Stay Informed</h4>
-              <div className={styles.footerForm}>
-                <input type="email" placeholder="Email" className={styles.footerFormInput} />
-                <button className={styles.footerSubscribeBtn}>
-                  <span>Subscribe Now</span>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ width: "16px", height: "16px" }}>
-                    <line x1="5" y1="12" x2="19" y2="12" />
-                    <polyline points="12 5 19 12 12 19" />
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <hr className={styles.footerDivider} />
-
-          <div className={styles.footerBottom}>
-            <p>&copy; {new Date().getFullYear()} Mind Mantra. All rights reserved.</p>
-            <div className={styles.footerBottomLinks}>
-              <a href="#">Conditions of Use</a>
-              <span>|</span>
-              <a href="#">Privacy Notice</a>
-            </div>
-          </div>
-        </div>
-      </footer>
 
       {/* Back to top float button */}
       <button className={styles.backToTop} onClick={() => scrollToSection("home")} aria-label="Back to top">

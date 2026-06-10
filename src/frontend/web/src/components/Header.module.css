@@ -1,0 +1,285 @@
+/* Header & Navigation Styles */
+.topBar {
+  background-color: transparent;
+  color: var(--color-white);
+  padding: 12px 0;
+  font-size: 13px;
+  font-family: var(--font-sans);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 101;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.topBarContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.topInfo {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.topBarLink {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-white);
+  text-decoration: none;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.topBarLink:hover {
+  color: var(--color-accent-teal);
+}
+
+.socials {
+  display: flex;
+  gap: 12px;
+}
+
+.socialLink {
+  width: 28px;
+  height: 28px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-smooth);
+}
+
+.socialLink:hover {
+  background-color: var(--color-accent-teal);
+  transform: translateY(-2px);
+}
+
+.socialLink svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+}
+
+.navWrapper {
+  position: absolute;
+  top: 76px;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  padding: 0 24px;
+}
+
+.navbar {
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 9999px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logoImage {
+  height: 52px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.navMenu {
+  display: flex;
+  list-style: none;
+  gap: 24px;
+  align-items: center;
+}
+
+.navLink {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--color-primary-dark);
+  position: relative;
+  padding: 8px 0;
+  transition: var(--transition-smooth);
+}
+
+.navLink::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-accent-teal);
+  transition: var(--transition-smooth);
+}
+
+.navLink:hover {
+  color: var(--color-accent-teal);
+}
+
+.navLink:hover::after {
+  width: 100%;
+}
+
+.btnAppointment {
+  background-color: var(--color-accent-teal);
+  color: var(--color-white) !important;
+  padding: 12px 28px;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: var(--transition-smooth);
+  box-shadow: 0 4px 12px rgba(44, 165, 167, 0.2);
+  border: none;
+  cursor: pointer;
+}
+
+.btnAppointment:hover {
+  background-color: var(--color-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(31, 63, 67, 0.25);
+}
+
+.mobileMenuBtn {
+  display: none;
+  font-size: 24px;
+  color: var(--color-primary-dark);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Responsive Mobile Styles */
+@media (max-width: 992px) {
+  .navMenu {
+    gap: 16px;
+  }
+  .navLink {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  .topBar {
+    padding: 8px 0;
+    font-size: 11px;
+  }
+
+  .topInfo {
+    gap: 10px;
+  }
+
+  .socials {
+    display: none;
+  }
+
+  .navWrapper {
+    top: 52px;
+    padding: 0 12px;
+  }
+
+  .navbar {
+    height: 68px;
+    padding: 0 18px;
+  }
+  
+  .logoImage {
+    height: 50px;
+  }
+  
+  .navMenu {
+    display: none;
+  }
+  
+  .btnAppointment {
+    display: none;
+  }
+  
+  .mobileMenuBtn {
+    display: block;
+  }
+  
+  .mobileDrawer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--color-primary-dark);
+    z-index: 90;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 160px;
+    animation: slideInDown 0.3s ease-out;
+  }
+
+  @keyframes slideInDown {
+    from {
+      transform: translateY(-100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  .mobileDrawerContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    width: 100%;
+  }
+
+  .mobileNavMenu {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    gap: 24px;
+    align-items: center;
+    padding: 0;
+  }
+
+  .mobileNavLink {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--color-white);
+  }
+
+  .mobileBtnAppointment {
+    background-color: var(--color-white);
+    color: var(--color-primary-dark) !important;
+    padding: 14px 32px;
+    border-radius: 9999px;
+    font-weight: 700;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+}
