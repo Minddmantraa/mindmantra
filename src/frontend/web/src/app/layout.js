@@ -109,7 +109,7 @@ export const metadata = {
   },
   manifest: "/manifest.json",
   verification: {
-    google: "", // Add your Google Search Console verification token here
+    google: "jSboQyJPTMovKwsFgEcIep0CQSqe1tD8xxeX8TeQXa4",
   },
 };
 
