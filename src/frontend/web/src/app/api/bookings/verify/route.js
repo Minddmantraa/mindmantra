@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
 import crypto from "crypto";
+import { sendBookingEmails } from "@/lib/email";
 
 export async function POST(request) {
   try {
@@ -46,6 +47,16 @@ export async function POST(request) {
         console.error("Mock DB Update Error:", updateError);
         return NextResponse.json({ error: "Failed to update booking status" }, { status: 500 });
       }
+
+      // Trigger automated notification emails (non-blocking errors)
+      const updatedBooking = {
+        ...booking,
+        payment_status: "paid",
+        razorpay_payment_id: razorpayPaymentId,
+      };
+      await sendBookingEmails(updatedBooking).catch((err) =>
+        console.error("Failed to send mock booking emails:", err)
+      );
 
       return NextResponse.json({
         success: true,
@@ -96,6 +107,16 @@ export async function POST(request) {
       console.error("DB Update Error (Verify):", updateError);
       return NextResponse.json({ error: "Failed to mark booking as paid" }, { status: 500 });
     }
+
+    // Trigger automated notification emails (non-blocking errors)
+    const updatedBooking = {
+      ...booking,
+      payment_status: "paid",
+      razorpay_payment_id: razorpayPaymentId,
+    };
+    await sendBookingEmails(updatedBooking).catch((err) =>
+      console.error("Failed to send booking confirmation emails:", err)
+    );
 
     return NextResponse.json({
       success: true,
