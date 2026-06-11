@@ -133,21 +133,6 @@ export default function Footer() {
               </li>
             </ul>
           </div>
-
-          {/* Column 5: Stay Informed */}
-          <div className={styles.footerCol}>
-            <h4 className={styles.footerHeading}>Stay Informed</h4>
-            <form onSubmit={handleSubscribe} className={styles.footerForm}>
-              <input type="email" placeholder="Email" className={styles.footerFormInput} required />
-              <button type="submit" className={styles.footerSubscribeBtn}>
-                <span>Subscribe Now</span>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ width: "16px", height: "16px" }}>
-                  <line x1="5" y1="12" x2="19" y2="12" />
-                  <polyline points="12 5 19 12 12 19" />
-                </svg>
-              </button>
-            </form>
-          </div>
         </div>
 
         <hr className={styles.footerDivider} />
