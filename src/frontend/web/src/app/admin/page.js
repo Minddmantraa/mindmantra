@@ -24,6 +24,7 @@ export default function AdminDashboardPage() {
   const [loading, setLoading] = useState(true);
   const [checkingAuth, setCheckingAuth] = useState(true);
   const [selectedBooking, setSelectedBooking] = useState(null);
+  const [selectedBookingIds, setSelectedBookingIds] = useState([]);
   
   // Filters state
   const [searchQuery, setSearchQuery] = useState("");
@@ -81,21 +82,110 @@ export default function AdminDashboardPage() {
     if (!confirmDelete) return;
 
     try {
-      const { error } = await supabase.from("bookings").delete().eq("id", id);
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        alert("You must be logged in as an admin to perform this action.");
+        router.push("/admin/login");
+        return;
+      }
 
-      if (error) {
-        console.error("Delete booking error:", error);
-        alert(`Failed to delete record: ${error.message}`);
+      const response = await fetch("/api/bookings/delete", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${session.access_token}`
+        },
+        body: JSON.stringify({ bookingId: id })
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        console.error("Delete booking error:", result.error);
+        alert(`Failed to delete record: ${result.error || "Unknown error"}`);
         return;
       }
 
       setBookings((prev) => prev.filter((b) => b.id !== id));
+      setSelectedBookingIds((prev) => prev.filter((item) => item !== id));
       if (selectedBooking && selectedBooking.id === id) {
         setSelectedBooking(null);
       }
     } catch (err) {
       console.error("Network error deleting booking:", err);
       alert("Failed to delete record due to a network error.");
+    }
+  };
+
+  const handleSelectAllToggle = () => {
+    const visibleIds = filteredBookings.map((b) => b.id);
+    const allVisibleSelected = visibleIds.every((id) => selectedBookingIds.includes(id));
+
+    if (allVisibleSelected) {
+      // Deselect all visible bookings
+      setSelectedBookingIds((prev) => prev.filter((id) => !visibleIds.includes(id)));
+    } else {
+      // Select all visible bookings (merge with existing selections)
+      setSelectedBookingIds((prev) => {
+        const newSelection = [...prev];
+        visibleIds.forEach((id) => {
+          if (!newSelection.includes(id)) {
+            newSelection.push(id);
+          }
+        });
+        return newSelection;
+      });
+    }
+  };
+
+  const handleSelectBookingToggle = (id, e) => {
+    if (e) e.stopPropagation();
+    setSelectedBookingIds((prev) =>
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
+    );
+  };
+
+  const handleBulkDelete = async () => {
+    if (selectedBookingIds.length === 0) return;
+
+    const confirmDelete = window.confirm(
+      `Are you sure you want to permanently delete the ${selectedBookingIds.length} selected booking record(s)? This action cannot be undone.`
+    );
+    if (!confirmDelete) return;
+
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        alert("You must be logged in as an admin to perform this action.");
+        router.push("/admin/login");
+        return;
+      }
+
+      const response = await fetch("/api/bookings/delete", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${session.access_token}`
+        },
+        body: JSON.stringify({ bookingIds: selectedBookingIds })
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        console.error("Bulk delete bookings error:", result.error);
+        alert(`Failed to delete records: ${result.error || "Unknown error"}`);
+        return;
+      }
+
+      setBookings((prev) => prev.filter((b) => !selectedBookingIds.includes(b.id)));
+      setSelectedBookingIds([]);
+      if (selectedBooking && selectedBookingIds.includes(selectedBooking.id)) {
+        setSelectedBooking(null);
+      }
+    } catch (err) {
+      console.error("Network error bulk deleting bookings:", err);
+      alert("Failed to delete records due to a network error.");
     }
   };
 
@@ -247,6 +337,26 @@ export default function AdminDashboardPage() {
             </div>
           </div>
 
+          {selectedBookingIds.length > 0 && (
+            <div className={styles.bulkActionsRow}>
+              <span className={styles.selectedCount}>
+                {selectedBookingIds.length} booking{selectedBookingIds.length > 1 ? "s" : ""} selected
+              </span>
+              <button
+                className={styles.btnBulkDelete}
+                onClick={handleBulkDelete}
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ verticalAlign: "middle" }}>
+                  <polyline points="3 6 5 6 21 6"></polyline>
+                  <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                  <line x1="10" y1="11" x2="10" y2="17"></line>
+                  <line x1="14" y1="11" x2="14" y2="17"></line>
+                </svg>
+                <span style={{ marginLeft: "4px" }}>Delete Selected</span>
+              </button>
+            </div>
+          )}
+
           {/* Data Table */}
           <div className={styles.tableWrapper}>
             {loading ? (
@@ -268,6 +378,15 @@ export default function AdminDashboardPage() {
               <table className={styles.bookingTable}>
                 <thead>
                   <tr>
+                    <th className={styles.checkboxColumnHeader}>
+                      <input
+                        type="checkbox"
+                        className={styles.checkboxInput}
+                        checked={filteredBookings.length > 0 && filteredBookings.every((b) => selectedBookingIds.includes(b.id))}
+                        onChange={handleSelectAllToggle}
+                        onClick={(e) => e.stopPropagation()}
+                      />
+                    </th>
                     <th>Ref ID</th>
                     <th>Client details</th>
                     <th>Clinical focus</th>
@@ -283,6 +402,14 @@ export default function AdminDashboardPage() {
                       className={styles.tableRow}
                       onClick={() => setSelectedBooking(booking)}
                     >
+                      <td className={styles.checkboxColumnCell} onClick={(e) => e.stopPropagation()}>
+                        <input
+                          type="checkbox"
+                          className={styles.checkboxInput}
+                          checked={selectedBookingIds.includes(booking.id)}
+                          onChange={(e) => handleSelectBookingToggle(booking.id, e)}
+                        />
+                      </td>
                       <td>
                         <span style={{ fontWeight: "600", fontFamily: "var(--font-serif)" }}>
                           {booking.booking_ref || "N/A"}
@@ -313,6 +440,19 @@ export default function AdminDashboardPage() {
                         </span>
                       </td>
                       <td className={styles.actionsColumnCell} onClick={(e) => e.stopPropagation()}>
+                        <button
+                          className={styles.btnTableView}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setSelectedBooking(booking);
+                          }}
+                          title="View Details"
+                        >
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                          </svg>
+                        </button>
                         <button
                           className={styles.btnTableDelete}
                           onClick={(e) => handleDeleteBooking(booking.id, e)}

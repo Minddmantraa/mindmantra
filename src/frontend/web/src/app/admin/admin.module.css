@@ -635,13 +635,88 @@
   background-color: #fff5f5;
 }
 
+.btnTableView {
+  color: #a0aec0;
+  padding: 8px;
+  border-radius: 8px;
+  transition: var(--transition-smooth);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 4px;
+}
+
+.btnTableView:hover {
+  color: var(--color-accent-teal);
+  background-color: #e6fffa;
+}
+
 .actionsColumnHeader {
-  width: 80px;
+  width: 120px;
   text-align: center !important;
+  white-space: nowrap;
 }
 
 .actionsColumnCell {
   text-align: center;
+  white-space: nowrap;
+  padding-left: 8px !important;
+  padding-right: 8px !important;
+}
+
+/* BULK ACTIONS */
+.bulkActionsRow {
+  background-color: #fff5f5;
+  border: 1px solid #fed7d7;
+  border-radius: 12px;
+  padding: 12px 20px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.selectedCount {
+  font-size: 14px;
+  color: #c53030;
+  font-weight: 600;
+}
+
+.btnBulkDelete {
+  padding: 8px 16px;
+  background-color: #e53e3e;
+  color: var(--color-white);
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 13px;
+  border: 1px solid #e53e3e;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: var(--transition-smooth);
+}
+
+.btnBulkDelete:hover {
+  background-color: #c53030;
+  border-color: #c53030;
+}
+
+.checkboxColumnHeader {
+  width: 40px;
+  text-align: center !important;
+}
+
+.checkboxColumnCell {
+  text-align: center;
+}
+
+.checkboxInput {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: var(--color-accent-teal);
 }
 
 /* RESPONSIVE MEDIA QUERIES */
