@@ -17,50 +17,13 @@ const servicesList = [
   "Addiction & De-addiction Support"
 ];
 
-const timeSlotsList = [
-  "09:00 AM - 09:30 AM",
-  "09:30 AM - 10:00 AM",
-  "10:00 AM - 10:30 AM",
-  "10:30 AM - 11:00 AM",
-  "11:00 AM - 11:30 AM",
-  "11:30 AM - 12:00 PM",
-  "12:00 PM - 12:30 PM",
-  "12:30 PM - 01:00 PM",
-  "01:00 PM - 01:30 PM",
-  "01:30 PM - 02:00 PM",
-  "02:00 PM - 02:30 PM",
-  "02:30 PM - 03:00 PM",
-  "03:00 PM - 03:30 PM",
-  "03:30 PM - 04:00 PM",
-  "04:00 PM - 04:30 PM",
-  "04:30 PM - 05:00 PM",
-  "05:00 PM - 05:30 PM",
-  "05:30 PM - 06:00 PM",
-  "06:00 PM - 06:30 PM",
-  "06:30 PM - 07:00 PM",
-  "07:00 PM - 07:30 PM",
-  "07:30 PM - 08:00 PM",
-  "08:00 PM - 08:30 PM",
-  "08:30 PM - 09:00 PM"
-];
+
 
 export default function AdminDashboardPage() {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [checkingAuth, setCheckingAuth] = useState(true);
   const [selectedBooking, setSelectedBooking] = useState(null);
-  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-  const [saving, setSaving] = useState(false);
-  const [addFormData, setAddFormData] = useState({
-    name: "",
-    phone: "",
-    email: "",
-    service: "Obsessive Compulsive Disorder Recovery",
-    date: "",
-    time_slot: "09:00 AM - 09:30 AM",
-    message: "",
-    payment_status: "paid"
-  });
   
   // Filters state
   const [searchQuery, setSearchQuery] = useState("");
@@ -109,15 +72,6 @@ export default function AdminDashboardPage() {
     router.push("/admin/login");
   };
 
-  const generateBookingRef = () => {
-    const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-    let ref = "";
-    for (let i = 0; i < 5; i++) {
-      ref += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-    return `MM-${ref}`;
-  };
-
   const handleDeleteBooking = async (id, e) => {
     if (e) e.stopPropagation();
 
@@ -142,57 +96,6 @@ export default function AdminDashboardPage() {
     } catch (err) {
       console.error("Network error deleting booking:", err);
       alert("Failed to delete record due to a network error.");
-    }
-  };
-
-  const handleAddSubmit = async (e) => {
-    e.preventDefault();
-    setSaving(true);
-
-    try {
-      const ref = generateBookingRef();
-      const { data, error } = await supabase
-        .from("bookings")
-        .insert({
-          booking_ref: ref,
-          name: addFormData.name,
-          phone: addFormData.phone,
-          email: addFormData.email || null,
-          service: addFormData.service,
-          date: addFormData.date || null,
-          time_slot: addFormData.time_slot,
-          message: addFormData.message || null,
-          payment_status: addFormData.payment_status,
-          razorpay_order_id: "manual_booking",
-          razorpay_payment_id: "manual_" + Math.random().toString(36).substring(2, 9).toUpperCase(),
-        })
-        .select()
-        .single();
-
-      if (error) {
-        console.error("Manual booking insert error:", error);
-        alert(`Failed to create manual booking: ${error.message}`);
-        setSaving(false);
-        return;
-      }
-
-      setBookings((prev) => [data, ...prev]);
-      setIsAddModalOpen(false);
-      setAddFormData({
-        name: "",
-        phone: "",
-        email: "",
-        service: "Obsessive Compulsive Disorder Recovery",
-        date: "",
-        time_slot: "09:00 AM - 09:30 AM",
-        message: "",
-        payment_status: "paid",
-      });
-    } catch (err) {
-      console.error("Network error inserting manual booking:", err);
-      alert("Failed to add booking due to a network error.");
-    } finally {
-      setSaving(false);
     }
   };
 
@@ -341,14 +244,6 @@ export default function AdminDashboardPage() {
                 value={dateFilter}
                 onChange={(e) => setDateFilter(e.target.value)}
               />
-
-              <button className={styles.btnAddBooking} onClick={() => setIsAddModalOpen(true)}>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <line x1="12" y1="5" x2="12" y2="19"></line>
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                </svg>
-                <span>Add Booking</span>
-              </button>
             </div>
           </div>
 
@@ -557,137 +452,6 @@ export default function AdminDashboardPage() {
         </>
       )}
 
-      {/* Manual Booking Modal */}
-      {isAddModalOpen && (
-        <div className={styles.modalOverlay} onClick={() => setIsAddModalOpen(false)}>
-          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-            <div className={styles.modalHeader}>
-              <h3 className={styles.modalTitle}>Add Booking Manually</h3>
-              <button className={styles.btnCloseModal} onClick={() => setIsAddModalOpen(false)}>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <line x1="18" y1="6" x2="6" y2="18"></line>
-                  <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-              </button>
-            </div>
-
-            <form onSubmit={handleAddSubmit} className={styles.modalForm}>
-              <div className={styles.modalFormGrid}>
-                <div className={styles.modalFormGroup}>
-                  <label>Client Name *</label>
-                  <input
-                    type="text"
-                    required
-                    value={addFormData.name}
-                    onChange={(e) => setAddFormData((prev) => ({ ...prev, name: e.target.value }))}
-                    placeholder="Enter client's full name"
-                  />
-                </div>
-                <div className={styles.modalFormGroup}>
-                  <label>Phone Number *</label>
-                  <input
-                    type="tel"
-                    required
-                    value={addFormData.phone}
-                    onChange={(e) => setAddFormData((prev) => ({ ...prev, phone: e.target.value }))}
-                    placeholder="e.g. +91 98765 43210"
-                  />
-                </div>
-              </div>
-
-              <div className={styles.modalFormGroup}>
-                <label>Email Address (Optional)</label>
-                <input
-                  type="email"
-                  value={addFormData.email}
-                  onChange={(e) => setAddFormData((prev) => ({ ...prev, email: e.target.value }))}
-                  placeholder="client@example.com"
-                />
-              </div>
-
-              <div className={styles.modalFormGroup}>
-                <label>Clinical Focus Area</label>
-                <select
-                  value={addFormData.service}
-                  onChange={(e) => setAddFormData((prev) => ({ ...prev, service: e.target.value }))}
-                >
-                  {servicesList.map((service, idx) => (
-                    <option key={idx} value={service}>
-                      {service}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div className={styles.modalFormGrid}>
-                <div className={styles.modalFormGroup}>
-                  <label>Session Date (Optional)</label>
-                  <input
-                    type="date"
-                    value={addFormData.date}
-                    onChange={(e) => setAddFormData((prev) => ({ ...prev, date: e.target.value }))}
-                  />
-                </div>
-                <div className={styles.modalFormGroup}>
-                  <label>Time Slot</label>
-                  <select
-                    value={addFormData.time_slot}
-                    onChange={(e) => setAddFormData((prev) => ({ ...prev, time_slot: e.target.value }))}
-                  >
-                    {timeSlotsList.map((slot, idx) => (
-                      <option key={idx} value={slot}>
-                        {slot}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-
-              <div className={styles.modalFormGrid}>
-                <div className={styles.modalFormGroup}>
-                  <label>Payment Status</label>
-                  <select
-                    value={addFormData.payment_status}
-                    onChange={(e) => setAddFormData((prev) => ({ ...prev, payment_status: e.target.value }))}
-                  >
-                    <option value="paid">Paid</option>
-                    <option value="pending">Pending</option>
-                    <option value="failed">Failed</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className={styles.modalFormGroup}>
-                <label>Clinical Description / Notes (Optional)</label>
-                <textarea
-                  rows="3"
-                  value={addFormData.message}
-                  onChange={(e) => setAddFormData((prev) => ({ ...prev, message: e.target.value }))}
-                  placeholder="Provide clinical symptoms, diagnosis notes, etc."
-                />
-              </div>
-
-              <div className={styles.modalButtons}>
-                <button
-                  type="button"
-                  className={styles.btnCancel}
-                  onClick={() => setIsAddModalOpen(false)}
-                  disabled={saving}
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className={styles.btnAddBooking}
-                  disabled={saving}
-                >
-                  {saving ? "Saving..." : "Save Booking"}
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

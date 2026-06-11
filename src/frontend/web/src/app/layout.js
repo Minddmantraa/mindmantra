@@ -1,7 +1,6 @@
 import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import LayoutWrapper from "../components/LayoutWrapper";
 import JsonLd from "../components/JsonLd";
 
 const playfair = Playfair_Display({
@@ -163,9 +162,7 @@ export default function RootLayout({ children }) {
         <meta name="theme-color" content="#1f3f43" />
       </head>
       <body className="min-h-full flex flex-col justify-between">
-        <Header />
-        <main className="flex-grow">{children}</main>
-        <Footer />
+        <LayoutWrapper>{children}</LayoutWrapper>
       </body>
     </html>
   );

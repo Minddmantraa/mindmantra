@@ -63,13 +63,21 @@ export default function AppointmentClient() {
   const [bookingId, setBookingId] = useState("");
   const [bookingRef, setBookingRef] = useState("");
   const [loading, setLoading] = useState(false);
+  const [minDate, setMinDate] = useState("");
 
-  // Dynamically load Razorpay Checkout script
+  // Dynamically load Razorpay Checkout script and calculate today's date
   useEffect(() => {
     const script = document.createElement("script");
     script.src = "https://checkout.razorpay.com/v1/checkout.js";
     script.async = true;
     document.body.appendChild(script);
+
+    // Calculate today's date in local time zone format YYYY-MM-DD
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const dd = String(today.getDate()).padStart(2, '0');
+    setMinDate(`${yyyy}-${mm}-${dd}`);
   }, []);
 
   const handleInputChange = (e) => {
@@ -82,6 +90,16 @@ export default function AppointmentClient() {
     if (!formData.name || !formData.phone) {
       alert("Please enter your name and phone number.");
       return;
+    }
+    if (formData.date) {
+      const selectedDate = new Date(formData.date);
+      selectedDate.setHours(0, 0, 0, 0);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      if (selectedDate < today) {
+        alert("Preferred date cannot be in the past. Please select today's date or a future date.");
+        return;
+      }
     }
     setStep(2);
   };
@@ -347,6 +365,7 @@ export default function AppointmentClient() {
                   name="date" 
                   value={formData.date} 
                   onChange={handleInputChange} 
+                  min={minDate}
                 />
               </div>
 

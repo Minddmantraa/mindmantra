@@ -1,0 +1,72 @@
+/* Stylesheet for Compliance / Legal Pages */
+.policyWrapper {
+  padding: 180px 0 100px;
+  background: linear-gradient(180deg, var(--color-secondary-light) 0%, var(--color-white) 100%);
+  min-height: 80vh;
+}
+
+.policyContainer {
+  max-width: 800px;
+  margin: 0 auto;
+  background: var(--color-white);
+  padding: 48px;
+  border-radius: var(--border-radius-lg);
+  box-shadow: 0 10px 40px rgba(31, 63, 67, 0.05);
+  border: 1px solid rgba(31, 63, 67, 0.05);
+}
+
+.policyTitle {
+  font-size: 36px;
+  margin-bottom: 8px;
+  color: var(--color-primary-dark);
+}
+
+.policySubtitle {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  margin-bottom: 32px;
+  border-bottom: 1px solid #edf2f7;
+  padding-bottom: 16px;
+}
+
+.policyContent {
+  color: var(--color-text-dark);
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.policyContent h2 {
+  font-size: 22px;
+  margin-top: 32px;
+  margin-bottom: 12px;
+  color: var(--color-primary-dark);
+  font-family: var(--font-serif);
+}
+
+.policyContent p {
+  margin-bottom: 16px;
+  color: var(--color-text-dark);
+}
+
+.policyContent ul, .policyContent ol {
+  margin-bottom: 20px;
+  padding-left: 24px;
+}
+
+.policyContent li {
+  margin-bottom: 8px;
+}
+
+@media (max-width: 768px) {
+  .policyWrapper {
+    padding: 120px 16px 60px;
+  }
+
+  .policyContainer {
+    padding: 24px 20px;
+  }
+
+  .policyTitle {
+    font-size: 28px;
+  }
+}

@@ -155,9 +155,13 @@ export default function Footer() {
         <div className={styles.footerBottom}>
           <p>&copy; {new Date().getFullYear()} Mind Mantra. All rights reserved.</p>
           <div className={styles.footerBottomLinks}>
-            <a href="#">Conditions of Use</a>
+            <Link href="/terms-conditions">Terms & Conditions</Link>
             <span>|</span>
-            <a href="#">Privacy Notice</a>
+            <Link href="/privacy-policy">Privacy Policy</Link>
+            <span>|</span>
+            <Link href="/refund-policy">Refund Policy</Link>
+            <span>|</span>
+            <Link href="/shipping-policy">Shipping Policy</Link>
           </div>
         </div>
       </div>
