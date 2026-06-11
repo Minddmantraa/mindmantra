@@ -1,6 +1,5 @@
 import Link from "next/link";
 import styles from "./services.module.css";
-import CtaSection from "../../components/CtaSection";
 
 export const metadata = {
   title: "Clinical Psychological & Mental Health Services | Mind Mantra",
@@ -237,7 +236,6 @@ export default function ServicesPage() {
           </div>
         </div>
       </section>
-      <CtaSection />
     </>
   );
 }
