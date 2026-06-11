@@ -153,7 +153,17 @@ export default function Footer() {
         <hr className={styles.footerDivider} />
 
         <div className={styles.footerBottom}>
-          <p>&copy; {new Date().getFullYear()} Mind Mantra. All rights reserved.</p>
+          <p>
+            &copy; {new Date().getFullYear()} Mind Mantra. All rights reserved. | Developed By{" "}
+            <a 
+              href="https://www.opegl.com" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              style={{ color: "var(--color-accent-teal, #2ca5a7)", textDecoration: "underline" }}
+            >
+              Opegl
+            </a>
+          </p>
           <div className={styles.footerBottomLinks}>
             <Link href="/terms-conditions">Terms & Conditions</Link>
             <span>|</span>
