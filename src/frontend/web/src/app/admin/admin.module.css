@@ -594,3 +594,202 @@
     transform: translateX(0);
   }
 }
+
+/* MANUAL BOOKING MODAL */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(31, 63, 67, 0.4);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.modalContent {
+  background-color: var(--color-white);
+  padding: 32px;
+  border-radius: 24px;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border: 1px solid #edf2f7;
+  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #edf2f7;
+  padding-bottom: 16px;
+}
+
+.modalTitle {
+  font-size: 20px;
+  font-family: var(--font-serif);
+  color: var(--color-primary-dark);
+}
+
+.btnCloseModal {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #f7fafc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+  transition: var(--transition-smooth);
+}
+
+.btnCloseModal:hover {
+  background-color: #edf2f7;
+  color: var(--color-text-dark);
+}
+
+.modalForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.modalFormGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.modalFormGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.modalFormGroup label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-dark);
+}
+
+.modalFormGroup input,
+.modalFormGroup select,
+.modalFormGroup textarea {
+  padding: 10px 12px;
+  background-color: #f7fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--color-text-dark);
+  transition: var(--transition-smooth);
+  outline: none;
+}
+
+.modalFormGroup input:focus,
+.modalFormGroup select:focus,
+.modalFormGroup textarea:focus {
+  background-color: var(--color-white);
+  border-color: var(--color-accent-teal);
+  box-shadow: 0 0 0 3px rgba(181, 76, 98, 0.1);
+}
+
+.modalButtons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.btnCancel {
+  padding: 10px 20px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--color-text-muted);
+  transition: var(--transition-smooth);
+}
+
+.btnCancel:hover {
+  background-color: #f7fafc;
+  color: var(--color-text-dark);
+}
+
+/* ACTION BUTTONS */
+.btnAddBooking {
+  padding: 12px 20px;
+  background: linear-gradient(135deg, var(--color-primary-dark) 0%, #152c2e 100%);
+  color: var(--color-white);
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: var(--transition-smooth);
+  box-shadow: 0 4px 12px rgba(31, 63, 67, 0.15);
+}
+
+.btnAddBooking:hover {
+  background: linear-gradient(135deg, var(--color-accent-teal) 0%, var(--color-accent-teal-dark) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(181, 76, 98, 0.25);
+}
+
+.btnDeleteBooking {
+  padding: 12px;
+  background-color: #fff5f5;
+  color: #e53e3e;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid #fed7d7;
+  transition: var(--transition-smooth);
+  margin-top: 10px;
+  width: 100%;
+}
+
+.btnDeleteBooking:hover {
+  background-color: #e53e3e;
+  color: var(--color-white);
+  border-color: #e53e3e;
+}
+
+.btnTableDelete {
+  color: #a0aec0;
+  padding: 8px;
+  border-radius: 8px;
+  transition: var(--transition-smooth);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btnTableDelete:hover {
+  color: #e53e3e;
+  background-color: #fff5f5;
+}
+
+.actionsColumnHeader {
+  width: 80px;
+  text-align: center !important;
+}
+
+.actionsColumnCell {
+  text-align: center;
+}
