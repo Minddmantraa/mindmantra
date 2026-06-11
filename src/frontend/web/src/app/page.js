@@ -490,7 +490,7 @@ export default function Home() {
           <div className={styles.aboutHeader}>
             <div className={styles.sectionBadge}>Our Trusted Support</div>
             <h2 className={styles.aboutTitle}>
-              Dedicated To <span>Building Resilience</span> & Autonomy in OCD
+              Dedicated To <span>Building Resilience</span>
             </h2>
           </div>
 

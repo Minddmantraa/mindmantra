@@ -47,8 +47,6 @@ const CONSULTATION_FEE = 90;
 
 // PLACE YOUR RAZORPAY KEY ID HERE
 // e.g. "rzp_test_xxxxxxxxxxxxxx"
-const RAZORPAY_KEY_ID = "rzp_test_placeholder"; 
-
 export default function AppointmentClient() {
   const [step, setStep] = useState(1); // 1: Details, 2: Payment, 3: Processing, 4: Success
   const [formData, setFormData] = useState({
@@ -62,6 +60,9 @@ export default function AppointmentClient() {
   });
   
   const [paymentId, setPaymentId] = useState("");
+  const [bookingId, setBookingId] = useState("");
+  const [bookingRef, setBookingRef] = useState("");
+  const [loading, setLoading] = useState(false);
 
   // Dynamically load Razorpay Checkout script
   useEffect(() => {
@@ -89,15 +90,17 @@ export default function AppointmentClient() {
     setStep(1);
   };
 
-  const processWhatsAppRedirect = (completedPaymentId) => {
+  const processWhatsAppRedirect = (completedPaymentId, finalRef) => {
     const { name, phone, email, service, date, timeSlot, message } = formData;
     
     const requestHeader = "*MIND MANTRA - CLINICAL SESSION REQUEST*";
     const payId = completedPaymentId || `pay_mock_${Math.random().toString(36).substring(2, 11)}`;
+    const ref = finalRef || bookingRef || "Pending";
 
     const textMessage = 
       `${requestHeader}\n` +
       `---------------------------------------\n` +
+      `*Booking Ref ID:* ${ref}\n` +
       `*Client Name:* ${name}\n` +
       `*Phone Number:* ${phone}\n` +
       `*Email Address:* ${email || "Not provided"}\n` +
@@ -117,19 +120,46 @@ export default function AppointmentClient() {
     window.open(whatsappUrl, "_blank");
   };
 
-  const handlePaymentSubmit = () => {
-    // Check if real Razorpay is set up
-    const isRealRazorpay = RAZORPAY_KEY_ID && RAZORPAY_KEY_ID !== "rzp_test_placeholder" && window.Razorpay;
+  const handlePaymentSubmit = async () => {
+    setLoading(true);
+    try {
+      // 1. Create order and database entry
+      const res = await fetch("/api/bookings/create", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
 
-    if (isRealRazorpay) {
-      try {
+      const data = await res.json();
+      if (!res.ok) {
+        alert(data.error || "Failed to initialize booking transaction.");
+        setLoading(false);
+        return;
+      }
+
+      setBookingId(data.bookingId);
+      setBookingRef(data.bookingRef);
+
+      if (data.isMock) {
+        // Fallback to simulated payment verification
+        setLoading(false);
+        runSimulatedCheckout(data.bookingId, data.bookingRef);
+      } else {
+        // Real Razorpay checkout flow
+        setLoading(false);
+        if (!window.Razorpay) {
+          alert("Payment gateway script could not be loaded. Please reload and try again.");
+          return;
+        }
+
         const options = {
-          key: RAZORPAY_KEY_ID,
-          amount: CONSULTATION_FEE * 100, // in paise
+          key: data.keyId,
+          amount: data.amount * 100, // in paise
           currency: "INR",
           name: "Mind Mantra",
           description: "Clinical Therapy Session Booking",
           image: "/images/favicon.png",
+          order_id: data.orderId,
           prefill: {
             name: formData.name,
             email: formData.email || "",
@@ -138,16 +168,36 @@ export default function AppointmentClient() {
           theme: {
             color: "#2ca5a7"
           },
-          handler: function (response) {
-            const rzpPayId = response.razorpay_payment_id;
-            setPaymentId(rzpPayId);
-            setStep(3);
-            setTimeout(() => {
-              setStep(4);
-              setTimeout(() => {
-                processWhatsAppRedirect(rzpPayId);
-              }, 1500);
-            }, 1000);
+          handler: async function (response) {
+            setStep(3); // Show processing spinner
+            try {
+              const verifyRes = await fetch("/api/bookings/verify", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  bookingId: data.bookingId,
+                  razorpayPaymentId: response.razorpay_payment_id,
+                  razorpayOrderId: response.razorpay_order_id,
+                  razorpaySignature: response.razorpay_signature,
+                }),
+              });
+
+              const verifyData = await verifyRes.json();
+              if (verifyRes.ok) {
+                setPaymentId(response.razorpay_payment_id);
+                setStep(4); // Success screen
+                setTimeout(() => {
+                  processWhatsAppRedirect(response.razorpay_payment_id, data.bookingRef);
+                }, 1500);
+              } else {
+                alert(verifyData.error || "Payment signature verification failed.");
+                setStep(2); // Back to overview
+              }
+            } catch (verErr) {
+              console.error("Signature Verification API Error:", verErr);
+              alert("Network error during payment verification.");
+              setStep(2);
+            }
           },
           modal: {
             ondismiss: function() {
@@ -158,28 +208,49 @@ export default function AppointmentClient() {
 
         const rzp = new window.Razorpay(options);
         rzp.open();
-      } catch (err) {
-        console.error("Razorpay error, falling back to simulated checkout", err);
-        runSimulatedCheckout();
       }
-    } else {
-      runSimulatedCheckout();
+    } catch (err) {
+      console.error("Booking submit error:", err);
+      alert("Failed to connect to the server. Please check your internet connection.");
+      setLoading(false);
     }
   };
 
-  const runSimulatedCheckout = () => {
+  const runSimulatedCheckout = (id, ref) => {
     setStep(3); // Go to processing state
     
     // Simulate payment transaction delays
-    setTimeout(() => {
+    setTimeout(async () => {
       const mockPayId = `pay_mock_${Math.random().toString(36).substring(2, 11).toUpperCase()}`;
-      setPaymentId(mockPayId);
-      setStep(4); // Go to success state
       
-      // Auto-redirect to WhatsApp after success showing
-      setTimeout(() => {
-        processWhatsAppRedirect(mockPayId);
-      }, 1800);
+      try {
+        const verifyRes = await fetch("/api/bookings/verify", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            bookingId: id,
+            razorpayPaymentId: mockPayId,
+          }),
+        });
+
+        const verifyData = await verifyRes.json();
+        if (verifyRes.ok) {
+          setPaymentId(mockPayId);
+          setStep(4); // Go to success state
+          
+          // Auto-redirect to WhatsApp after success showing
+          setTimeout(() => {
+            processWhatsAppRedirect(mockPayId, ref);
+          }, 1800);
+        } else {
+          alert(verifyData.error || "Mock payment verification failed.");
+          setStep(2);
+        }
+      } catch (err) {
+        console.error("Mock verification call failed:", err);
+        alert("Mock payment verification failed due to network error.");
+        setStep(2);
+      }
     }, 2000);
   };
 
@@ -365,8 +436,14 @@ export default function AppointmentClient() {
             <button type="button" className={styles.btnBookingBack} onClick={handlePrevStep}>
               Back
             </button>
-            <button type="button" className={styles.btnBookingSubmit} onClick={handlePaymentSubmit}>
-              <span>Pay & Confirm Booking</span>
+            <button 
+              type="button" 
+              className={styles.btnBookingSubmit} 
+              onClick={handlePaymentSubmit}
+              disabled={loading}
+              style={loading ? { opacity: 0.7, cursor: "not-allowed" } : {}}
+            >
+              <span>{loading ? "Initializing..." : "Pay & Confirm Booking"}</span>
               <div className={styles.btnBookingSubmitIcon}>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ width: "14px", height: "14px" }}>
                   <line x1="5" y1="12" x2="19" y2="12" />
