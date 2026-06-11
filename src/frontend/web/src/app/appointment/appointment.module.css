@@ -597,3 +597,36 @@
   line-height: 1.5;
 }
 
+.btnWhatsappSuccess {
+  margin-top: 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #25D366;
+  color: var(--color-white) !important;
+  padding: 14px 32px;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 15px;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.25);
+  transition: var(--transition-smooth);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btnWhatsappSuccess:hover {
+  background-color: #128C7E;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(18, 140, 126, 0.35);
+}
+
+.btnWhatsappSuccess svg {
+  transition: transform 0.3s ease;
+}
+
+.btnWhatsappSuccess:hover svg {
+  transform: translateX(4px);
+}
+
+

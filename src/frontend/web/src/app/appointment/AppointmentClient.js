@@ -493,9 +493,32 @@ export default function AppointmentClient() {
           </div>
           <h3 className={styles.successTitle}>Payment Successful!</h3>
           <p className={styles.successDesc}>Your session has been successfully booked.</p>
-          <p className={styles.successDesc} style={{ marginTop: "12px", fontWeight: "600", fontSize: "13px", color: "var(--color-accent-teal)" }}>
-            Redirecting to WhatsApp to send booking details...
+          <p className={styles.successDesc} style={{ marginTop: "12px", fontSize: "14px", color: "var(--color-text-muted)" }}>
+            To complete your scheduling, please click the button below to share your booking reference with Ms. Gauri on WhatsApp.
           </p>
+          
+          <a
+            href={`https://api.whatsapp.com/send?phone=917706000771&text=${encodeURIComponent(
+              `*MIND MANTRA - CLINICAL SESSION REQUEST*\n\n` +
+              `*Reference ID:* ${bookingRef || "Pending"}\n` +
+              `*Payment ID:* ${paymentId || "Success"}\n` +
+              `*Name:* ${formData.name}\n` +
+              `*Phone:* ${formData.phone}\n` +
+              `*Focus Area:* ${formData.service}\n` +
+              `*Scheduled Date:* ${formData.date ? new Date(formData.date).toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" }) : "Flexible"}\n` +
+              `*Time Slot:* ${formData.timeSlot}\n\n` +
+              `*Clinical Notes/Symptoms:*\n${formData.message || "None provided"}`
+            )}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.btnWhatsappSuccess}
+          >
+            <span>Send booking details to Whatsapp</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ width: "16px", height: "16px" }}>
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
+            </svg>
+          </a>
         </div>
       )}
     </div>
