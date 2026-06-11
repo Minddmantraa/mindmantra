@@ -154,12 +154,14 @@ export default function Footer() {
 
         <div className={styles.footerBottom}>
           <p>
-            &copy; {new Date().getFullYear()} Mind Mantra. All rights reserved. | Developed By{" "}
+            &copy; {new Date().getFullYear()}{" "}
+            <span style={{ color: "var(--color-accent-teal, #2ca5a7)" }}>Mind Mantra</span>
+            . All rights reserved. | Developed By{" "}
             <a 
               href="https://www.opegl.com" 
               target="_blank" 
               rel="noopener noreferrer" 
-              style={{ color: "var(--color-accent-teal, #2ca5a7)", textDecoration: "underline" }}
+              style={{ color: "var(--color-accent-teal, #2ca5a7)", textDecoration: "none" }}
             >
               Opegl
             </a>
