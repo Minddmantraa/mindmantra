@@ -494,7 +494,7 @@ export default function AppointmentClient() {
           <h3 className={styles.successTitle}>Session Booked!</h3>
           <p className={styles.successDesc}>Your session has been successfully booked.</p>
           <p className={styles.successDesc} style={{ marginTop: "12px", fontSize: "14px", color: "var(--color-text-muted)" }}>
-            To complete your scheduling, please click the button below to share your booking reference with Ms. Gauri on WhatsApp.
+            You can also click the button below to share your booking reference with Ms. Gauri on WhatsApp.
           </p>
           
           <a
