@@ -363,7 +363,24 @@ export default function Home() {
   const [windowWidth, setWindowWidth] = useState(1200);
 
   // Testimonial slider states
+  const [reviews, setReviews] = useState(reviewsList);
   const [testimonialSlideIndex, setTestimonialSlideIndex] = useState(0);
+
+  // Load reviews from Google Places API
+  useEffect(() => {
+    const loadReviews = async () => {
+      try {
+        const response = await fetch("/api/reviews");
+        const data = await response.json();
+        if (data.reviews && data.reviews.length > 0) {
+          setReviews(data.reviews);
+        }
+      } catch (err) {
+        console.error("Error fetching reviews:", err);
+      }
+    };
+    loadReviews();
+  }, []);
 
   // Manage window resize for responsive slider calculations
   useEffect(() => {
@@ -410,7 +427,7 @@ export default function Home() {
     visibleTestimonialCards = 2;
   }
 
-  const maxTestimonialIndex = Math.max(0, reviewsList.length - visibleTestimonialCards);
+  const maxTestimonialIndex = Math.max(0, reviews.length - visibleTestimonialCards);
 
   // Autoplay testimonials slider
   useEffect(() => {
@@ -754,7 +771,7 @@ export default function Home() {
                 transform: `translateX(-${testimonialSlideIndex * (100 / visibleTestimonialCards)}%)`,
               }}
             >
-              {reviewsList.map((review) => (
+              {reviews.map((review) => (
                 <div
                   key={review.id}
                   className={styles.reviewCardWrapper}
@@ -768,9 +785,20 @@ export default function Home() {
                         style={{
                           backgroundColor: review.avatarBg,
                           color: review.avatarColor,
+                          padding: 0,
+                          overflow: "hidden"
                         }}
                       >
-                        {review.initials}
+                        {review.profilePhotoUrl ? (
+                          <img 
+                            src={review.profilePhotoUrl} 
+                            alt={review.name} 
+                            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                            referrerPolicy="no-referrer"
+                          />
+                        ) : (
+                          review.initials
+                        )}
                       </div>
                       <div className={styles.reviewUserMeta}>
                         <div className={styles.reviewerNameRow}>
