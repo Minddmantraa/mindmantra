@@ -73,7 +73,7 @@ export default function AdminDashboardPage() {
   // Stats calculations
   const totalBookings = bookings.length;
   const paidBookings = bookings.filter((b) => b.payment_status === "paid");
-  const totalRevenue = paidBookings.reduce((sum) => sum + 90, 0); // ₹90 per paid session
+  const totalRevenue = paidBookings.reduce((sum) => sum + 1, 0); // ₹1 per paid session
   const pendingBookings = bookings.filter((b) => b.payment_status === "pending").length;
 
   // Filter application
@@ -356,7 +356,7 @@ export default function AdminDashboardPage() {
               <div className={styles.infoGrid}>
                 <div className={styles.infoItem}>
                   <span className={styles.infoLabel}>Consultation Fee</span>
-                  <span className={styles.infoValue}>₹90.00</span>
+                  <span className={styles.infoValue}>₹1.00</span>
                 </div>
                 <div className={styles.infoItem}>
                   <span className={styles.infoLabel}>Payment Status</span>

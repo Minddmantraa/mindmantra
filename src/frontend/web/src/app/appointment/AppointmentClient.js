@@ -43,7 +43,7 @@ const timeSlotsList = [
 ];
 
 // Consultation Fee (INR)
-const CONSULTATION_FEE = 90;
+const CONSULTATION_FEE = 1;
 
 // PLACE YOUR RAZORPAY KEY ID HERE
 // e.g. "rzp_test_xxxxxxxxxxxxxx"

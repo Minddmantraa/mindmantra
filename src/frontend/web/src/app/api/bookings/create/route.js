@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
 import Razorpay from "razorpay";
 
-const CONSULTATION_FEE = 90; // INR
+const CONSULTATION_FEE = 1; // INR
 
 // Helper to generate a unique human-readable booking reference (e.g., MM-R7A8B)
 function generateBookingRef() {
