@@ -491,7 +491,7 @@ export default function AppointmentClient() {
               <polyline points="20 6 9 17 4 12" />
             </svg>
           </div>
-          <h3 className={styles.successTitle}>Payment Successful!</h3>
+          <h3 className={styles.successTitle}>Session Booked!</h3>
           <p className={styles.successDesc}>Your session has been successfully booked.</p>
           <p className={styles.successDesc} style={{ marginTop: "12px", fontSize: "14px", color: "var(--color-text-muted)" }}>
             To complete your scheduling, please click the button below to share your booking reference with Ms. Gauri on WhatsApp.
