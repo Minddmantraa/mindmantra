@@ -117,10 +117,10 @@ export default function Footer() {
                 <Link href="/services">Services</Link>
               </li>
               <li className={styles.footerLinkItem}>
-                <Link href="/clinical-expertise">Expertise</Link>
+                <Link href="/clinical-expertise">Clinical Expertise</Link>
               </li>
               <li className={styles.footerLinkItem}>
-                <Link href="/dsm-5">Classification Directory</Link>
+                <Link href="/dsm-5">Classification</Link>
               </li>
               <li className={styles.footerLinkItem}>
                 <Link href="/#testimonials" onClick={(e) => handleLinkClick(e, "testimonials")}>Testimonials</Link>
