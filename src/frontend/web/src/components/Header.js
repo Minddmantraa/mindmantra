@@ -79,6 +79,11 @@ export default function Header() {
 
           <ul className={styles.navMenu}>
             <li>
+              <Link href="/" className={styles.navLink}>
+                Home
+              </Link>
+            </li>
+            <li>
               <Link href="/about" className={styles.navLink}>
                 About Us
               </Link>
@@ -134,7 +139,12 @@ export default function Header() {
           <div className={styles.mobileDrawerContent}>
             <ul className={styles.mobileNavMenu}>
               <li>
-                <Link href="/about" className={styles.mobileNavLink}>
+                <Link href="/" className={styles.mobileNavLink} onClick={() => setMobileMenuOpen(false)}>
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link href="/about" className={styles.mobileNavLink} onClick={() => setMobileMenuOpen(false)}>
                   About Us
                 </Link>
               </li>
