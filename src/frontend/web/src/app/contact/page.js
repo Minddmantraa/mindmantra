@@ -96,8 +96,8 @@ export default function ContactPage() {
                   <div className={styles.itemContent}>
                     <h4>Email Address</h4>
                     <p>
-                      <a href="mailto:info@mindmantra.com" className={styles.itemLink}>
-                        info@mindmantra.com
+                      <a href="mailto:minddmantraa@gmail.com" className={styles.itemLink}>
+                        minddmantraa@gmail.com
                       </a>
                     </p>
                   </div>

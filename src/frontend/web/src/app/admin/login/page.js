@@ -94,7 +94,7 @@ export default function AdminLoginPage() {
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="admin@mindmantraa.com"
+              placeholder="minddmantraa@gmail.com"
               required
             />
           </div>

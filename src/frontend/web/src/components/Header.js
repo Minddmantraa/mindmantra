@@ -38,12 +38,12 @@ export default function Header() {
               </svg>
               <span>+91 77060 00771</span>
             </a>
-            <a href="mailto:info@mindmantra.com" className={styles.topBarLink}>
+            <a href="mailto:minddmantraa@gmail.com" className={styles.topBarLink}>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: "16px", height: "16px", color: "var(--color-accent-teal)" }}>
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                 <polyline points="22,6 12,13 2,6" />
               </svg>
-              <span>info@mindmantra.com</span>
+              <span>minddmantraa@gmail.com</span>
             </a>
           </div>
           <div className={styles.socials}>
