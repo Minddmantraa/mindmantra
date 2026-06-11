@@ -37,6 +37,10 @@ export async function sendBookingEmails(booking) {
       })
     : "Flexible / First Available";
 
+  const isDirect = booking.service && booking.service.includes("Direct Consultation (₹199)");
+  const isRca = booking.service && booking.service.includes("RCA (₹9)");
+  const feeAmount = isDirect ? "₹199.00" : isRca ? "₹9.00" : "₹1.00";
+
   const whatsappLink = `https://api.whatsapp.com/send?phone=917706000771&text=${encodeURIComponent(
     `Hello Ms. Gauri, I have completed the payment. My Booking Reference ID is: ${booking.booking_ref}`
   )}`;
@@ -121,7 +125,7 @@ export async function sendBookingEmails(booking) {
           
           <p>Dear ${booking.name},</p>
           
-          <p>Thank you for choosing Mind Mantra. We are writing to confirm that we have successfully received your booking consultation fee of <strong>₹1.00</strong>. Your session appointment slot has been reserved.</p>
+          <p>Thank you for choosing Mind Mantra. We are writing to confirm that we have successfully received your booking consultation fee of <strong>${feeAmount}</strong>. Your session appointment slot has been reserved.</p>
           
           <div style="background-color: #faf0f2; border: 1px solid #edf2f7; border-radius: 12px; padding: 20px; margin: 24px 0;">
             <h3 style="color: #1F3F43; margin-top: 0; border-bottom: 1px solid rgba(31,63,67,0.1); padding-bottom: 8px;">Reservation Summary</h3>

@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
 import Razorpay from "razorpay";
 
-const CONSULTATION_FEE = 1; // INR
 
 // Helper to generate a unique human-readable booking reference (e.g., MM-R7A8B)
 function generateBookingRef() {
@@ -17,7 +16,7 @@ function generateBookingRef() {
 export async function POST(request) {
   try {
     const body = await request.json();
-    const { name, phone, email, service, date, timeSlot, message } = body;
+    const { name, phone, email, service, bookingType = "rca", date, timeSlot, message } = body;
 
     if (!name || !phone || !service || !timeSlot) {
       return NextResponse.json(
@@ -27,6 +26,8 @@ export async function POST(request) {
     }
 
     const bookingRef = generateBookingRef();
+    const feeAmount = bookingType === "direct" ? 199 : 9;
+    const finalService = `${service} - ${bookingType === "direct" ? "Direct Consultation (₹199)" : "RCA (₹9)"}`;
 
     // 1. Insert record into database as 'pending'
     const { data: dbData, error: dbError } = await supabaseAdmin
@@ -36,7 +37,7 @@ export async function POST(request) {
         name,
         phone,
         email: email || null,
-        service,
+        service: finalService,
         date: date || null,
         time_slot: timeSlot,
         message: message || null,
@@ -72,7 +73,7 @@ export async function POST(request) {
         });
 
         const rzpOrder = await razorpay.orders.create({
-          amount: CONSULTATION_FEE * 100, // Razorpay expects amount in paise
+          amount: feeAmount * 100, // Razorpay expects amount in paise
           currency: "INR",
           receipt: bookingRef,
           notes: {
@@ -112,7 +113,7 @@ export async function POST(request) {
       bookingId: dbData.id,
       bookingRef: dbData.booking_ref,
       orderId,
-      amount: CONSULTATION_FEE,
+      amount: feeAmount,
       isMock,
       keyId: isMock ? "" : keyId,
     });

@@ -54,6 +54,7 @@ export default function AppointmentClient() {
     phone: "",
     email: "",
     service: "Obsessive Compulsive Disorder Recovery",
+    bookingType: "rca",
     date: "",
     timeSlot: "09:00 AM - 09:30 AM",
     message: ""
@@ -138,6 +139,7 @@ export default function AppointmentClient() {
       `*Client Name:* ${name}\n` +
       `*Phone Number:* ${phone}\n` +
       `*Email Address:* ${email || "Not provided"}\n` +
+      `*Booking Type:* ${formData.bookingType === "direct" ? "Direct Consultation (₹199)" : "Root Cause Analysis (RCA) (₹9)"}\n` +
       `*Focus Area/Service:* ${service}\n` +
       `*Preferred Date:* ${date || "Flexible / First Available"}\n` +
       `*Preferred Time Slot:* ${timeSlot}\n` +
@@ -372,6 +374,34 @@ export default function AppointmentClient() {
               </select>
             </div>
 
+            <div className={styles.formGroup}>
+              <label>Booking Type *</label>
+              <div className={styles.radioGroup}>
+                <label className={styles.radioLabel}>
+                  <input 
+                    type="radio" 
+                    id="bookingType-rca"
+                    name="bookingType" 
+                    value="rca" 
+                    checked={formData.bookingType === "rca"} 
+                    onChange={handleInputChange} 
+                  />
+                  <span>Root Cause Analysis (RCA) - ₹9</span>
+                </label>
+                <label className={styles.radioLabel}>
+                  <input 
+                    type="radio" 
+                    id="bookingType-direct"
+                    name="bookingType" 
+                    value="direct" 
+                    checked={formData.bookingType === "direct"} 
+                    onChange={handleInputChange} 
+                  />
+                  <span>Direct Consultation (Ms. Gauri) - ₹199</span>
+                </label>
+              </div>
+            </div>
+
             <div className={styles.formGrid}>
               <div className={styles.formGroup}>
                 <label htmlFor="date">Preferred Date</label>
@@ -452,10 +482,9 @@ export default function AppointmentClient() {
                 {formData.date || "Flexible Date"} @ {formData.timeSlot}
               </span>
             </div>
-
             <div className={styles.feeDisplay}>
               <span className={styles.feeLabel}>Session Consultation Fee</span>
-              <span className={styles.feeAmount}>₹{CONSULTATION_FEE}</span>
+              <span className={styles.feeAmount}>₹{formData.bookingType === "direct" ? 199 : 9}</span>
             </div>
           </div>
 
@@ -520,6 +549,7 @@ export default function AppointmentClient() {
               `*Payment ID:* ${paymentId || "Success"}\n` +
               `*Name:* ${formData.name}\n` +
               `*Phone:* ${formData.phone}\n` +
+              `*Booking Type:* ${formData.bookingType === "direct" ? "Direct Consultation (₹199)" : "Root Cause Analysis (RCA) (₹9)"}\n` +
               `*Focus Area:* ${formData.service}\n` +
               `*Scheduled Date:* ${formData.date ? new Date(formData.date).toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" }) : "Flexible"}\n` +
               `*Time Slot:* ${formData.timeSlot}\n\n` +
