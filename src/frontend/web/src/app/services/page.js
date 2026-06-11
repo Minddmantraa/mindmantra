@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styles from "./services.module.css";
 import CtaSection from "../../components/CtaSection";
 
@@ -172,7 +173,6 @@ export default function ServicesPage() {
           <div className={styles.servicesGridContainer}>
             {servicesList.map((service, idx) => {
               const isEven = idx % 2 === 0;
-              const whatsappLink = `https://wa.me/917706000771?text=Hello%20Ms.%20Gauri,%20I%20would%20like%20to%20book%20a%20session%20for%20${encodeURIComponent(service.shortName)}.`;
 
               return (
                 <div
@@ -214,13 +214,11 @@ export default function ServicesPage() {
                       ))}
                     </ul>
 
-                    <a
-                      href={whatsappLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    <Link
+                      href={`/appointment?service=${encodeURIComponent(service.name)}`}
                       className={styles.bookBtn}
                     >
-                      <span>Book a Session via WhatsApp</span>
+                      <span>Book a Session</span>
                       <svg
                         viewBox="0 0 24 24"
                         fill="none"
@@ -231,7 +229,7 @@ export default function ServicesPage() {
                         <line x1="5" y1="12" x2="19" y2="12" />
                         <polyline points="12 5 19 12 12 19" />
                       </svg>
-                    </a>
+                    </Link>
                   </div>
                 </div>
               );

@@ -65,7 +65,7 @@ export default function AppointmentClient() {
   const [loading, setLoading] = useState(false);
   const [minDate, setMinDate] = useState("");
 
-  // Dynamically load Razorpay Checkout script and calculate today's date
+  // Dynamically load Razorpay Checkout script, calculate today's date, and check for service query parameter
   useEffect(() => {
     const script = document.createElement("script");
     script.src = "https://checkout.razorpay.com/v1/checkout.js";
@@ -78,6 +78,22 @@ export default function AppointmentClient() {
     const mm = String(today.getMonth() + 1).padStart(2, '0');
     const dd = String(today.getDate()).padStart(2, '0');
     setMinDate(`${yyyy}-${mm}-${dd}`);
+
+    // Pre-select service from URL parameter
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const serviceParam = params.get("service");
+      if (serviceParam) {
+        const matchedService = servicesList.find((s) => 
+          s.name.toLowerCase() === serviceParam.toLowerCase() ||
+          s.name.toLowerCase().includes(serviceParam.toLowerCase()) ||
+          serviceParam.toLowerCase().includes(s.name.toLowerCase())
+        );
+        if (matchedService) {
+          setFormData((prev) => ({ ...prev, service: matchedService.name }));
+        }
+      }
+    }
   }, []);
 
   const handleInputChange = (e) => {
