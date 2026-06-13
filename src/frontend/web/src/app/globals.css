@@ -110,7 +110,8 @@ button {
 @media (max-width: 768px) {
   .whatsapp-sticky {
     bottom: 20px !important;
-    right: 20px !important;
+    left: 20px !important;
+    right: auto !important;
     width: 50px !important;
     height: 50px !important;
     display: flex !important;
