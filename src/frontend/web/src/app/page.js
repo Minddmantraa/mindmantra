@@ -270,7 +270,7 @@ const videoResources = [
     title: "DBT Strategies for Distress Tolerance & Emotional Regulation",
     category: "DBT Strategies",
     duration: "15:10",
-    thumbnail: "/images/service-relationship.jpg",
+    thumbnail: "/images/dbt.jpg",
     embedUrl: "https://www.youtube.com/embed/K-S8e7_uD3A"
   },
   {
@@ -278,7 +278,7 @@ const videoResources = [
     title: "Mindfulness & Somatic Grounding Worksheets for OCD Anxiety",
     category: "Mindfulness",
     duration: "09:45",
-    thumbnail: "/images/service-growth.jpg",
+    thumbnail: "/images/mindfulness.jpg",
     embedUrl: "https://www.youtube.com/embed/2_YI07g8dFw"
   }
 ];
@@ -669,7 +669,7 @@ export default function Home() {
       <section id="why-choose-us" className={styles.whyChooseUs}>
         {/* Left Column: Full height image */}
         <div className={styles.whyChooseUsImageCol}>
-          <img src="/images/why-choose-us.png" alt="Why Choose Mind Mantra" />
+          <img src="/images/why-us.jpg" alt="Why Choose Mind Mantra" />
         </div>
 
         {/* Right Column: Content */}
