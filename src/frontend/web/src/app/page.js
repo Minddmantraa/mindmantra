@@ -238,7 +238,7 @@ const videoResources = [
     title: "Understanding OCD: Intrusive Thoughts & Compulsive Cycles",
     category: "OCD Education",
     duration: "10:15",
-    thumbnail: "/images/video-thumb-1.jpg",
+    thumbnail: "/images/ocd_education.jpg",
     embedUrl: "https://www.youtube.com/embed/inpok4MKVLM"
   },
   {
@@ -246,7 +246,7 @@ const videoResources = [
     title: "Exposure & Response Prevention (ERP) Therapy In Action",
     category: "ERP Treatment",
     duration: "12:40",
-    thumbnail: "/images/video-thumb-2.jpg",
+    thumbnail: "/images/erp.jpg",
     embedUrl: "https://www.youtube.com/embed/z4L2Zg7382c"
   },
   {
@@ -254,7 +254,7 @@ const videoResources = [
     title: "Cognitive Behavioral Therapy (CBT) for Intrusive Thoughts",
     category: "CBT Modalities",
     duration: "14:20",
-    thumbnail: "/images/video-thumb-3.jpg",
+    thumbnail: "/images/cbt.jpg",
     embedUrl: "https://www.youtube.com/embed/tV2y5jE9bXU"
   },
   {
@@ -262,7 +262,7 @@ const videoResources = [
     title: "Acceptance & Commitment Therapy (ACT) - Coexisting With OCD",
     category: "ACT Practice",
     duration: "11:50",
-    thumbnail: "/images/service-counseling.jpg",
+    thumbnail: "/images/act_with_ocd.jpg",
     embedUrl: "https://www.youtube.com/embed/H7L6qB1W0Qo"
   },
   {
