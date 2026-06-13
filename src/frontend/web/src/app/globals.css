@@ -86,11 +86,11 @@ button {
   background-color: #25d366;
   color: white;
   border-radius: 50%;
-  display: flex;
+  display: flex !important;
   align-items: center;
   justify-content: center;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  z-index: 999;
+  z-index: 999999 !important;
   transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.3s ease;
 }
 
@@ -104,18 +104,21 @@ button {
   width: 32px;
   height: 32px;
   fill: currentColor;
+  display: block;
 }
 
 @media (max-width: 768px) {
   .whatsapp-sticky {
-    bottom: 16px;
-    right: 16px;
-    width: 48px;
-    height: 48px;
+    bottom: 20px !important;
+    right: 20px !important;
+    width: 50px !important;
+    height: 50px !important;
+    display: flex !important;
+    z-index: 999999 !important;
   }
   .whatsapp-sticky svg {
-    width: 26px;
-    height: 26px;
+    width: 28px !important;
+    height: 28px !important;
   }
 }
 
