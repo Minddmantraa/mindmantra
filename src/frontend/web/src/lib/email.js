@@ -44,13 +44,13 @@ export async function sendBookingEmails(booking) {
     subject: `🚨 New Paid Booking Received: ${booking.booking_ref}`,
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #1e2f31; line-height: 1.6;">
-        <h2 style="color: #1F3F43; border-bottom: 2px solid #b54c62; padding-bottom: 8px;">New Paid Booking Request</h2>
+        <h2 style="color: #1F3F43; border-bottom: 2px solid #d48410; padding-bottom: 8px;">New Paid Booking Request</h2>
         <p>A new counseling appointment has been booked and paid for. Details are listed below:</p>
         
         <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
           <tr>
             <td style="padding: 8px; border-bottom: 1px solid #edf2f7; font-weight: bold; width: 180px;">Booking Ref:</td>
-            <td style="padding: 8px; border-bottom: 1px solid #edf2f7; font-family: monospace; font-size: 15px; color: #b54c62; font-weight: bold;">${booking.booking_ref}</td>
+            <td style="padding: 8px; border-bottom: 1px solid #edf2f7; font-family: monospace; font-size: 15px; color: #d48410; font-weight: bold;">${booking.booking_ref}</td>
           </tr>
           <tr>
             <td style="padding: 8px; border-bottom: 1px solid #edf2f7; font-weight: bold;">Client Name:</td>
@@ -83,7 +83,7 @@ export async function sendBookingEmails(booking) {
         </table>
         
         <h3 style="color: #1F3F43; margin-top: 24px;">Client Submitted Concerns / Notes:</h3>
-        <div style="background-color: #faf0f2; padding: 16px; border-left: 4px solid #b54c62; border-radius: 8px; font-style: italic; white-space: pre-wrap;">
+        <div style="background-color: #faf6ee; padding: 16px; border-left: 4px solid #d48410; border-radius: 8px; font-style: italic; white-space: pre-wrap;">
           ${booking.message || "No clinical description submitted."}
         </div>
         

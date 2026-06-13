@@ -210,9 +210,9 @@ const getServiceIcon = (id) => {
 const heroSlides = [
   {
     id: 1,
-    badge: "Core Specialization",
-    title: <>Pioneering <span className="text-teal">OCD Recovery</span> & Resilience</>,
-    desc: "Learn to coexist with discomfort, distress, and uncertainty under the clinical guidance of Ms. Gauri, utilizing gold-standard therapies like ERP, CBT, and ACT.",
+    badge: "Clinical Excellence",
+    title: <>Pioneering <span className="text-teal">Clinical Psychology</span> & Mental Wellness</>,
+    desc: "Access evidence-based clinical therapy and psychological support under the guidance of Ms. Gauri, utilizing advanced therapeutic modalities to foster lasting resilience and wellbeing.",
     image: "/images/hero.jpg"
   },
   {
