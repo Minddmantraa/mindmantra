@@ -53,16 +53,10 @@ export default function AboutPage() {
 
           <div className={styles.aboutContentFull}>
             <p className={styles.aboutDesc}>
-              Ms. Gauri is a highly dedicated Clinical Psychologist with <strong>6+ years of experience</strong> in psychological assessment, psychotherapy, mental health rehabilitation, and evidence-based clinical interventions. She has received extensive training across premier healthcare and psychiatric institutions, including All India Institute of Medical Sciences (AIIMS) New Delhi, Lady Hardinge Medical College (LHMC), and specialized mental health organizations.
+              Ms. Gauri is a highly dedicated Clinical Psychologist with <strong>6+ years of experience</strong> in psychological assessment, psychotherapy, mental health rehabilitation, and evidence based clinical interventions. She has received extensive training across premier healthcare and psychiatric institutions, including All India Institute of Medical Sciences (AIIMS) New Delhi, Lady Hardinge Medical College (LHMC), and specialized mental health organizations. Her professional journey spans hospital based psychiatry, neuropsychological assessment, psychotherapy services, addiction psychiatry, psycho oncology, trauma focused care, and telemental health practice. She works with adolescents, adults, couples, and families to navigate emotional distress and psychiatric conditions through compassionate, evidence based care.
             </p>
             <p className={styles.aboutDesc}>
-              Her professional journey spans hospital-based psychiatry, neuropsychological assessment, psychotherapy services, addiction psychiatry, psycho-oncology, trauma-focused care, and tele-mental health practice. She works with adolescents, adults, couples, and families, helping individuals navigate emotional distress, psychiatric conditions, interpersonal difficulties, and life transitions through compassionate, evidence-based care.
-            </p>
-            <div className={styles.quoteBlock}>
-              "Rather than aiming only to reduce compulsions or intrusive thoughts, we emphasize strengthening emotional tolerance, psychological flexibility, and inner stability—core capacities that support sustainable and long-term OCD recovery. True healing occurs when individuals learn to coexist with discomfort, uncertainty, and emotional intensity without being controlled by them."
-            </div>
-            <p className={styles.aboutDesc}>
-              Special focus on emotional resilience building, distress tolerance, and psychological flexibility in OCD recovery. Working with adolescents and adults across diverse OCD presentations.
+              Our practice is built on the principle of developing long term emotional resilience, distress tolerance, and psychological flexibility, helping individuals coexist with discomfort and uncertainty.
             </p>
           </div>
         </div>

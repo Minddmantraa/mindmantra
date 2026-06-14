@@ -518,10 +518,10 @@ export default function Home() {
 
             <div>
               <p className={styles.aboutDesc}>
-                Ms. Gauri is a highly dedicated Clinical Psychologist with <strong>6+ years of experience</strong> in psychological assessment, psychotherapy, mental health rehabilitation, and evidence-based clinical interventions. She has received extensive training across premier healthcare and psychiatric institutions, including All India Institute of Medical Sciences (AIIMS) New Delhi, Lady Hardinge Medical College (LHMC), and specialized mental health organizations. Her professional journey spans hospital-based psychiatry, neuropsychological assessment, psychotherapy services, addiction psychiatry, psycho-oncology, trauma-focused care, and tele-mental health practice. She works with adolescents, adults, couples, and families to navigate emotional distress and psychiatric conditions through compassionate, evidence-based care.
+                Ms. Gauri is a highly dedicated Clinical Psychologist with <strong>6+ years of experience</strong> in psychological assessment, psychotherapy, mental health rehabilitation, and evidence based clinical interventions. She has received extensive training across premier healthcare and psychiatric institutions, including All India Institute of Medical Sciences (AIIMS) New Delhi, Lady Hardinge Medical College (LHMC), and specialized mental health organizations. Her professional journey spans hospital based psychiatry, neuropsychological assessment, psychotherapy services, addiction psychiatry, psycho oncology, trauma focused care, and telemental health practice. She works with adolescents, adults, couples, and families to navigate emotional distress and psychiatric conditions through compassionate, evidence based care.
               </p>
               <p className={styles.aboutDesc}>
-                Our practice is built on the principle of developing long-term emotional resilience, distress tolerance, and psychological flexibility, helping individuals coexist with discomfort and uncertainty.
+                Our practice is built on the principle of developing long term emotional resilience, distress tolerance, and psychological flexibility, helping individuals coexist with discomfort and uncertainty.
               </p>
               <Link href="/about" className={styles.btnReadMore}>
                 <span>View More</span>
