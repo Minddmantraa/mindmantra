@@ -11,7 +11,7 @@ const servicesList = [
     id: 1,
     name: "Obsessive Compulsive Disorder Recovery",
     shortName: "OCD Recovery",
-    image: "/images/dr-gauri.jpg",
+    image: "/images/ocd_education.jpg",
     title: "Obsessive Compulsive Disorder Recovery",
     desc: "Evidence-based, gold-standard clinical protocols (ERP, CBT, ACT) to help individuals break free from obsessive doubts and compulsive rituals, building sustainable emotional resilience.",
     bullets: [
@@ -25,7 +25,7 @@ const servicesList = [
     id: 2,
     name: "Sexual Dysfunctionality",
     shortName: "Sexual Dysfunctionality",
-    image: "/images/service-sexual.jpg",
+    image: "/images/erp.jpg",
     title: "Sexual Dysfunctionality (ED, PME & Compulsive Masturbation)",
     desc: "Professional and confidential clinical counseling for Erectile Dysfunction (ED), Premature Ejaculation (PME), and compulsive sexual behaviors to resolve performance anxiety and restore intimacy.",
     bullets: [
@@ -39,7 +39,7 @@ const servicesList = [
     id: 3,
     name: "Bipolar Disorder Support",
     shortName: "Bipolar Support",
-    image: "/images/service-growth.jpg",
+    image: "/images/cbt.jpg",
     title: "Bipolar Disorder Support",
     desc: "Comprehensive therapeutic management for Bipolar I and II, focused on mood tracking, stabilization strategies, and cognitive behavioral training to maintain equilibrium.",
     bullets: [
@@ -52,7 +52,7 @@ const servicesList = [
     id: 4,
     name: "Sleep Disorder Management",
     shortName: "Sleep Therapy",
-    image: "/images/service-counseling.jpg",
+    image: "/images/act_with_ocd.jpg",
     title: "Sleep Disorder Management",
     desc: "Evidence-based Cognitive Behavioral Therapy for Insomnia (CBT-I) to tackle chronic sleeplessness, sleep anxiety, and irregular sleep cycles without dependency.",
     bullets: [
@@ -65,7 +65,7 @@ const servicesList = [
     id: 5,
     name: "Eating Disorder Therapy",
     shortName: "Eating Disorder Support",
-    image: "/images/service-relationship.jpg",
+    image: "/images/dbt.jpg",
     title: "Eating Disorder Therapy",
     desc: "Holistic therapeutic support for Anorexia, Bulimia, and Binge Eating Disorder, centering on rebuilding a healthy relationship with food, body image, and self-worth.",
     bullets: [
@@ -78,7 +78,7 @@ const servicesList = [
     id: 6,
     name: "Relationship Management",
     shortName: "Relationship Therapy",
-    image: "/images/service-relationship.jpg",
+    image: "/images/mindfulness.jpg",
     title: "Relationship Management",
     desc: "Systemic therapy for couples and family dynamics, designed to resolve persistent conflicts, repair attachment wounds, and establish secure, conscious communication patterns.",
     bullets: [
@@ -91,7 +91,7 @@ const servicesList = [
     id: 7,
     name: "Schizophrenia Support",
     shortName: "Schizophrenia Support",
-    image: "/images/therapist-3.jpg",
+    image: "/images/ocd_education.jpg",
     title: "Schizophrenia & Psychosis Support",
     desc: "Clinical support focusing on social skills, reality testing, cognitive rehabilitation, and family intervention to help individuals lead functional, meaningful lives.",
     bullets: [
@@ -104,7 +104,7 @@ const servicesList = [
     id: 8,
     name: "Anxiety & Depression Support",
     shortName: "Anxiety & Depression",
-    image: "/images/service-counseling.jpg",
+    image: "/images/erp.jpg",
     title: "Anxiety and Depression Recovery",
     desc: "Personalized therapeutic interventions targeting generalized anxiety, panic attacks, social phobias, and clinical depression to rebuild joy, motivation, and calmness.",
     bullets: [
@@ -117,7 +117,7 @@ const servicesList = [
     id: 9,
     name: "Addiction & De-addiction Support",
     shortName: "Addiction Therapy",
-    image: "/images/service-growth.jpg",
+    image: "/images/cbt.jpg",
     title: "Addiction & De-addiction Support (Alcohol, Opium & Smoke)",
     desc: "Specialized clinical therapy utilizing Motivational Interviewing (MI) and relapse prevention strategies to overcome addictions to alcohol, opium, tobacco, and nicotine.",
     bullets: [
