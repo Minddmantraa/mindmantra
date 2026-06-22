@@ -277,9 +277,11 @@
   }
   .bookingFormCard {
     padding: 30px;
+    order: 1;
   }
   .infoCol {
     padding: 30px;
+    order: 2;
   }
 }
 
