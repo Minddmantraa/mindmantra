@@ -2,6 +2,7 @@ import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
 import LayoutWrapper from "../components/LayoutWrapper";
 import JsonLd from "../components/JsonLd";
+import Script from "next/script";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -148,6 +149,19 @@ export default function RootLayout({ children }) {
         <JsonLd data={businessSchema} />
         <meta name="msapplication-TileColor" content="#1f3f43" />
         <meta name="theme-color" content="#1f3f43" />
+        {/* Google Tag (gtag.js) */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=AW-18222711498"
+          strategy="afterInteractive"
+        />
+        <Script id="google-tag" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'AW-18222711498');
+          `}
+        </Script>
       </head>
       <body className="min-h-full flex flex-col justify-between">
         <LayoutWrapper>{children}</LayoutWrapper>

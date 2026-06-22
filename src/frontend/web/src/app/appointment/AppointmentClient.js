@@ -156,6 +156,17 @@ export default function AppointmentClient() {
     window.open(whatsappUrl, "_blank");
   };
 
+  const triggerGoogleAdsConversion = (completedPaymentId) => {
+    if (typeof window !== "undefined" && window.gtag) {
+      window.gtag("event", "conversion", {
+        send_to: "AW-18222711498/ijuKCM6zwsMcEMqFovFD",
+        value: formData.bookingType === "direct" ? 199.0 : 9.0,
+        currency: "INR",
+        transaction_id: completedPaymentId || "",
+      });
+    }
+  };
+
   const handlePaymentSubmit = async () => {
     setLoading(true);
     try {
@@ -221,6 +232,7 @@ export default function AppointmentClient() {
               const verifyData = await verifyRes.json();
               if (verifyRes.ok) {
                 setPaymentId(response.razorpay_payment_id);
+                triggerGoogleAdsConversion(response.razorpay_payment_id);
                 setStep(4); // Success screen
                 setTimeout(() => {
                   processWhatsAppRedirect(response.razorpay_payment_id, data.bookingRef);
@@ -272,6 +284,7 @@ export default function AppointmentClient() {
         const verifyData = await verifyRes.json();
         if (verifyRes.ok) {
           setPaymentId(mockPayId);
+          triggerGoogleAdsConversion(mockPayId);
           setStep(4); // Go to success state
           
           // Auto-redirect to WhatsApp after success showing
