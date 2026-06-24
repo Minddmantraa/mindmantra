@@ -847,3 +847,52 @@
   }
 }
 
+/* Database error banner */
+.dbErrorBanner {
+  background-color: #fff5f5;
+  border-left: 5px solid #e53e3e;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 30px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.dbErrorIcon {
+  font-size: 24px;
+  line-height: 1;
+}
+
+.dbErrorInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: #2d3748;
+}
+
+.dbErrorTitle {
+  font-size: 16px;
+  font-weight: 700;
+  color: #c53030;
+  margin: 0;
+}
+
+.dbErrorDescription {
+  font-size: 14px;
+  margin: 0;
+  line-height: 1.5;
+  color: #4a5568;
+}
+
+.dbErrorDetail {
+  font-family: var(--font-mono, monospace);
+  font-size: 12px;
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 4px 8px;
+  border-radius: 4px;
+  width: fit-content;
+  margin-top: 4px;
+  word-break: break-all;
+}

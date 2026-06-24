@@ -6,7 +6,7 @@ import { sendBookingEmails } from "@/lib/email";
 export async function POST(request) {
   try {
     const body = await request.json();
-    const { bookingId, razorpayPaymentId, razorpayOrderId, razorpaySignature } = body;
+    const { bookingId, razorpayPaymentId, razorpayOrderId, razorpaySignature, formData } = body;
 
     if (!bookingId || !razorpayPaymentId) {
       return NextResponse.json(
@@ -15,56 +15,79 @@ export async function POST(request) {
       );
     }
 
-    // 1. Fetch the booking from the database to check status and order ID
-    const { data: booking, error: fetchError } = await supabaseAdmin
-      .from("bookings")
-      .select("*")
-      .eq("id", bookingId)
-      .single();
-
-    if (fetchError || !booking) {
-      console.error("Booking Fetch Error:", fetchError);
-      return NextResponse.json({ error: "Booking not found" }, { status: 404 });
-    }
-
-    // Check if the order was a mock checkout
-    const isMockOrder =
-      booking.razorpay_order_id && booking.razorpay_order_id.startsWith("order_mock_");
+    // Check if the order is a mock checkout
+    const isMockOrder = !razorpayOrderId || razorpayOrderId.startsWith("order_mock_");
     const isEnvMock =
       !process.env.RAZORPAY_KEY_ID || process.env.RAZORPAY_KEY_ID === "rzp_test_placeholder";
 
-    if (isMockOrder || isEnvMock) {
-      // 2a. Mock Validation Flow
-      const { error: updateError } = await supabaseAdmin
-        .from("bookings")
-        .update({
-          payment_status: "paid",
-          razorpay_payment_id: razorpayPaymentId,
-        })
-        .eq("id", bookingId);
+    // Build booking details from formData passed from frontend
+    const bookingRef = bookingId;
+    const finalService = formData
+      ? `${formData.service} - ${formData.bookingType === "direct" ? "Direct Consultation (₹199)" : "RCA (₹9)"}`
+      : "Unknown Service";
 
-      if (updateError) {
-        console.error("Mock DB Update Error:", updateError);
-        return NextResponse.json({ error: "Failed to update booking status" }, { status: 500 });
+    const booking = {
+      booking_ref: bookingRef,
+      name: formData ? formData.name : "Unknown",
+      phone: formData ? formData.phone : "Unknown",
+      email: formData ? (formData.email || null) : null,
+      service: finalService,
+      date: formData ? (formData.date || null) : null,
+      time_slot: formData ? formData.timeSlot : "Unknown",
+      message: formData ? (formData.message || null) : null,
+      payment_status: "paid",
+      razorpay_order_id: razorpayOrderId || null,
+      razorpay_payment_id: razorpayPaymentId,
+    };
+
+    if (isMockOrder || isEnvMock) {
+      // 1. Mock Validation Flow
+      let dbFailed = false;
+      try {
+        const { error: insertError } = await supabaseAdmin
+          .from("bookings")
+          .insert({
+            booking_ref: booking.booking_ref,
+            name: booking.name,
+            phone: booking.phone,
+            email: booking.email,
+            service: booking.service,
+            date: booking.date,
+            time_slot: booking.time_slot,
+            message: booking.message,
+            payment_status: "paid",
+            razorpay_order_id: booking.razorpay_order_id,
+            razorpay_payment_id: booking.razorpay_payment_id,
+          });
+
+        if (insertError) {
+          console.error("Supabase mock booking insert error:", insertError);
+          dbFailed = true;
+        }
+      } catch (err) {
+        console.error("Database connection exception during mock insert:", err);
+        dbFailed = true;
       }
 
       // Trigger automated notification emails (non-blocking errors)
-      const updatedBooking = {
+      const emailBooking = {
         ...booking,
-        payment_status: "paid",
-        razorpay_payment_id: razorpayPaymentId,
+        dbFailed,
       };
-      await sendBookingEmails(updatedBooking).catch((err) =>
+      await sendBookingEmails(emailBooking).catch((err) =>
         console.error("Failed to send mock booking emails:", err)
       );
 
       return NextResponse.json({
         success: true,
-        message: "Mock payment verified and saved successfully",
+        message: dbFailed
+          ? "Mock payment verified (database offline)"
+          : "Mock payment verified and saved successfully",
+        dbFailed,
       });
     }
 
-    // 2b. Real Razorpay Signature Verification Flow
+    // 2. Real Razorpay Signature Verification Flow
     if (!razorpayOrderId || !razorpaySignature) {
       return NextResponse.json(
         { error: "Missing Razorpay order ID or signature for real payment verification" },
@@ -82,48 +105,59 @@ export async function POST(request) {
     const isSignatureValid = expectedSignature === razorpaySignature;
 
     if (!isSignatureValid) {
-      // Mark as failed in DB
-      await supabaseAdmin
-        .from("bookings")
-        .update({ payment_status: "failed" })
-        .eq("id", bookingId);
-
       return NextResponse.json(
         { error: "Invalid payment signature verification failed" },
         { status: 400 }
       );
     }
 
-    // 3. Mark as paid in DB
-    const { error: updateError } = await supabaseAdmin
-      .from("bookings")
-      .update({
-        payment_status: "paid",
-        razorpay_payment_id: razorpayPaymentId,
-      })
-      .eq("id", bookingId);
+    // Try saving the paid booking in DB
+    let dbFailed = false;
+    try {
+      const { error: insertError } = await supabaseAdmin
+        .from("bookings")
+        .insert({
+          booking_ref: booking.booking_ref,
+          name: booking.name,
+          phone: booking.phone,
+          email: booking.email,
+          service: booking.service,
+          date: booking.date,
+          time_slot: booking.time_slot,
+          message: booking.message,
+          payment_status: "paid",
+          razorpay_order_id: booking.razorpay_order_id,
+          razorpay_payment_id: booking.razorpay_payment_id,
+        });
 
-    if (updateError) {
-      console.error("DB Update Error (Verify):", updateError);
-      return NextResponse.json({ error: "Failed to mark booking as paid" }, { status: 500 });
+      if (insertError) {
+        console.error("Supabase insert error during verification:", insertError);
+        dbFailed = true;
+      }
+    } catch (err) {
+      console.error("Database connection exception during insert:", err);
+      dbFailed = true;
     }
 
     // Trigger automated notification emails (non-blocking errors)
-    const updatedBooking = {
+    const emailBooking = {
       ...booking,
-      payment_status: "paid",
-      razorpay_payment_id: razorpayPaymentId,
+      dbFailed,
     };
-    await sendBookingEmails(updatedBooking).catch((err) =>
+    await sendBookingEmails(emailBooking).catch((err) =>
       console.error("Failed to send booking confirmation emails:", err)
     );
 
     return NextResponse.json({
       success: true,
-      message: "Payment verified and booking finalized successfully",
+      message: dbFailed
+        ? "Payment verified (database offline)"
+        : "Payment verified and booking finalized successfully",
+      dbFailed,
     });
   } catch (error) {
     console.error("API /bookings/verify Error:", error);
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }
 }
+

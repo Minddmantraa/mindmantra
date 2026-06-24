@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import { supabaseAdmin } from "@/lib/supabase";
 import Razorpay from "razorpay";
 
 
@@ -29,32 +28,7 @@ export async function POST(request) {
     const feeAmount = bookingType === "direct" ? 199 : 9;
     const finalService = `${service} - ${bookingType === "direct" ? "Direct Consultation (₹199)" : "RCA (₹9)"}`;
 
-    // 1. Insert record into database as 'pending'
-    const { data: dbData, error: dbError } = await supabaseAdmin
-      .from("bookings")
-      .insert({
-        booking_ref: bookingRef,
-        name,
-        phone,
-        email: email || null,
-        service: finalService,
-        date: date || null,
-        time_slot: timeSlot,
-        message: message || null,
-        payment_status: "pending",
-      })
-      .select()
-      .single();
-
-    if (dbError) {
-      console.error("Supabase Insert Error:", dbError);
-      return NextResponse.json(
-        { error: "Failed to create booking in database" },
-        { status: 500 }
-      );
-    }
-
-    // 2. Determine if we are using real Razorpay or simulation fallback
+    // 1. Determine if we are using real Razorpay or simulation fallback
     const keyId = process.env.RAZORPAY_KEY_ID;
     const keySecret = process.env.RAZORPAY_KEY_SECRET;
     const isMock = !keyId || keyId === "rzp_test_placeholder";
@@ -77,16 +51,20 @@ export async function POST(request) {
           currency: "INR",
           receipt: bookingRef,
           notes: {
-            booking_id: dbData.id,
+            booking_ref: bookingRef,
             client_name: name,
+            client_phone: phone,
+            client_email: email || "",
+            service: finalService,
+            date: date || "",
+            time_slot: timeSlot,
+            message: message || "",
           },
         });
 
         orderId = rzpOrder.id;
       } catch (rzpErr) {
         console.error("Razorpay Order Creation Error:", rzpErr);
-        // Clean up the pending database entry if payment generation fails
-        await supabaseAdmin.from("bookings").delete().eq("id", dbData.id);
         return NextResponse.json(
           { error: "Failed to initialize payment gateway" },
           { status: 500 }
@@ -94,24 +72,10 @@ export async function POST(request) {
       }
     }
 
-    // 3. Update the database record with the order_id
-    const { error: updateError } = await supabaseAdmin
-      .from("bookings")
-      .update({ razorpay_order_id: orderId })
-      .eq("id", dbData.id);
-
-    if (updateError) {
-      console.error("Database Update Error (Order ID):", updateError);
-      return NextResponse.json(
-        { error: "Failed to link order ID to booking" },
-        { status: 500 }
-      );
-    }
-
     return NextResponse.json({
       success: true,
-      bookingId: dbData.id,
-      bookingRef: dbData.booking_ref,
+      bookingId: bookingRef,
+      bookingRef: bookingRef,
       orderId,
       amount: feeAmount,
       isMock,
@@ -122,3 +86,4 @@ export async function POST(request) {
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }
 }
+

@@ -37,15 +37,26 @@ export async function sendBookingEmails(booking) {
       })
     : "Flexible / First Available";
 
+  const warningHeader = booking.dbFailed
+    ? `
+      <div style="background-color: #fff5f5; border: 1px solid #feb2b2; color: #c53030; padding: 16px; border-radius: 8px; margin-bottom: 24px; font-weight: bold;">
+        ⚠️ WARNING: This booking was processed and paid successfully, but the Supabase database is offline or paused. 
+        This record is NOT stored in the database. Please save these booking details manually.
+      </div>
+      `
+    : "";
+
   // Email 1: ADMIN NOTIFICATION (New Session Alert)
   const adminMailOptions = {
     from: `"Mind Mantra Notifications" <${fromEmail}>`,
     to: adminEmail,
-    subject: `🚨 New Paid Booking Received: ${booking.booking_ref}`,
+    subject: `${booking.dbFailed ? "[DB OFFLINE] " : ""}🚨 New Paid Booking Received: ${booking.booking_ref}`,
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #1e2f31; line-height: 1.6;">
+        ${warningHeader}
         <h2 style="color: #1F3F43; border-bottom: 2px solid #d48410; padding-bottom: 8px;">New Paid Booking Request</h2>
         <p>A new counseling appointment has been booked and paid for. Details are listed below:</p>
+
         
         <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
           <tr>

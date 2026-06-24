@@ -226,6 +226,7 @@ export default function AppointmentClient() {
                   razorpayPaymentId: response.razorpay_payment_id,
                   razorpayOrderId: response.razorpay_order_id,
                   razorpaySignature: response.razorpay_signature,
+                  formData: formData,
                 }),
               });
 
@@ -278,6 +279,7 @@ export default function AppointmentClient() {
           body: JSON.stringify({
             bookingId: id,
             razorpayPaymentId: mockPayId,
+            formData: formData,
           }),
         });
 

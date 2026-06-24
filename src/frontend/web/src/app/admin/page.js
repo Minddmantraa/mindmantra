@@ -30,6 +30,7 @@ export default function AdminDashboardPage() {
   const [checkingAuth, setCheckingAuth] = useState(true);
   const [selectedBooking, setSelectedBooking] = useState(null);
   const [selectedBookingIds, setSelectedBookingIds] = useState([]);
+  const [dbError, setDbError] = useState(null);
   
   // Filters state
   const [searchQuery, setSearchQuery] = useState("");
@@ -62,12 +63,14 @@ export default function AdminDashboardPage() {
 
       if (error) {
         console.error("Error fetching bookings:", error);
-        alert("Failed to load bookings from Supabase. Ensure bookings table exists and RLS policies are configured.");
+        setDbError(error.message || "Failed to load bookings from Supabase.");
       } else {
         setBookings(data || []);
+        setDbError(null);
       }
     } catch (err) {
       console.error("Network error fetching bookings:", err);
+      setDbError(err.message || "Network connection to Supabase failed.");
     } finally {
       setLoading(false);
     }
@@ -246,6 +249,19 @@ export default function AdminDashboardPage() {
       {/* Dashboard Content */}
       <main className={styles.dashboardContent}>
         <div className="container">
+          {dbError && (
+            <div className={styles.dbErrorBanner}>
+              <div className={styles.dbErrorIcon}>⚠️</div>
+              <div className={styles.dbErrorInfo}>
+                <h4 className={styles.dbErrorTitle}>Database Connectivity Issue</h4>
+                <p className={styles.dbErrorDescription}>
+                  The Supabase database appears to be offline or paused. Users can still book sessions and pay, but data cannot be saved to the database. Please check your Supabase project status.
+                </p>
+                <code className={styles.dbErrorDetail}>Details: {dbError}</code>
+              </div>
+            </div>
+          )}
+
           {/* Stats Section */}
           <div className={styles.statsGrid}>
             {/* Stat 1 */}
